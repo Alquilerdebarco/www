@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="<%= language %>">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="<%= title %>| Alquiler de Barco">
+    <meta name="description" content='<% if(metas.desc){ %> <%- metas.desc %> <% }else{ %> <% } %>'>
+    <meta name="author" content="Isofact">
+    <% var metaseo = "";
+    if (typeof noindex != 'undefined' && noindex == true) {
+        metaseo = "noindex, "
+    } else {
+        metaseo += "index, "
+    }
+    if (typeof nofollow != 'undefined' && nofollow == true) {
+        metaseo += "nofollow"
+    } else {
+        metaseo += "follow"
+    } %>
+    <meta name="robot" content='<%= metaseo %>'>
+    <title><%= title %> | Alquiler de Barco</title>
+
+    <% routes.forEach(function(route){ %>
+    <link rel="alternate" href="<%= route.url %>" hreflang="<%= route.lang %>"/>
+    <% }); %>
+
+    <!--Bootstrap core CSS-->
+    <!--
+    <link href="/frontEnd/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/jquery-ui.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/datepicker.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/validationEngine.jquery.css" rel="stylesheet">
+    <link href="/frontEnd/lib/css/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    -->
+    <!--favicons-->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/common/img/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/common/img/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/common/img/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/common/img/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/common/img/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/common/img/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/common/img/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/common/img/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/common/img/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/common/img/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/common/img/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/common/img/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/common/img/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/common/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/common/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/common/img/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Custom styles for this template -->
+    <!--
+    <link href="/frontEnd/css/main.css" rel="stylesheet">
+    <link href="/frontEnd/css/carousel.css" rel="stylesheet">
+    <link href="/common/libs/magnific-popup/magnific-popup.css" rel="stylesheet">
+    -->
+    <link href="/bin/main.min.css" rel="stylesheet">
+</head>
+<!-- NAVBAR
+================================================== -->
+<body id="body">
+
+<% if(imgs){ %>
+<%- include('header',{imgs:imgs,texts:texts}) %>
+<% } %>
+<div id="page_container">
+<% if (page == 'index') { %>
+<%- include('../index',{ships:ships,texts:texts}) %>
+<script>
+    var ships = <%- JSON.stringify(ships) %>;
+    var landingSelect = <%- JSON.stringify(landingSelect)%>;
+    //    console.log(ships);
+</script>
+<% } %>
+
+<% if (page == 'rent-your-ship') { %>
+<%- include('../rent-your-ship',{page:page,texts:texts}) %>
+<% } %>
+
+<% if (page == 'user-guide') { %>
+<%- include('../user-guide',{page:page,language:language,texts:texts}) %>
+<% } %>
+
+<% if (page == 'sealer-guide') { %>
+<%- include('../sealer-guide',{page:page,language:language,texts:texts}) %>
+<% } %>
+
+<% if (page == 'frequently-questions') { %>
+<%- include('../frequently-questions',{page:page,language:language,texts:texts}) %>
+<% } %>
+
+<% if (page == 'privacy-politics') { %>
+<%- include('../privacy-politics',{language:language,texts:texts}) %>
+<% } %>
+
+<% if (page == 'anchor-ship') { %>
+<%- include('../anchor-ship',{page:page,texts:texts}) %>
+<% } %>
+
+<% if (page == 'service-conditions') { %>
+<%- include('../service-conditions',{page:page,texts:texts}) %>
+<% } %>
+
+<% if (page == 'our-ships') { %>
+<%- include('../our-ships',{page:page,texts:texts,allships:allships}) %>
+<script>
+    var allships = <%- JSON.stringify(allships) %>;
+</script>
+<% } %>
+
+<% if (page == 'about-us') { %>
+<%- include('../about-us',{page:page,texts:texts}) %>
+<% } %>
+
+<% if (page == 'private-owner') { %>
+<%- include('../private-owners',{page:page,texts:texts}) %>
+<% } %>
+
+<% if (page == 'login-user') { %>
+<%- include('../login-user',{page:page}) %>
+<% } %>
+
+<% if (page == 'login-owner') { %>
+<%- include('../login-owner',{page:page}) %>
+<% } %>
+
+<% if (page == 'enterprise-owner') { %>
+<%- include('../enterprise-owner',{page:page,texts:texts}) %>
+<% } %>
+
+<% if (page == 'map') { %>
+<%- include('../map',{page:page}) %>
+<% } %>
+
+<% if (page == 'answer') { %>
+<%- include('../answer_request',{page:page}) %>
+<% } %>
+
+<% if (page == 'pay_booking') { %>
+<%- include('../pay_booking',{page:page}) %>
+<script>
+    var book = <%- JSON.stringify(book) %>
+            console.log(book)
+</script>
+<% } %>
+
+<% if (page == 'newsletter') { %>
+<%- include('../subscriptions',{page:page}) %>
+<script>
+    var susc = <%- JSON.stringify(susc) %>
+            console.log(susc)
+</script>
+<% } %>
+
+<% if (page == '404') { %>
+<%- include('../404') %>
+<% } %>
+
+<% if (page == 'ship-details') { %>
+<%- include('../ship-details',{page:page,ship:ship,texts:texts,recomendation:recomendation}) %>
+<script>
+    if (<%- JSON.stringify(ship) %>) {
+        var detail = <%- JSON.stringify(ship) %>;
+    }
+    var lang =
+    <%- JSON.stringify(language) %>
+</script>
+<% } %>
+</div>
+<script>
+    var filters = <%- JSON.stringify(filters) %>;
+    var general_land = <%- JSON.stringify(general_land) %>;
+    var slogans = <%- JSON.stringify(slogans) %>;
+    var page = <%- JSON.stringify(page) %>;
+    var symbol = <%- JSON.stringify(symbol) %>
+    var texts = <%- JSON.stringify(texts) %>
+    var routes = <%- JSON.stringify(routes) %>;
+    var landing = <%- JSON.stringify(landing)%>;
+    var money = <%- JSON.stringify(currenciesMenu)%>;
+    var userSession = <%- JSON.stringify(user)%>;
+    //console.log(routes);
+</script>
+<div class="cookie col-xs-12">
+    <div class="container">
+        <div class="title">
+            <%= texts.cookie_title %>
+        </div>
+        <div class="description col-xs-10">
+            <div class="row">
+                <%- texts.cookies %>
+            </div>
+        </div>
+        <div class="col-xs-2 closed">
+            <img width="20px" height="20px" src="/frontEnd/img/ic_20_cookies_close@2x.png">
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<footer>
+    <%- include('footer',{texts:texts}) %>
+</footer>
+<div class="modal fade" id="compose-modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="inline-block pull-right icon-remove" data-dismiss="modal"></span>
+                <div class="text-center"><img width="60px" height="60px" src="/frontEnd/img/img_60_menu_logo.png"
+                                              srcset="/frontEnd/img/img_60_menu_logo@2x.png 2x">
+                </div>
+                <h4 class="modal-title align-center">Alquiler<span>de</span>Barco<span>.com</span></h4>
+            </div>
+            <form action="/Blogin" method="post" name="formLogin" id="formLogin">
+                <div class="modal-body">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <!--<div class="count-head"><%= texts.login_account %></div>-->
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" name="email" id="email"
+                                       class="form-control required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="<%= texts.placeholder_pass %>" name="password"
+                                       id="password"
+                                       class="form-control required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button type="submit" class="btn btn-primary" id="sub_button"><%= texts.login %></button>
+                </div>
+
+                <div class="modal-footer">
+                    <div><a href="/backoffice/login#toreset_pass"><%= texts.forgot_pass %></a></div>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="compose-modal-login-back" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="inline-block pull-right icon-remove" data-dismiss="modal"></span>
+
+                <div class="text-center"><img width="60px" height="60px" src="/frontEnd/img/img_60_menu_logo.png"
+                                              srcset="/frontEnd/img/img_60_menu_logo@2x.png 2x">
+                </div>
+                <h4 class="modal-title align-center">Alquiler<span>de</span>Barco<span>.com</span></h4>
+            </div>
+            <div class="modal-body" id="show_login_form">
+                <form action="/Blogin" method="post" name="formLogin" id="formLoginB">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <!--<div class="count-head"><%= texts.login_account %></div>-->
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" name="email" id="email"
+                                       class="form-control required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="<%= texts.placeholder_pass %>" name="password"
+                                       id="password"
+                                       class="form-control required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button type="submit" class="btn btn-primary" id="sub_button"><%= texts.login %></button>
+                    <div class="modal-footer">
+                        <div><a href="/backoffice/login#toreset_pass"><%= texts.forgot_pass %></a></div>
+                        <div><a id="create_account" href="#"><%= texts.register %></a></div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-body" id="general-register">
+                <div class="delimiter">
+                    <div class="line inline-block"></div>
+                    o
+                    <div class="line inline-block"></div>
+                </div>
+                <div class="social">
+                    <button class="btn btn-success"
+                            id="mail-register"> <%= texts.sign_up_with %> Email
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="mailRegister">
+                <form id="form-mailRegister">
+                    <div class="form-group">
+                        <label for="reg_name" class="control-label asterisk"><%= texts.name %></label>
+                        <input type="text" id="reg_name" class="form-control required" name="reg_name"
+                               placeholder="<%= texts.name %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_lastname" class="control-label asterisk"><%= texts.surname %></label>
+                        <input type="text" id="reg_lastname" class="form-control required" name="reg_lastname"
+                               placeholder="<%= texts.surname %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_phone" class="control-label asterisk"><%= texts.phone %></label>
+                        <input type="text" id="reg_phone" name="reg_phone"
+                               class="form-control required phone" minlength="6"
+                               placeholder="<%= texts.phone %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_address" class="control-label asterisk"><%= texts.address %></label>
+                        <input type="text" id="reg_address" class="form-control required" minlength="4"
+                               name="reg_address"
+                               placeholder="<%= texts.address %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_email" class="control-label asterisk">Email</label>
+                        <input type="email" id="reg_email" class="form-control required" name="reg_email"
+                               placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg_pass" class="control-label asterisk"><%= texts.placeholder_pass %></label>
+                        <input type="password" id="reg_pass" class="form-control required" minlength="6"
+                               name="reg_pass" placeholder="<%= texts.valid_minlength.replace("[number]", "6") %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_pass_confirm" class="control-label asterisk"><%= texts.repeat_pass %></label>
+                        <input type="password" id="reg_pass_confirm"
+                               class="form-control required" minlength="6" name="reg_pass_confirm"
+                               placeholder="<%= texts.valid_minlength.replace("[number]", "6") %>">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success register" type="submit"><%= texts.register %></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="compose-modal-register" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="inline-block pull-right icon-remove" data-dismiss="modal"></span>
+
+                <div class="text-center"><img width="60px" height="60px" src="/frontEnd/img/img_60_menu_logo.png"
+                                              srcset="/frontEnd/img/img_60_menu_logo@2x.png 2x">
+                </div>
+                <h4 class="modal-title align-center">Alquiler<span>de</span>Barco<span>.com</span></h4>
+            </div>
+            <div class="modal-body" id="general-register">
+                <form action="/login/facebook" method="post">
+                    <div class="social">
+                        <button class="btn btn-primary"> <%= texts.sign_up_with %> Facebook
+                        </button>
+                    </div>
+                </form>
+                <form action="/auth/google/callback" method="post">
+                    <div class="social" id="signinButton">
+                        <button class="btn btn-danger" type="submit"
+                                data-scope="https://www.googleapis.com/auth/plus.login"
+                                data-clientid="305599916291450"
+                                data-redirecturi="postmessage"
+                                data-accesstype="offline"
+                                data-cookiepolicy="single_host_origin"
+                                data-callback="signInCallback"> <%= texts.sign_up_with %> Google+
+                        </button>
+                    </div>
+                </form>
+                <div class="delimiter">
+                    <div class="line inline-block"></div>
+                    o
+                    <div class="line inline-block"></div>
+                </div>
+                <div class="social">
+                    <button class="btn btn-success"
+                            id="mail-register"> <%= texts.sign_up_with %> Email
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="mailRegister">
+                <form id="form-mailRegister">
+                    <div class="form-group">
+                        <label for="reg_name" class="control-label asterisk"><%= texts.name %></label>
+                        <input type="text" id="reg_name" class="form-control required" name="reg_name"
+                               placeholder="<%= texts.name %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_lastname" class="control-label asterisk"><%= texts.surname %></label>
+                        <input type="text" id="reg_lastname" class="form-control required" name="reg_lastname"
+                               placeholder="<%= texts.surname %>" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_phone" class="control-label asterisk"><%= texts.phone %></label>
+                        <input type="text" id="reg_phone" name="reg_phone"
+                               class="form-control required phone" minlength="6"
+                               placeholder="<%= texts.phone %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_address" class="control-label asterisk"><%= texts.address %></label>
+                        <input type="text" id="reg_address" class="form-control required" name="reg_address"
+                               placeholder="<%= texts.address %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_email" class="control-label asterisk">Email</label>
+                        <input type="email" id="reg_email" class="form-control required" name="reg_email"
+                               placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg_pass" class="control-label asterisk"><%= texts.placeholder_pass %></label>
+                        <input type="password" id="reg_pass" class="form-control required" minlength="6"
+                               name="reg_pass" placeholder="<%-texts.placeholder_pass%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg_pass_confirm" class="control-label asterisk"><%= texts.repeat_pass %></label>
+                        <input type="password" id="reg_pass_confirm"
+                               class="form-control required" minlength="6" name="reg_pass_confirm"
+                               placeholder="<%-texts.repeat_pass%>">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success register" type="submit"><%= texts.register %></button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="conditions"><%- texts.by_sign %> </div>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!--Placed at the end of the document so the pages load faster-->
+<script>
+// Copyright 2014-2015 Twitter, Inc.
+// Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+  var msViewportStyle = document.createElement('style')
+  msViewportStyle.appendChild(
+    document.createTextNode(
+      '@-ms-viewport{width:auto!important}'
+    )
+  )
+  document.querySelector('head').appendChild(msViewportStyle)
+}
+</script>
+<!--
+<script type="text/javascript" src="/frontEnd/lib/js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="/common/libs/magnific-popup/jquery.magnific-popup.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script type="text/javascript" src="/common/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/common/js/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/daterangepicker.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/moment.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/jquery.inputmask.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/jquery.menu-aim.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/modernizr.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/ejs.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/docs.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/parallax.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/main.js"></script>
+<script type="text/javascript" src="/frontEnd/js/index.js"></script>
+<script type="text/javascript" src="/frontEnd/js/rent-ship.js"></script>
+<script type="text/javascript" src="/frontEnd/js/register.js"></script>
+<script type="text/javascript" src="/frontEnd/js/ship_details.js"></script>
+<script type="text/javascript" src="/frontEnd/js/pay_booking.js"></script>
+<script type="text/javascript" src="/frontEnd/js/suscriptions.js"></script>
+<script type="text/javascript" src="/frontEnd/js/login.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/loadingoverlay.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/js/loadingoverlay_progress.min.js"></script>
+
+<script src="/common/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
+<script src="/common/libs/inputmask/inputmask/jquery.inputmask.date.extensions.js"></script>
+-->
+
+<script type="text/javascript" src="/bin/main.min.js"></script>
+
+</body>
+</html>

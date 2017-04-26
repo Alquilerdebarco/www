@@ -1,0 +1,104 @@
+<div class="container margin-pages">
+    <div class="row" id="hidden_me">
+        <div class="hidden text-center" id="title-register">
+            <h2><%-texts.title_form_register_user%></h2>
+        </div>
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 panel">
+                <form id="login-form" autocomplete="off">
+                    <h4><%-texts.login_user%></h4>
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-control required" name="email"
+                               placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-control required" minlength="6"
+                               name="password" placeholder="<%- texts.placeholder_pass %>">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="remember_here"><%-texts.remember_me%>
+                        </label>
+                    </div>
+                    <div class="form-group text-center">
+                        <button role="button" class="btn  btn-primary  submit login-bnt"
+                                id="user-login-button"><%-texts.button_login%></button>
+                    </div>
+                    <div class="form-group text-center">
+                        <div><a href="#" id="lost-pass"><%- texts.forgot_pass %></a></div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary" id="register"><%-texts.register_now%></button>
+                    </div>
+                    <a href="/<%= language %>">< <%= texts.go_back %></a>
+                </form>
+                <form id="form-register" class="hidden">
+
+                    <div class="form-group">
+                            <input type="text" id="register_name" name="register_name" placeholder="<%- texts.name %>"
+                                   class="form-control required">
+                    </div>
+                    <div class="form-group">
+                            <input type="text" id="register_surname" name="register_surname"
+                                   placeholder="<%- texts.surname %>" class="form-control required">
+                    </div>
+                    <div class="form-group">
+                            <input type="email" id="register_email_user" class="form-control required" name="register_email_user"
+                                   placeholder="Email">
+                    </div>
+                    <!--<div class="form-group">-->
+                            <!--<input type="text" id="register_telephone" name="register_telephone" class="form-control required"-->
+                                   <!--placeholder="<%- texts.phone %>">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                            <input type="number" id="register_mobile" name="register_mobile" class="form-control required"
+                                   placeholder="<%- texts.mobile %> ">
+                    </div>
+                    <div class="form-group">
+                            <input type="text" id="register_city" name="register_city" class="form-control required"
+                                   placeholder="<%- texts.city %>">
+                    </div>
+                    <div class="form-group">
+                            <input type="password" id="register_pass" class="form-control required" minlength="6"
+                                   name="register_pass" placeholder="<%- texts.placeholder_pass %>">
+                    </div>
+                    <div class="form-group">
+                            <input type="password" id="register_rep_pass" class="form-control required" minlength="6"
+                                   name="register_rep_pass" placeholder="<%- texts.repeat_pass %>">
+                    </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked id="subscription"><%-texts.send_offer%>
+                            </label>
+                        </div>
+                        <h6><%-texts.receive_commercial_information%> <a href="/<%= language %>/<%= texts.slug_conditions %>"><%= texts.service_conditions %></a>,
+                            <a href="/<%= language %>/<%= texts.slug_privacy %>"><%= texts.cookies_privacy %></a></h6>
+
+                    <div class="text-center form-group">
+                        <button role="button" class="btn  btn-primary  submit login-bnt"
+                                id="submit-register"><%- texts.register %></button>
+                    </div>
+                    <div class="text-center form-group">
+                        <a id="register_back" href="#"><%-texts.already_member%></a>
+                    </div>
+                    <h6><%-texts.by_clicking_on%> <a href="/<%= language %>/<%= texts.slug_conditions %>"><%= texts.service_conditions %></a>,
+                        <a href="/<%= language %>/<%= texts.slug_privacy %>"><%= texts.cookies_privacy %></a></h6>
+                </form>
+                <form id="reset_pass-form" novalidate autocomplete="off" class="hidden">
+                    <h4><%-texts.recover_password%></h4>
+                    <div class="form-group">
+                        <!--<label for="reset_pass_email" class="control-label asterisk"><%- texts.placeholder_email %></label>-->
+                        <input id="reset_pass_email" name="reset_pass_email" type="text" class="form-control required"
+                               placeholder="Email"/>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center form-group">
+                        <button role="button" class="btn  btn-primary  submit login-bnt"
+                                id="submit_reset_pass"><%- texts.send %></button>
+                    </div>
+                    <div class="text-center form-group">
+                        <a id="back-form-group" href="#" ><%-texts.already_member%></a>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>

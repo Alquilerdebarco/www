@@ -1,0 +1,2770 @@
+<div class="container">
+    <div class="row">
+
+        <% if(page == 'ship-details'){ %>
+        <div class="col-xs-12">
+            <h1 class="first-title" style="margin-left: 35px"><%= texts.title_rent_ships %></h1>
+        </div>
+        <div class="filter2">
+            <div class="col-xs-12">
+                <div class="breadc" style="margin-left: 30px">
+                    <a class="filter2-rent-ship inline-block" href="/<%= language %>"><%= texts.rent_ships %></a>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-type-ship inline-block"
+                       href="/<%= language %>/<%= general_land.slug[0].value %>"><%= texts.general_ships %></a>
+
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a href="#" class="filter2-country inline-block"><%= ship.localization.country.name[0].value %></a>
+
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a href="#" class="filter2-port inline-block"><%= ship.localization.city.name[0].value %> </a>
+
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a href="#" class="filter2-area inline-block"><%= ship.localization.area.name[0].value %></a>
+
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a href="#" class="filter2-city inline-block"><%= ship.localization.port.name[0].value %></a>
+
+
+                </div>
+            </div>
+        </div>
+        <% };;;;;; %>
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <!--<div class="tab-content">-->
+                <section id="section-description"></section>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active col-xs-6 col-sm-6 col-md-2" style="padding: 10px 5px;"><a
+                                    onclick="scrollerId('section-description')"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%- texts.description %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-pictures')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_photos_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_photos_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_pictures %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-marker')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_location_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_location_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_loc %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-calendars')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_avail %></h2></a>
+                        </li>
+                        <li class="settings col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-settings')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_pricing_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_pricing_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_price %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-charact')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_charact %></h2></a>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12 card-details" id="description">
+                        <div class="col-xs-12 col-md-12 description">
+                            <h1 class="title"><%= ship.title[0].value %></h1>
+
+                        </div>
+
+                        <div class="col-xs-12 col-md-6">
+                            <div class="col-xs-12 card-details">
+                                <div class="row back-grey">
+                                    <div class="header">
+                                        <% ship.photos.forEach(function(media){ %>
+                                        <% if(media.default){ %>
+                                        <img class="ship-details-photo" src="/service/media/<%= media.media %>"
+                                             href="/service/media/<%= media.media %>"/>
+                                        <% } %>
+                                        <% }) %>
+                                    </div>
+                                </div>
+                                <div class="row hidden-xs hidden-sm">
+                                    <div style="margin-top: 10px;margin-bottom: 20px;">
+                                        <% contP = 0 %>
+                                        <% if(ship.photos){ %>
+                                        <% ship.photos.forEach(function(photo){ %>
+                                        <% if(contP < 4){ %>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                            <img class="ship-galery" id="<%= photo.media %>"
+                                                 src="/service/media/<%= photo.media %>"/>
+                                            <% contP++ %>
+                                        </div>
+                                        <% } %>
+                                        <% });;; %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="row visible-xs visible-sm">
+                                    <div class="pics-movil inline-block">
+                                        <% if(ship.photos){ %>
+                                        <% ship.photos.forEach(function(photo){ %>
+                                        <img id="<% photo.media %>" src="/service/media/<%= photo.media %>"/>
+                                        <% });;; %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 discount-card">
+                                    <% ship.seasons.forEach(function (season) { %>
+                                    <% if ((new Date(season.start).getTime() <= new Date().getTime() && new Date(season.end).getTime() >= new Date().getTime())) { season.experiences.forEach(function (xp) { %>
+                                    <% if (xp.experience.id == ship.xp.id) { xp.durations.forEach(function(duration){ %>
+                                    <div class="col-xs-12 discount-item" onclick="scrollerId('section-settings')">
+                                        <div class="row">
+                                            <% if(duration.discount && duration.discount != '0,00' && duration.discount != '0') { %>
+                                            <original-price>
+                                                <span class="dollar"></span> <%= duration.price %>
+                                                <span class="euro"></span>
+                                            </original-price>
+                                            <span> &ensp; </span>
+                                            <discount-price>
+                                                <span class="dollar"></span> <%= duration.discount %>
+                                                <span class="euro"></span>
+                                            </discount-price>
+                                            <% } else { %>
+                                            <discount-price>
+                                                <span class="dollar"></span> <%= duration.price %>
+                                                <span class="euro"></span>
+                                            </discount-price>
+                                            <% } %>
+                                            <% if(duration.duration.unity == 0){ %>
+                                            <% if(duration.duration.quantity == 4){ %>
+                                            <p><%= texts.halfDay %></p>
+                                            <% }else{ %>
+                                            <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                            <% } %>
+                                            <% }else if(duration.duration.unity == 1){ %>
+                                            <p><%= duration.duration.quantity %> <%= texts.globalDay %></p>
+                                            <% }else{ %>
+                                            <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                    <% }}) %>
+                                    <% }}) %>
+                                    <div class="col-xs-12" onclick="scrollerId('section-settings')">
+                                        <div class="row">
+                                            <p>
+                                                <%= ship.localization.port.name[0].value %>,
+                                                <%= ship.technicalDetails.habitability.cabins %> <%= texts.det_ship_cabin %>
+                                                ,
+                                                <%= ship.technicalDetails.habitability.persons.day %> <%= texts.det_ship_day %>
+                                                ,
+                                                <%= ship.technicalDetails.habitability.persons.night %> <%= texts.det_ship_night %>
+                                                ,
+                                                <% ship.seasons.forEach(function (season) { %>
+                                                <% if ((new Date(season.start).getTime() <= new Date().getTime() && new Date(season.end).getTime() >= new Date().getTime())) { season.experiences.forEach(function (xp) { %>
+                                                <% if (xp.experience.id == ship.xp.id) { %>
+                                                <%= xp.experience.name %>
+                                                <% }}) %>
+                                                <% }}) %>
+                                                <% if(ship.rentType && ship.rentType == 0){ %>
+                                                <br>*<%= texts.det_rent_without_skipper %>
+                                                <% } else if(ship.rentType && ship.rentType == 1){ %>
+                                                <br><%= texts.master_filter %>
+                                                <% } else { %>
+                                                <br>*<%= texts.det_skipper_optional %>
+                                                <% } %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!--<% if(ship.discounts.length > 0){ %>
+                                    <div class="discount-offer">
+                                        <div class="title"><%= texts.det_discounts %></div>
+                                        <% ship.discounts.forEach(function (disc) { %>
+                                            <% if (new Date(disc.start).getTime() <= new Date().getTime() && new Date(disc.end).getTime() >= new Date().getTime()) { %>
+                                            <% if(disc.type != "0"){ %>
+                                                <div class="offer-item">
+                                                <% if(disc.type == "1"){ %>
+                                                    <span class="middle-offer">Last minute </span><span class="big-offer"><%= disc.discount %>%</span>
+                                                    <div class="clearfix"></div>
+                                                    <p><%= new Date(disc.start).getDate() %>/<%= new Date(disc.start).getMonth() %>/<%= new Date(disc.start).getFullYear() %>
+                                                    -
+                                                    <%= new Date(disc.end).getDate() %>/<%= new Date(disc.end).getMonth() %>/<%= new Date(disc.end).getFullYear() %></p>
+                                                <% }else{ %>
+                                                    <span class="middle-offer">Early booking </span><span class="big-offer"><%= disc.discount %>%</span>
+                                                    <div class="clearfix"></div>
+                                                    <p><%= new Date(disc.start).getDate() %>/<%= new Date(disc.start).getMonth() %>/<%= new Date(disc.start).getFullYear() %>
+                                                    -
+                                                    <%= new Date(disc.end).getDate() %>/<%= new Date(disc.end).getMonth() %>/<%= new Date(disc.end).getFullYear() %></p>
+                                                <% } %>
+
+                                            </div>
+                                        <% }}}) %>
+                                    </div>
+                                    <% } %>-->
+                                </div>
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 contact-button-padding">
+                                    <button class="contact-button" data-toggle="modal"
+                                            data-target="#compose-modal-reserve">
+                                    <span class="hidden-xs"><img
+                                                src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                                srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                                class="inline-block"></span>
+
+                                        <p><%= texts.det_button %> <em><%= texts.det_not_compromise %></em></p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="card-details col-xs-12 col-sm-12 col-md-12">
+                            <div class="description">
+                                <%- ship.description[0].value %>
+                            </div>
+                        </div>
+
+                        <div class="side-card col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-12 col-sm-4 col-md-3 contact-margin-bottom">
+                                <div class="row ditails-contact">
+                                    <div class="title-support">
+                                        <%= texts.det_quiet_booking %>
+                                    </div>
+                                    <div class="body">
+                                        <div class="items" id="first-item">
+                                            <div class="span inline-block"><span class="icon icon-ok"></span></div>
+                                            <div class="inline-block">
+                                                <p><%= texts.det_help_item2 %></p>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <div class="span inline-block"><span class="icon icon-ok"></span></div>
+                                            <div class="inline-block">
+                                                <p><%= texts.det_help_item1 %></p>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <div class="span inline-block three"><span class="icon icon-ok"></span>
+                                            </div>
+                                            <div class="inline-block">
+                                                <p><%= texts.det_ship_checked %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="row">
+                                    <button class="contact-with ask-information" data-toggle="modal"
+                                            data-target="#compose-modal-reserve">
+                                        <p><%= texts.det_ask_information %></p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-5 boss contact-margin-bottom">
+                                <div class="row ditails-contact ditails-contact-not-margin-left">
+                                    <!--<a href="mailto:<%= ship.user.email %>" class="prop-contact">-->
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 title-support">
+                                        <%= texts.det_contact_help %>
+                                    </div>
+                                    <a data-toggle="modal" data-target="#compose-modal-reserve" class="prop-contact">
+                                        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                                            <% var avatar = ship.user.avatar == null ? "/common/img/user.png" : "/service/media/" + ship.user.avatar %>
+                                            <img src=<%= avatar %> class="inline-block">
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <span class="span-owner"><%= ship.user.name %> <%= ship.user.surname %></span>
+                                    </a>
+                                </div>
+                                <!--<div class="clearfix"></div>-->
+                                <div class="hidden-xs col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                                    <button class="contact-with" data-toggle="modal"
+                                            data-target="#compose-modal-reserve">
+                                        <p><%= texts.det_contact %></p>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <button class="hidden-sm hidden-md hidden-lg col-xs-12 contact-with"
+                                            data-toggle="modal" data-target="#compose-modal-reserve">
+                                        <p><%= texts.det_contact %></p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 contact-margin-bottom">
+                                <div class="row ditails-contact">
+                                    <div class="title-support">
+                                        <%= texts.support %>/<%= texts.help %>
+                                    </div>
+                                    <div class="body">
+
+                                        <p>
+                                            <%= texts.support_contact %>
+                                        </p>
+                                        <div class="items">
+                                            <div class="span inline-block"><span class="icon icon-phone"></span></div>
+                                            <div class="inline-block">
+                                                <a href="tel:(+34) 609 183 183">(+34) 609 183 183</a>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <div class="span inline-block mail"><span class="icon icon-envelope"></span>
+                                            </div>
+                                            <p class="inline-block">
+                                                <a href="mailto:info@alquilerdebarco.com">info@alquilerdebarco.com </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section id="section-pictures"></section>
+
+                <div class="panel-body">
+                    <div class="clearfix"></div>
+                    <ul class="nav nav-tabs">
+                        <li class="col-xs-6 col-sm-6 col-md-2" style="padding: 10px 5px;"><a
+                                    onclick="scrollerId('section-description')"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%- texts.description %></h2></a>
+                        </li>
+                        <li class="active col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-pictures')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_photos_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_photos_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_pictures %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-marker')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_location_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_location_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_loc %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-calendars')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_avail %></h2></a>
+                        </li>
+                        <li class="settings col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-settings')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_pricing_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_pricing_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_price %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-charact')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_charact %></h2></a>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12" id="pictures">
+                        <% ship.photos.forEach(function(pic){ %>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-12 pict">
+                                <div class="row">
+                                    <div class="picture">
+                                        <img id="<%= pic.media %>" src="/service/media/<%= pic.media %>"
+                                             class="ship-details-photo2" href="/service/media/<%= pic.media %>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="panel-body line-bootom">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pull-right">
+                            <button class="contact-button" data-toggle="modal" data-target="#compose-modal-reserve">
+                                    <span class="hidden-xs"><img
+                                                src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                                srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                                class="inline-block"></span>
+
+                                <p><%= texts.det_button %> <em><%= texts.det_not_compromise %></em></p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-marker"></section>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="col-xs-6 col-sm-6 col-md-2" style="padding: 10px 5px;"><a
+                                    onclick="scrollerId('section-description')"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%- texts.description %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-pictures')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_photos_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_photos_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_pictures %></h2></a>
+                        </li>
+                        <li class="active col-xs-6 col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-marker')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_location_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_location_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_loc %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-calendars')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_avail %></h2></a>
+                        </li>
+                        <li class="settings col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-settings')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_pricing_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_pricing_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_price %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-charact')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_charact %></h2></a>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12 col-sm-12 col-md-12" id="marker">
+                        <div style="width: 100%" id="mapGoogle">
+
+                        </div>
+                        <br/>
+
+                    </div>
+                </div>
+                <div class="panel-body line-bootom">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pull-right">
+                            <button class="contact-button" data-toggle="modal" data-target="#compose-modal-reserve">
+                                    <span class="hidden-xs"><img
+                                                src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                                srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                                class="inline-block"></span>
+
+                                <p><%= texts.det_button %> <em><%= texts.det_not_compromise %></em></p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-calendars"></section>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="col-xs-6 col-sm-6 col-md-2" style="padding: 10px 5px;"><a
+                                    onclick="scrollerId('section-description')"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%- texts.description %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-pictures')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_photos_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_photos_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_pictures %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-marker')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_location_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_location_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_loc %></h2></a>
+                        </li>
+                        <li class="active col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-calendars')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_avail %></h2></a>
+                        </li>
+                        <li class="settings col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-settings')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_pricing_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_pricing_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_price %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-charact')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_charact %></h2></a>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12 col-sm-12 col-md-12" id="calendars">
+                        <div class="calendars-arrows">
+                            <div class="inline-block col-xs-12 col-sm-6 col-md-6 month-actuals"></div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <img id="fordward-calendar" class="pull-right pointer"
+                                     src="/frontEnd/img/ic_24_boat_detail_availability_forward.png"
+                                     srcset="/frontEnd/img/ic_24_boat_detail_availability_forward@2x.png 2x">
+
+                                <img id="calendar-middle" class="pull-right"
+                                     src="/frontEnd/img/ic_24_boat_detail_availability_calendar.png"
+                                     srcset="/frontEnd/img/ic_24_boat_detail_availability_calendar@2x.png 2x">
+                                <img id="backward-calendar" class="pull-right pointer"
+                                     src="/frontEnd/img/ic_24_boat_detail_availability_backward.png"
+                                     srcset="/frontEnd/img/ic_24_boat_detail_availability_backward@2x.png 2x">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="month-list">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body line-bootom">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pull-right">
+                            <button class="contact-button" data-toggle="modal" data-target="#compose-modal-reserve">
+                                    <span class="hidden-xs"><img
+                                                src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                                srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                                class="inline-block"></span>
+
+                                <p><%= texts.det_button %> <em><%= texts.det_not_compromise %></em></p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-settings"></section>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="col-xs-6 col-sm-6 col-md-2" style="padding: 10px 5px;"><a
+                                    onclick="scrollerId('section-description')"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%- texts.description %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-pictures')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_photos_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_photos_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_pictures %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-marker')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_location_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_location_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_loc %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-calendars')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_avail %></h2></a>
+                        </li>
+                        <li class="active settings col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-settings')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_pricing_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_pricing_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_price %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-charact')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_charact %></h2></a>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12" id="settings">
+                        <div class="col-xs-12">
+                            <div class="pull-left"></div>
+                            <div class="clearfix"></div>
+                            <div class="prices">
+                                <% var stop = false %>
+                                <% if(ship.seasons.length > 0) { %>
+                                <% ship.seasons.forEach(function(season) { %>
+                                <% if ((new Date(season.start).getTime() <= new Date().getTime() && new Date(season.end).getTime() >= new Date().getTime())) { %>
+                                <div>
+                                    <h4 class="hidden-xs" style="color: <%= season.color %>"><%= season.title %>
+                                        (<%= new Date(season.start).getDate() %>
+                                        /<%= new Date(season.start).getMonth() + 1 %>
+                                        /<%= new Date(season.start).getFullYear() %>
+                                        - <%= new Date(season.end).getDate() %>
+                                        /<%= new Date(season.end).getMonth() + 1 %>
+                                        /<%= new Date(season.end).getFullYear() %>)</h4>
+                                    <h5 class="visible-xs" style="color: <%= season.color %>"><%= season.title %>
+                                        (<%= new Date(season.start).getDate() %>
+                                        /<%= new Date(season.start).getMonth() + 1 %>
+                                        /<%= new Date(season.start).getFullYear() %>
+                                        - <%= new Date(season.end).getDate() %>
+                                        /<%= new Date(season.end).getMonth() + 1 %>
+                                        /<%= new Date(season.end).getFullYear() %>)</h5>
+                                </div>
+                                <div class="table-responsive hidden-xs">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th><%= texts.xp %></th>
+                                            <% durations.forEach(function(duration){ %>
+                                            <% if(duration.unity == 0){ %>
+                                            <% if(duration.quantity == 4){ %>
+                                            <th><%= texts.halfDay %></th>
+                                            <% }else{ %>
+                                            <th><%= duration.quantity %> <%= texts.det_ship_hours %></th>
+                                            <% } %>
+
+                                            <% }else if(duration.unity == 1){ %>
+                                            <th><%= duration.quantity %> <%= texts.globalDay %></th>
+                                            <% }else{ %>
+                                            <th><%= duration.quantity %> <%= texts.det_ship_week %></th>
+                                            <% } %>
+                                            <% }) %>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <% season.experiences.forEach(function(xp){ %>
+                                        <tr>
+                                            <td><%= xp.experience.name %></td>
+                                            <% durations.forEach(function(dur) { var price = '' %>
+                                            <% xp.durations.forEach(function(duration){ %>
+                                            <% if (duration.duration.id == dur._id) { %>
+                                            <% price = duration.price %>
+                                            <% }}) %>
+                                            <% if (price) { %>
+                                            <td><span class="dollar"></span> <%= price %> <span
+                                                        class="euro"></span></td>
+                                            <% } else { %>
+                                            <td>----------</td>
+                                            <% } }) %>
+                                        </tr>
+                                        <% }) %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="visible-xs">
+                                    <% season.experiences.forEach(function(xp){ %>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12"><strong><%= xp.experience.name %></strong></div>
+                                        <div class="col-xs-6">
+                                            <% durations.forEach(function(duration){ %>
+                                            <% if(duration.unity == 0){ %>
+                                            <% if(duration.quantity == 4){ %>
+                                            <div><%= texts.halfDay %></div>
+                                            <% }else{ %>
+                                            <div><%= duration.quantity %> <%= texts.det_ship_hours %></div>
+                                            <% } %>
+
+                                            <% }else if(duration.unity == 1){ %>
+                                            <div><%= duration.quantity %> <%= texts.globalDay %></div>
+                                            <% }else{ %>
+                                            <div><%= duration.quantity %> <%= texts.det_ship_week %></div>
+                                            <% } %>
+                                            <% }) %>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <% durations.forEach(function(dur) { var price = '' %>
+                                            <% xp.durations.forEach(function(duration){ %>
+                                            <% if (duration.duration.id == dur._id) { %>
+                                            <% price = duration.price %>
+                                            <% }}) %>
+                                            <% if (price) { %>
+                                            <div><span class="dollar"></span> <%= price %> <span
+                                                        class="euro"></span></div>
+                                            <% } else { %>
+                                            <div>------------</div>
+                                            <% } }) %>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br/>
+                                    <% }) %>
+                                </div>
+                                <% }}) %>
+                                <% } %>
+                                <!--<% ship.seasons.forEach(function(season){ %>-->
+                                <!--<% season.experiences.forEach(function(xp){ %>-->
+
+                                <!--<% if(filters){ %>-->
+                                <!--<% if(filters[6] != "0" && filters[6] != null){ %>-->
+                                <!--<% if(xp.experience.name == ship.xp.name && new Date(season.start).getTime() <= new Date(parseInt(filters[6])).getTime() && new Date(season.end).getTime() >= new Date(parseInt(filters[6])).getTime() && !stop){ %>-->
+                                <!--<% xp.durations.forEach(function(duration){ %>-->
+                                <!--<div class="col-xs-12 col-sm-3">-->
+                                <!--<div class="price">-->
+                                <!--<div class="duration">-->
+                                <!--<% if(duration.duration.unity == 0){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>-->
+                                <!--<% }else if(duration.duration.unity == 1){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>-->
+                                <!--<% }else{ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>-->
+                                <!--<% } %>-->
+                                <!--</div>-->
+                                <!--<h3><span class="dollar"></span> <%= duration.price %> <span-->
+                                <!--class="euro"></span></h3>-->
+                                <!--<% stop = true %>-->
+                                <!--</div>-->
+
+                                <!--</div>-->
+                                <!--<% }) %>-->
+                                <!--<% } %>-->
+                                <!--<% }else if(xp.experience.name == ship.xp.name && new Date(season.start).getTime() <= new Date().getTime() && new Date(season.end).getTime() >= new Date().getTime() && !stop){ %>-->
+                                <!--<% xp.durations.forEach(function(duration){ %>-->
+                                <!--<div class="col-xs-12 col-sm-3">-->
+                                <!--<div class="price">-->
+                                <!--<div class="duration">-->
+                                <!--<% if(duration.duration.unity == 0){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>-->
+                                <!--<% }else if(duration.duration.unity == 1){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>-->
+                                <!--<% }else{ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>-->
+                                <!--<% } %>-->
+                                <!--</div>-->
+                                <!--<h3><span class="dollar"></span> <%= duration.price %> <span-->
+                                <!--class="euro"></span></h3>-->
+                                <!--<% stop = true %>-->
+                                <!--</div>-->
+
+                                <!--</div>-->
+                                <!--<% }) %>-->
+                                <!--<% }else if(xp.experience.name == ship.xp.name && !stop){ %>-->
+                                <!--<% xp.durations.forEach(function(duration){ %>-->
+                                <!--<div class="col-xs-12 col-sm-3">-->
+                                <!--<div class="price">-->
+                                <!--<div class="duration">-->
+                                <!--<% if(duration.duration.unity == 0){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>-->
+                                <!--<% }else if(duration.duration.unity == 1){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>-->
+                                <!--<% }else{ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>-->
+                                <!--<% } %>-->
+                                <!--</div>-->
+                                <!--<h3><span class="dollar"></span> <%= duration.price %> <span-->
+                                <!--class="euro"></span></h3>-->
+                                <!--<% stop = true %>-->
+                                <!--</div>-->
+
+                                <!--</div>-->
+                                <!--<% }) %>-->
+                                <!--<% } %>-->
+                                <!--<% }else if(xp.experience.name == ship.xp.name && new Date(season.start).getTime() <= new Date().getTime() && new Date(season.end).getTime() >= new Date().getTime() && !stop){ %>-->
+
+                                <!--<% xp.durations.forEach(function(duration){ %>-->
+                                <!--<div class="col-xs-12 col-sm-3">-->
+                                <!--<div class="price">-->
+                                <!--<div class="duration">-->
+                                <!--<% if(duration.duration.unity == 0){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>-->
+                                <!--<% }else if(duration.duration.unity == 1){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>-->
+                                <!--<% }else{ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>-->
+                                <!--<% } %>-->
+                                <!--</div>-->
+                                <!--<h3><span class="dollar"></span> <%= duration.price %> <span-->
+                                <!--class="euro"></span></h3>-->
+                                <!--<% stop = true %>-->
+                                <!--</div>-->
+
+                                <!--</div>-->
+
+                                <!--<% }) %>-->
+                                <!--<% }else if(xp.experience.name == ship.xp.name && !stop){ %>-->
+
+                                <!--<% xp.durations.forEach(function(duration){ %>-->
+                                <!--<div class="col-xs-12 col-sm-3">-->
+                                <!--<div class="price">-->
+                                <!--<div class="duration">-->
+                                <!--<% if(duration.duration.unity == 0){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>-->
+                                <!--<% }else if(duration.duration.unity == 1){ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>-->
+                                <!--<% }else{ %>-->
+                                <!--<p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>-->
+                                <!--<% } %>-->
+                                <!--</div>-->
+                                <!--<h3><span class="dollar"></span> <%= duration.price %> <span-->
+                                <!--class="euro"></span></h3>-->
+                                <!--<% stop = true %>-->
+                                <!--</div>-->
+
+                                <!--</div>-->
+                                <!--<% }) %>-->
+                                <!--<% } %>-->
+                                <!--<% }) %>-->
+                                <!--<% }) %>-->
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <% if(ship.discounts.length > 0){ %>
+                            <div class="discount">
+                                <h3 class="title"><%= texts.det_discounts %></h3>
+                                <% ship.discounts.forEach(function (disc) { %>
+                                <% if (new Date(disc.start).getTime() <= new Date().getTime() && new Date(disc.end).getTime() >= new Date().getTime()) { %>
+                                <div><%= texts.det_discount %>
+                                    <% if(disc.type == "0"){ %>
+                                    Especial <%= disc.discount %>%
+                                    <%= texts.between_filter.toLowerCase() %>
+                                    <%= new Date(disc.start).getDate() %>/<%= new Date(disc.start).getMonth() %>
+                                    /<%= new Date(disc.start).getFullYear() %>
+                                    <%= texts.and_filter %> <%= new Date(disc.end).getDate() %>
+                                    /<%= new Date(disc.end).getMonth() %>
+                                    /<%= new Date(disc.end).getFullYear() %>  <%= texts.det_discount_text %>
+                                    <span class=""><%= disc.minDuration %> <%= texts.det_ship_hours %></span>
+                                    <% }else if(disc.type == "1"){ %>
+                                    Last minute <%= disc.discount %>%
+                                    <%= texts.det_discount_last %> <%= disc.min %> <%= texts.det_ship_hours %> <%= texts.det_antel_days %>
+                                    <%= new Date(disc.start).getDate() %>/<%= new Date(disc.start).getMonth() %>
+                                    /<%= new Date(disc.start).getFullYear() %>
+                                    <%= texts.and_filter %> <%= new Date(disc.end).getDate() %>
+                                    /<%= new Date(disc.end).getMonth() %>
+                                    /<%= new Date(disc.end).getFullYear() %> <%= texts.det_duration_text %>
+                                    <span class=""><%= disc.minDuration %> <%= texts.det_ship_hours %></span>
+                                    <% }else{ %>
+                                    Early booking <%= disc.discount %>%
+                                    <%= texts.det_discount_text %> <%= disc.max %> <%= texts.det_ship_hours %> <%= texts.det_antel_days %>
+                                    <%= new Date(disc.start).getDate() %>/<%= new Date(disc.start).getMonth() %>
+                                    /<%= new Date(disc.start).getFullYear() %>
+                                    <%= texts.and_filter %> <%= new Date(disc.end).getDate() %>
+                                    /<%= new Date(disc.end).getMonth() %>
+                                    /<%= new Date(disc.end).getFullYear() %> <%= texts.det_duration_text %>
+                                    <span class=""><%= disc.minDuration %> <%= texts.det_ship_hours %></span>
+                                    <% } %>
+
+                                </div>
+                                <% }}) %>
+                            </div>
+                            <% } %>
+                            <div class="clearfix"></div>
+                            <% if(ship.conditions.bail > 0){ %>
+                            <div class="bail">
+                                <h3 class="title"><%= texts.det_bail %></h3>
+                                <div class="text_bail"><%= texts.det_bail_text %> <span
+                                            class="dollar"></span><%= ship.conditions.bail %><span
+                                            class="euro"></span></div>
+                                <div><%= texts.det_bail_deposit %>
+                                    <% if(ship.conditions.bailOptions.americanExpress){ %>
+                                    AmericanExpress
+                                    <% } if(ship.conditions.bailOptions.cash){ %>
+                                    , Cash
+                                    <% } if(ship.conditions.bailOptions.cheque){ %>
+                                    , Cheque
+                                    <% } if(ship.conditions.bailOptions.euroCard){ %>
+                                    , EuroCard
+                                    <% } if(ship.conditions.bailOptions.masterCard){ %>
+                                    , MasterCard
+                                    <% } if(ship.conditions.bailOptions.transfer){ %>
+                                    , Transfer
+                                    <% } if(ship.conditions.bailOptions.visa){ %>
+                                    , Visa
+                                    <% } %>
+                                </div>
+                            </div>
+                            <% } %>
+                            <div class="clearfix"></div>
+                            <div class="skipper">
+                                <h3 class="title"><%= texts.det_skipper %></h3>
+                                <% if(ship.rentType == "0"){ %>
+                                <p><%= texts.det_rent_without_skipper %></p>
+                                <% }else if(ship.rentType == "1"){ %>
+                                <p><%= texts.det_rent_with_skipper %></p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <% durations.forEach(function(duration){ %>
+                                            <% if(duration.unity == 0){ %>
+                                            <% if(duration.quantity == 4){ %>
+                                            <th><%= texts.halfDay %></th>
+                                            <% }else{ %>
+                                            <th><%= duration.quantity %> <%= texts.det_ship_hours %></th>
+                                            <% } %>
+
+                                            <% }else if(duration.unity == 1){ %>
+                                            <th><%= duration.quantity %> <%= texts.globalDay %></th>
+                                            <% }else{ %>
+                                            <th><%= duration.quantity %> <%= texts.det_ship_week %></th>
+                                            <% } %>
+                                            <% }) %>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <% ship.conditions.patron.forEach(function (p) { %>
+                                            <td><span class="dollar"></span> <%= p.price %> <span
+                                                        class="euro"></span></td>
+                                            <% }) %>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <% }else{ %>
+                                <p><%= texts.det_rent_optional_skipper %></p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <% durations.forEach(function(duration){ %>
+                                            <% if(duration.unity == 0){ %>
+                                            <% if(duration.quantity == 4){ %>
+                                            <th><%= texts.halfDay %></th>
+                                            <% }else{ %>
+                                            <th><%= duration.quantity %> <%= texts.det_ship_hours %></th>
+                                            <% } %>
+
+                                            <% }else if(duration.unity == 1){ %>
+                                            <th><%= duration.quantity %> <%= texts.globalDay %></th>
+                                            <% }else{ %>
+                                            <th><%= duration.quantity %> <%= texts.det_ship_week %></th>
+                                            <% } %>
+                                            <% }) %>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <% ship.conditions.patron.forEach(function (p) { %>
+                                            <td><span class="dollar"></span> <%= p.price %> <span
+                                                        class="euro"></span></td>
+                                            <% }) %>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <% } %>
+                                <p><%= texts.det_skipper_text %></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="conclusion">
+                                <h3 class="title"><%= texts.conditions %></h3>
+                                <% var exist = false %>
+                                <% ship.conditions.extras.forEach(function(extra){ %>
+                                <% if(extra.included == "1"){ %>
+                                <% if(!exist){ %>
+                                <div class="tag_title"><%= texts.det_extras_includes %></div>
+                                <% exist = true %>
+                                <% } %>
+                                <% if(extra.extra == "1"){ %>
+                                <p class="inline-block"><%= texts.det_extra1 %>:</p>
+                                <p class="inline-block"><%= texts.det_import_by_consuption %></p>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } if(extra.extra == "2"){ %>
+                                <p class="inline-block"><%= texts.det_extra2 %>:</p> <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } if(extra.extra == "3"){ %>
+                                <p class="inline-block"><%= texts.det_extra3 %>:</p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "4"){ %>
+                                <p class="inline-block"><%= texts.det_extra4 %>:</p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "5"){ %>
+                                <p class="inline-block"><%= texts.det_extra5 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "6"){ %>
+                                <p class="inline-block"><%= texts.det_extra6 %> :</p>
+                                <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "7"){ %>
+                                <p class="inline-block"><%= texts.det_extra7 %>:</p> <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "8"){ %>
+                                <p class="inline-block"><%= texts.det_extra8 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "9"){ %>
+                                <p class="inline-block"><%= texts.det_extra9 %>: </p>
+                                <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "10"){ %>
+                                <p class="inline-block"><%= texts.det_extra10 %>:</p>
+                                <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "11"){ %>
+                                <p class="inline-block"><%= texts.det_extra11 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "12"){ %>
+                                <p class="inline-block"><%= texts.det_extra12 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "13"){ %>
+                                <p class="inline-block"><%= texts.det_extra13 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "14"){ %>
+                                <p class="inline-block"><%= texts.det_extra14 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "15"){ %>
+                                <p class="inline-block"><%= extra.name %>: </p> <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <% } %>
+                                <% }) %>
+                                <% exist = false %>
+                                <% ship.conditions.extras.forEach(function(extra){ %>
+                                <% if(extra.obligatory == "1"){ %>
+                                <% if(!exist){ %>
+                                <div class="tag_title"><%= texts.det_extras_obligatory %></div>
+                                <% exist = true %>
+                                <% } %>
+                                <% if(extra.extra == "1"){ %>
+                                <p class="inline-block"><%= texts.det_extra1 %>: </p>
+                                <p class="inline-block"><%= texts.det_import_by_consuption %></p>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } if(extra.extra == "2"){ %>
+                                <p class="inline-block"><%= texts.det_extra2 %>: </p>
+                                <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } if(extra.extra == "3"){ %>
+                                <p class="inline-block"><%= texts.det_extra3 %>: </p>
+                                <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "4"){ %>
+                                <p class="inline-block"><%= texts.det_extra4 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "5"){ %>
+                                <p class="inline-block"><%= texts.det_extra5 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "6"){ %>
+                                <p class="inline-block"><%= texts.det_extra6 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "7"){ %>
+                                <p class="inline-block"><%= texts.det_extra7 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "8"){ %>
+                                <p class="inline-block"><%= texts.det_extra8 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "9"){ %>
+                                <p class="inline-block"><%= texts.det_extra9 %>:</p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "10"){ %>
+                                <p class="inline-block"><%= texts.det_extra10 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "11"){ %>
+                                <p class="inline-block"><%= texts.det_extra11 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "12"){ %>
+                                <p class="inline-block"><%= texts.det_extra12 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "13"){ %>
+                                <p class="inline-block"><%= texts.det_extra13 %>: </p>
+                                <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "14"){ %>
+                                <p class="inline-block"><%= texts.det_extra14 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "15"){ %>
+                                <p class="inline-block"><%= extra.name %>: </p> <span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } %>
+                                <% }) %>
+
+                                <% exist = false %>
+                                <% ship.conditions.extras.forEach(function(extra){ %>
+                                <% if(extra.obligatory == "0"){ %>
+                                <% if(!exist){ %>
+                                <div class="tag_title"><%= texts.det_extras_optional %></div>
+                                <% exist = true %>
+                                <% } %>
+                                <% if(extra.extra == "1"){ %>
+                                <p class="inline-block"><%= texts.det_extra1 %>: </p>
+                                <p class="inline-block"><%= texts.det_import_by_consuption %></p>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } if(extra.extra == "2"){ %>
+                                <p class="inline-block"><%= texts.det_extra2 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } if(extra.extra == "3"){ %>
+                                <p class="inline-block"><%= texts.det_extra3 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "4"){ %>
+                                <p class="inline-block"><%= texts.det_extra4 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "5"){ %>
+                                <p class="inline-block"><%= texts.det_extra5 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "6"){ %>
+                                <p class="inline-block"><%= texts.det_extra6 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "7"){ %>
+                                <p class="inline-block"><%= texts.det_extra7 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "8"){ %>
+                                <p class="inline-block"><%= texts.det_extra8 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "9"){ %>
+                                <p class="inline-block"><%= texts.det_extra9 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "10"){ %>
+                                <p class="inline-block"><%= texts.det_extra10 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "11"){ %>
+                                <p class="inline-block"><%= texts.det_extra11 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "12"){ %>
+                                <p class="inline-block"><%= texts.det_extra12 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "13"){ %>
+                                <p class="inline-block"><%= texts.det_extra13 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "14"){ %>
+                                <p class="inline-block"><%= texts.det_extra14 %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(extra.extra == "15"){ %>
+                                <p class="inline-block"><%= extra.name %>: </p><span
+                                        class="dolar inline-block"></span>
+                                <p class="inline-block"><%= extra.import %></p><span
+                                        class="euro inline-block"></span>
+                                <% if(extra.period == "0"){ %>
+                                <p class="inline-block"><%= texts.det_period0 %></p>
+                                <% }else if(extra.period == "1"){ %>
+                                <p class="inline-block"><%= texts.det_period1 %></p>
+                                <% }else{ %>
+                                <p class="inline-block"><%= texts.det_period2 %></p>
+                                <% } %>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% } %>
+                                <% }) %>
+                                <div class="tag_title"><%= texts.det_schedule %></div>
+                                <% if(parseInt(ship.conditions.weekRentals.checkIn.hour) > 0){ %>
+                                <p><%= texts.det_schedule_checkin %> <%= texts.det_schedule_week %>
+                                    <% if(ship.conditions.weekRentals.checkIn.day == "7"){ %>
+                                    <%= texts.det_flex %>
+                                    <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                    <%= texts.det_flex_schedule %>
+                                    <% }else { %>
+                                    <%= texts.det_maked_at %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                    h</p>
+                                <% } %>
+                                <% }else{ %>
+                                <% if(ship.conditions.weekRentals.checkIn.day == "0"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_sun %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkIn.day == "1"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_mon %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkIn.day == "2"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_tues %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkIn.day == "3"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_wes %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkIn.day == "4"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_thur %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkIn.day == "5"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_fri %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkIn.day == "6"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_sat %>
+                                <% if(ship.conditions.weekRentals.checkIn.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkIn.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% } %>
+                                <% } %>
+
+                                <% } %>
+                                <% if(parseInt(ship.conditions.weekRentals.checkOut.hour) > 0){ %>
+                                <p><%= texts.det_schedule_checkout %> <%= texts.det_schedule_week %>
+                                    <% if(ship.conditions.weekRentals.checkOut.day == "7"){ %>
+                                    <%= texts.det_flex %>
+                                    <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                    <%= texts.det_flex_schedule %>
+                                    <% }else { %>
+                                    <%= texts.det_maked_at %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                    h</p>
+                                <% } %>
+                                <% }else{ %>
+                                <% if(ship.conditions.weekRentals.checkOut.day == "0"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_sun %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkOut.day == "1"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_mon %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkOut.day == "2"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_tues %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkOut.day == "3"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_wes %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkOut.day == "4"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_thur %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkOut.day == "5"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_fri %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% }else if(ship.conditions.weekRentals.checkOut.day == "6"){ %>
+                                <%= texts.det_maked_week %> <%= texts.det_sat %>
+                                <% if(ship.conditions.weekRentals.checkOut.hour == "24"){ %>
+                                <%= texts.det_flex_schedule %>
+                                <% }else { %>
+                                <%= texts.det_at_the %> <%= parseFloat(ship.conditions.weekRentals.checkOut.hour).toFixed(2) %>
+                                h</p>
+                                <% } %>
+                                <% } %>
+                                <% } %>
+
+                                <% } %>
+                                <% if(parseInt(ship.conditions.dayRentals.checkIn.hour) > 0){ %>
+                                <p><%= texts.det_schedule_checkin %> <%= texts.det_schedule_day %>
+                                    <% if(ship.conditions.dayRentals.checkIn.hour == "24"){ %>
+                                    <%= texts.det_flex_schedule_day %>
+                                    <% }else { %>
+                                    <%= texts.det_maked_day %> <%= parseFloat(ship.conditions.dayRentals.checkIn.hour).toFixed(2) %>
+                                    h
+                                    <% } %>
+                                </p>
+                                <% } %>
+                                <% if(parseInt(ship.conditions.dayRentals.checkOut.hour) > 0){ %>
+                                <p><%= texts.det_schedule_checkout %> <%= texts.det_schedule_day %>
+                                    <% if(ship.conditions.dayRentals.checkOut.hour == "24"){ %>
+                                    <%= texts.det_flex_schedule_day %>
+                                    <% }else { %>
+                                    <%= texts.det_maked_day %> <%= parseFloat(ship.conditions.dayRentals.checkOut.hour).toFixed(2) %>
+                                    h
+                                    <% } %>
+                                </p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <div class="tag_title"><%= texts.det_base_port %></div>
+                                <% if(ship.conditions.basePort == "0"){ %>
+                                <p><%= texts.det_base_port_text.replace("[include]", texts.det_port_not_include) %></p>
+                                <% }else{ %>
+                                <p><%= texts.det_base_port_text.replace("[include]", texts.det_port_include) %></p>
+                                <% } %>
+                                <% if(ship.conditions.sleepBasePort == "0"){ %>
+                                <p><%= texts.det_nosleep_port %></p>
+                                <% }else{ %>
+                                <p><%= texts.det_sleep_port %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <div class="tag_title"><%= texts.det_others_conditios %></div>
+                                <% if(ship.conditions.secondPayment == "0"){ %>
+                                <p><%= texts.det_second_pay %> : <%= texts.det_secp1 %></p>
+                                <% }else if(ship.conditions.secondPayment == "1"){ %>
+                                <p><%= texts.det_second_pay %> : <%= texts.det_secp2 %></p>
+                                <% }else if(ship.conditions.secondPayment == "2"){ %>
+                                <p><%= texts.det_second_pay %> : <%= texts.det_secp3 %></p>
+                                <% }else if(ship.conditions.secondPayment == "3"){ %>
+                                <p><%= texts.det_second_pay %> : <%= texts.det_secp4 %></p>
+                                <% }else if(ship.conditions.secondPayment == "4"){ %>
+                                <p><%= texts.det_second_pay %> : <%= texts.det_secp5 %></p>
+                                <% }else if(ship.conditions.secondPayment == "1"){ %>
+                                <p><%= texts.det_second_pay %> : <%= texts.det_secp6 %></p>
+                                <% } %>
+                                <div class="clearfix"></div>
+                                <% if(ship.conditions.refund == "0"){ %>
+                                <p><%= texts.det_bad_day %><%= texts.det_refund1 %></p>
+                                <% }else if(ship.conditions.refund == "1"){ %>
+                                <p><%= texts.det_bad_day %><%= texts.det_refund2 %></p>
+                                <% }else if(ship.conditions.refund == "2"){ %>
+                                <p><%= texts.det_bad_day %><%= texts.det_refund3 %></p>
+                                <% }else if(ship.conditions.refund == "3"){ %>
+                                <p><%= texts.det_bad_day %><%= texts.det_refund4 %></p>
+                                <% }else if(ship.conditions.refund == "4"){ %>
+                                <p><%= texts.det_bad_day %><%= texts.det_refund5 %></p>
+                                <% } %>
+                                <p><%- ship.conditions.text[0].value %></p>
+                                <div class="clearfix"></div>
+                                <p><%= texts.det_iva_include %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body line-bootom">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pull-right">
+                            <button class="contact-button" data-toggle="modal" data-target="#compose-modal-reserve">
+                                    <span class="hidden-xs"><img
+                                                src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                                srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                                class="inline-block"></span>
+
+                                <p><%= texts.det_button %> <em><%= texts.det_not_compromise %></em></p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <section id="section-charact"></section>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="col-xs-6 col-sm-6 col-md-2" style="padding: 10px 5px;"><a
+                                    onclick="scrollerId('section-description')"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%- texts.description %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-pictures')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_photos_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_photos_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_pictures %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-marker')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_location_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_location_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_loc %></h2></a>
+                        </li>
+                        <li class="col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-calendars')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_avail %></h2></a>
+                        </li>
+                        <li class="settings col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-settings')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_pricing_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_pricing_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_price %></h2></a>
+                        </li>
+                        <li class="active col-xs-6  col-sm-6 col-md-2" style="padding:10px 5px;"><a
+                                    onclick="scrollerId('section-charact')" class="page-scroll"><img
+                                        src="/frontEnd/img/ic_14_boat_detail_features_selected.png "
+                                        srcset="/frontEnd/img/ic_14_boat_detail_features_selected@2x.png 2x"
+                                        class="inline-block">
+                                <h2><%= texts.det_charact %></h2></a>
+                        </li>
+                    </ul>
+                    <div class="col-xs-12" id="charact">
+                        <div class="body">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="separator"></div>
+                                <div class="visible-xs">
+                                    <table class="col-xs-12 col-sm-12 col-md-12 charact-table">
+                                        <tr>
+                                            <th><%= texts.det_manuf %></th>
+                                            <td><%= ship.manufacturer %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_model %></th>
+                                            <td><%= ship.model %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_type %></th>
+                                            <td><%= ship.shipType.name %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_constr %></th>
+                                            <td><%= ship.year %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_renov %></th>
+                                            <td><%= ship.lastRedecorate %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_length %></th>
+                                            <td><%= ship.technicalDetails.measurements.dimension %> m</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_beam %></th>
+                                            <td><%= ship.technicalDetails.measurements.sleeve %> m</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_draught %></th>
+                                            <td><%= ship.technicalDetails.measurements.draught %> m</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_day %></th>
+                                            <td><%= ship.technicalDetails.habitability.persons.day %> <%= texts.peoples %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_night %></th>
+                                            <td><%= ship.technicalDetails.habitability.persons.night %> <%= texts.peoples %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cabin %></th>
+                                            <td><%= ship.technicalDetails.habitability.cabins %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_bath %></th>
+                                            <td><%= ship.technicalDetails.habitability.baths %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_water %></th>
+                                            <td><%= ship.technicalDetails.deposits.freshwater %> L</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_fuel %></th>
+                                            <td><%= ship.technicalDetails.engine.combustible %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_pow %></th>
+                                            <td><%= ship.technicalDetails.engine.power %> C</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cruising %></th>
+                                            <td><%= ship.technicalDetails.engine.speed.cruising %> <%= texts.det_knot %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_speed %></th>
+                                            <td><%= ship.technicalDetails.engine.speed.max %> <%= texts.det_knot %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cons %></th>
+                                            <td><%= ship.technicalDetails.engine.consume %> L/h</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cap %></th>
+                                            <td><%= ship.technicalDetails.deposits.combustible %> L</td>
+                                        </tr>
+                                        <% if( ship.equipments.length > 0){ %>
+                                        <% ship.equipments.forEach(function(equips){ %>
+                                        <tr>
+                                            <th><%= equips.name[0].value %></th>
+                                            <td>
+                                                <ul>
+                                                    <% equips.items.forEach(function(item){ %>
+                                                    <% if(item.name[0]){ %>
+                                                    <li><%= item.name[0].value %></li>
+                                                    <% }}) %>
+                                                    <% if(equips.text[0].value != ""){ %>
+                                                    <% equips.text[0].value.forEach(function(text){ %>
+                                                    <li><%= text %></li>
+                                                    <% })} %>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                        <% } %>
+                                    </table>
+                                </div>
+                                <div class="col-xs-12 hidden-xs">
+                                    <table class="col-xs-6 charact-table" style="width: 50%">
+                                        <tr>
+                                            <th><%= texts.det_manuf %></th>
+                                            <td><%= ship.manufacturer %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_model %></th>
+                                            <td><%= ship.model %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_type %></th>
+                                            <td><%= ship.shipType.name %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_constr %></th>
+                                            <td><%= ship.year %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_renov %></th>
+                                            <td><%= ship.lastRedecorate %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_length %></th>
+                                            <td><%= ship.technicalDetails.measurements.dimension %> m</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_beam %></th>
+                                            <td><%= ship.technicalDetails.measurements.sleeve %> m</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_draught %></th>
+                                            <td><%= ship.technicalDetails.measurements.draught %> m</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_day %></th>
+                                            <td><%= ship.technicalDetails.habitability.persons.day %> <%= texts.peoples %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_night %></th>
+                                            <td><%= ship.technicalDetails.habitability.persons.night %> <%= texts.peoples %></td>
+                                        </tr>
+                                    </table>
+                                    <table class="col-xs-6 charact-table" style="width: 50%">
+                                        <tr>
+                                            <th><%= texts.det_cabin %></th>
+                                            <td><%= ship.technicalDetails.habitability.cabins %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_bath %></th>
+                                            <td><%= ship.technicalDetails.habitability.baths %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_water %></th>
+                                            <td><%= ship.technicalDetails.deposits.freshwater %> L</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_fuel %></th>
+                                            <td><%= ship.technicalDetails.engine.combustible %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_pow %></th>
+                                            <td><%= ship.technicalDetails.engine.power %> C</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cruising %></th>
+                                            <td><%= ship.technicalDetails.engine.speed.cruising %> <%= texts.det_knot %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_speed %></th>
+                                            <td><%= ship.technicalDetails.engine.speed.max %> <%= texts.det_knot %></td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cons %></th>
+                                            <td><%= ship.technicalDetails.engine.consume %> L/h</td>
+                                        </tr>
+                                        <tr>
+                                            <th><%= texts.det_cap %></th>
+                                            <td><%= ship.technicalDetails.deposits.combustible %> L</td>
+                                        </tr>
+
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <br/>
+                                    <% if( ship.equipments.length > 0){ %>
+                                    <% ship.equipments.forEach(function(equips){ %>
+                                    <table class="col-xs-6 charact-table" style="width: 50%">
+                                        <tr>
+                                            <th><%= equips.name[0].value %></th>
+                                            <td>
+                                                <ul>
+                                                    <% equips.items.forEach(function(item){ %>
+                                                    <% if(item.name[0]){ %>
+                                                    <li><%= item.name[0].value %></li>
+                                                    <% }}) %>
+                                                    <% if(equips.text[0].value != ""){ %>
+                                                    <% equips.text[0].value.forEach(function(text){ %>
+                                                    <li><%= text %></li>
+                                                    <% })} %>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <% }) %>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body line-bootom">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pull-right">
+                            <button class="contact-button" data-toggle="modal" data-target="#compose-modal-reserve">
+                                    <span class="hidden-xs"><img
+                                                src="/frontEnd/img/ic_14_boat_detail_availability_selected.png "
+                                                srcset="/frontEnd/img/ic_14_boat_detail_availability_selected@2x.png 2x"
+                                                class="inline-block"></span>
+
+                                <p><%= texts.det_button %> <em><%= texts.det_not_compromise %></em></p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--</div>-->
+            </div>
+        </div>
+
+    </div>
+    <% if(recomendation.length){ %>
+    <div class="recom row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="recommendations"><%= texts.det_recom %></div>
+                </div>
+                <% recomendation.forEach(function(recomd){ %>
+                <% if(filters){ %>
+                <% routes.forEach(function(route){ %>
+                <% if(route.lang == language){ %>
+                <% var aux = route.url.split("/") %>
+                <% var auxUrl = "/" + aux[1] + "/" + aux[2] %>
+                <a href="<%= auxUrl %>/<%= texts.slug_ship %>/<%= recomd.slug %>/<%= ship.xp.slug %>">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 card">
+                            <div class="row">
+                                <% recomd.discounts.forEach(function (disc) { %>
+                                <% var exist = false %>
+                                <% var today = new Date() %>
+                                <% if(disc.type == "0" && !exist && new Date(disc.start) < today && today < new Date(disc.end)){ %>
+                                <div class="ui-ribbon-wrapper" style="z-index: 1;">
+                                    <div class="ui-ribbon img-ship-active">
+                                        - <%= disc.discount %> %
+                                    </div>
+                                </div>
+                                <% exist = true %>
+                                <% } %>
+                                <% }) %>
+                                <div class="header">
+                                    <% recomd.photos.forEach(function(media){ %>
+                                    <% if(media.default){ %>
+                                    <img src="/service/media/<%= media.media %>">
+                                    <% } %>
+                                    <% }) %>
+
+                                </div>
+                            </div>
+                            <div class="title"><h3><%= recomd.name %></h3></div>
+
+                            <div class="ship-description"><%- recomd.description[0].value %>
+                                <div class="transparent"></div>
+                            </div>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                          srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <%= recomd.shipType.name %>, <%= recomd.manufacturer %>, <%= recomd.model %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                          srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <%= recomd.technicalDetails.measurements.dimension %>
+                                        m, <%= recomd.technicalDetails
+                                                .habitability.cabins %>
+                                        <%= texts.det_ship_cabin %>
+                                        , <%= recomd.technicalDetails.habitability.persons.day %> <%= texts.det_ship_day %>
+                                        , <%= recomd.technicalDetails.habitability.persons.night %> <%= texts.det_ship_night %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="localization elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row">
+                                        <img src="/frontEnd/img/ic_14_boat_card_location.png"
+                                             srcset="/frontEnd/img/ic_14_boat_card_location@2x.png 2x"
+                                             class="inline-block">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <% if(recomd.localization.port){ %>
+                                        <strong><%= recomd.localization.port.name[0].value %>,
+                                            <% if(recomd.localization.area){ %>
+                                            <%= recomd.localization.area.name[0].value %>
+                                            <% }else{ %>
+                                            <%= recomd.localization.city.name[0].value %>
+                                            <% } %>
+                                        </strong>
+                                        <% }else{ %>
+                                        <strong></strong>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row">
+                                        <img src="/frontEnd/img/ic_14_boat_card_experience.png"
+                                             srcset="/frontEnd/img/ic_14_boat_card_experience@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <% if(recomd.seasons.length){ %>
+                                        <strong><%= ship.xp.name %> </strong>
+                                        <% }else{ %>
+                                        <strong></strong>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <% if(recomd.rentType){ %>
+                            <% if(recomd.rentType == 1){ %>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row">
+                                        <img src="/frontEnd/img/ic_14_boat_card_skipper.png"
+                                             srcset="/frontEnd/img/ic_14_boat_card_skipper@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <strong><%= texts.master_filter %> </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% } %>
+                            <div class="clearfix"></div>
+                            <% var d = false %>
+                            <% if(parseFloat(recomd.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                            <% d = true %>
+                            <% }else{ %>
+                            <div class="clearfix"></div>
+                            <div class="divisor-space"></div>
+                            <% } %>
+                            <% if(ship.rentType && ship.rentType != 1){ %>
+                            <div class="not_master"></div>
+                            <% } %>
+                            <div class="row prices <% if(d){ %>old<% } %>">
+                                <% recomd.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                                <div class="col-xs-<%= 12 / recomd.seasons[0].experiences[0].durations.length %> price">
+                                    <div class="row">
+                                        <h3 <% if(d){ %>class="old-price"
+                                                <% } %>
+                                        ><span class="dollar"></span> <%= duration.price %> <span class="euro"></span>
+                                        </h3>
+                                        <% if(duration.duration.unity == 0){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                        <% }else if(duration.duration.unity == 1){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>
+                                        <% }else{ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                        <% } %>
+                                    </div>
+
+
+                                </div>
+                                <% }) %>
+                            </div>
+                            <div class="clearfix"></div>
+                            <% if(parseFloat(recomd.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                            <div class="row prices">
+                                <% recomd.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                                <div class="col-xs-<%= 12 / recomd.seasons[0].experiences[0].durations.length %> price">
+                                    <div class="row">
+                                        <h3>
+                                            <span class="dollar"></span> <%= duration.discount %>
+                                            <span class="euro"></span></h3>
+                                        <% if(duration.duration.unity == 0){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                        <% }else if(duration.duration.unity == 1){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>
+                                        <% }else{ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                        <% } %>
+                                    </div>
+
+
+                                </div>
+                                <% }) %>
+                            </div>
+                            <div class="clearfix"></div>
+                            <% } %>
+                        </div>
+                    </div>
+                </a>
+                <% } %>
+                <% }) %>
+                <% }else{ %>
+                <a href="/<%= language %>/<%= texts.slug_ship %>/<%= recomd.slug %>/<%= ship.xp.slug %>">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 card">
+                            <div class="row">
+                                <% recomd.discounts.forEach(function (disc) { %>
+                                <% var exist = false %>
+                                <% var today = new Date() %>
+                                <% if(disc.type == "0" && !exist && new Date(disc.start) < today && today < new Date(disc.end)){ %>
+                                <div class="ui-ribbon-wrapper" style="z-index: 1;">
+                                    <div class="ui-ribbon img-ship-active">
+                                        - <%= disc.discount %> %
+                                    </div>
+                                </div>
+                                <% exist = true %>
+                                <% } %>
+                                <% }) %>
+                                <div class="header">
+                                    <% recomd.photos.forEach(function(media){ %>
+                                    <% if(media.default){ %>
+                                    <img src="/service/media/<%= media.media %>">
+                                    <% } %>
+                                    <% }) %>
+
+                                </div>
+                            </div>
+                            <div class="title"><h3><%= recomd.name %></h3></div>
+
+                            <div class="ship-description"><%- recomd.description[0].value %>
+                                <div class="transparent"></div>
+                            </div>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                          srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <%= recomd.shipType.name %>, <%= recomd.manufacturer %>, <%= recomd.model %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                          srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <%= recomd.technicalDetails.measurements.dimension %>
+                                        m, <%= recomd.technicalDetails
+                                                .habitability.cabins %>
+                                        <%= texts.det_ship_cabin %>
+                                        , <%= recomd.technicalDetails.habitability.persons.day %> <%= texts.det_ship_day %>
+                                        , <%= recomd.technicalDetails.habitability.persons.night %> <%= texts.det_ship_night %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="localization elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row">
+                                        <img src="/frontEnd/img/ic_14_boat_card_location.png"
+                                             srcset="/frontEnd/img/ic_14_boat_card_location@2x.png 2x"
+                                             class="inline-block">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <% if(recomd.localization.port){ %>
+                                        <strong><%= recomd.localization.port.name[0].value %>,
+                                            <% if(recomd.localization.area){ %>
+                                            <%= recomd.localization.area.name[0].value %>
+                                            <% }else{ %>
+                                            <%= recomd.localization.city.name[0].value %>
+                                            <% } %>
+                                        </strong>
+                                        <% }else{ %>
+                                        <strong></strong>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row">
+                                        <img src="/frontEnd/img/ic_14_boat_card_experience.png"
+                                             srcset="/frontEnd/img/ic_14_boat_card_experience@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <% if(recomd.seasons.length){ %>
+                                        <strong><%= ship.xp.name %> </strong>
+                                        <% }else{ %>
+                                        <strong></strong>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <% if(recomd.rentType){ %>
+                            <% if(recomd.rentType == 1){ %>
+                            <div class="elements-margins">
+                                <div class="inline-block col-xs-1">
+                                    <div class="row">
+                                        <img src="/frontEnd/img/ic_14_boat_card_skipper.png"
+                                             srcset="/frontEnd/img/ic_14_boat_card_skipper@2x.png 2x">
+                                    </div>
+                                </div>
+                                <div class="inline-block col-xs-10">
+                                    <div class="row features">
+                                        <strong><%= texts.master_filter %> </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% } %>
+                            <div class="clearfix"></div>
+                            <% var d = false %>
+                            <% if(parseFloat(recomd.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                            <% d = true %>
+                            <% }else{ %>
+                            <div class="clearfix"></div>
+                            <div class="divisor-space"></div>
+                            <% } %>
+                            <% if(ship.rentType && ship.rentType != 1){ %>
+                            <div class="not_master"></div>
+                            <% } %>
+                            <div class="row prices <% if(d){ %>old<% } %>">
+                                <% recomd.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                                <div class="col-xs-<%= 12 / recomd.seasons[0].experiences[0].durations.length %> price">
+                                    <div class="row">
+                                        <h3 <% if(d){ %>class="old-price"
+                                                <% } %>
+                                        ><span class="dollar"></span> <%= duration.price %> <span class="euro"></span>
+                                        </h3>
+                                        <% if(duration.duration.unity == 0){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                        <% }else if(duration.duration.unity == 1){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>
+                                        <% }else{ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <% }) %>
+                            </div>
+                            <div class="clearfix"></div>
+                            <% if(parseFloat(recomd.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                            <div class="row prices">
+                                <% recomd.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                                <div class="col-xs-<%= 12 / recomd.seasons[0].experiences[0].durations.length %> price">
+                                    <div class="row">
+                                        <h3>
+                                            <span class="dollar"></span> <%= duration.discount %>
+                                            <span class="euro"></span></h3>
+                                        <% if(duration.duration.unity == 0){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                        <% }else if(duration.duration.unity == 1){ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_days %></p>
+                                        <% }else{ %>
+                                        <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                        <% } %>
+                                    </div>
+
+
+                                </div>
+                                <% }) %>
+                            </div>
+                            <div class="clearfix"></div>
+                            <% } %>
+                        </div>
+                    </div>
+                </a>
+                <% } %>
+                <% }) %>
+            </div>
+
+        </div>
+    </div>
+    <% } %>
+
+    <div class="modal fade" id="compose-modal-reserve" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog request-modal-dialog">
+            <div class="modal-content">
+                <div class="col-xs-12 col-sm-12 col-md-12 modal-header">
+                    <% var avatar = ship.user.avatar == null ? "/common/img/user.png" : "/service/media/" + ship.user.avatar %>
+                    <div class="col-xs-1">
+                        <img src="<%= avatar %>">
+                    </div>
+
+                    <div class="col-xs-10">
+                        <h4 class="col-xs-12 modal-title"><%= texts.det_contact_help %> <%= ship.user.name %></h4>
+                        <p class="col-xs-12"><%= texts.ask_for %> <%= ship.user.name %> <%= texts.can_doit_the_offer %></p>
+                    </div>
+                    <span class="pull-right" data-dismiss="modal">x</span>
+
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="clearfix"></div>
+                <form action="#" method="post" name="formSolic" id="formSolic" autocomplete="off">
+                    <div class="modal-body">
+
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group from-solicitude-margin-bottom">
+                            <!--<label for="cal-reserv" class="control-label asterisk"><%- texts.departure_date %></label>-->
+                            <label for="cal-reserv" class="control-label asterisk">Check in</label>
+
+                            <div class="input-group input-append date asterisk" id="cal-reserv">
+                                <input type="text" class="form-control required" id="reserv_day" name="reserv_day">
+                                <span class="input-group-addon add-on" style="height: 34px">
+                                        <i class="icon-calendar"></i>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                            <label for="number-passag"
+                                   class="control-label asterisk"><%= texts.n_passenger_filter %></label>
+                            <div>
+                                <select id="number_passag" class="form-control required pointer"
+                                        name="number_passag">
+                                    <option value=""><%= texts.det_choose %></option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <% if(!user){ %>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group from-solicitude-margin-bottom">
+                            <label for="name" class="control-label asterisk"><%= texts.name %></label>
+
+                            <div class="">
+                                <input type="text" id="name" class="form-control required" name="name"
+                                       placeholder="<%- texts.name %>">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                            <label for="phone" class="control-label asterisk"><%= texts.mobile %></label>
+
+                            <div class="">
+                                <input type="text" id="phone" class="form-control required" name="register_mobile"
+                                       placeholder="<%- texts.mobile %>">
+                            </div>
+                        </div>
+                        <% } %>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group from-solicitude-margin-bottom">
+                            <label for="ship_xp" class="control-label asterisk"><%= texts.xp %></label>
+                            <div>
+                                <select id="ship_xp" class="form-control required pointer" name="ship_xp">
+                                    <option value=""><%= texts.det_choose %></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                            <label for="durations" class="control-label asterisk">
+                                <%= texts.det_duration %>
+                            </label>
+                            <div>
+                                <select id="durations" class="form-control required pointer" name="durations">
+                                    <option value=""><%= texts.det_choose %></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group from-solicitude-margin-bottom">
+                            <label for="skipper"
+                                   class="control-label asterisk"><%= texts.need_patern_filter %></label>
+
+                            <div class="">
+                                <select id="skipper" class="form-control required pointer" name="skipper">
+                                    <option value=""><%= texts.det_choose %></option>
+                                    <option value="true"><%= texts.det_need_skipper %></option>
+                                    <option value="false"><%= texts.det_no_skipper %></option>
+                                </select>
+                            </div>
+                        </div>
+                        <% if(!user){ %>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                            <!--<label for="email" class="control-label"><%- texts.placeholder_email %></label>-->
+                            <label for="email" class="control-label">Email</label>
+
+                            <div class="">
+                                <input type="email" id="email" class="form-control required" name="email"
+                                       placeholder="Email">
+                            </div>
+                        </div>
+                        <% } %>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="something_else" class="control-label"><%= texts.something_else %>
+                                    <%= ship.user.name %>?</label>
+
+                                <div class="">
+                                    <textarea id="something_else" class="form-control" name="something_else"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer clearfix">
+                        <p><%= texts.at_send %> <a
+                                    href="/<%= language %>/<%= texts.slug_conditions %>"><%= texts.conditions_use %></a>
+                        </p>
+                        <button type="submit" class="btn btn-primary"
+                                id="send-request"><%= texts.send_to %> <%= ship.user.name %>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="compose-modal-offer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="container">
+            <div class="row">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="offer-top">
+                                <div class="col-xs-12">
+                                    <div class="pull-left title"><%= texts.det_offer %></div>
+                                    <span class="pull-right close" data-dismiss="modal"><img width="20px" height="20px"
+                                                                                             src="/frontEnd/img/ic_20_cookies_close@2x.png"></span>
+                                </div>
+                            </div>
+                            <div class="offer-bottom-head">
+                                <div class="col-xs-12">
+                                    <div class="pull-left subtitle"><%= texts.det_offer_send %></div>
+                                    <div class="pull-right">
+                                        <img src="/frontEnd/img/ic_32_free_advertising_ok_sign.png"
+                                             srcset="/frontEnd/img/ic_32_free_advertising_ok_sign@2x.png 2x"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-xs-12 col-sm-6">
+                                <% ship.photos.forEach(function(media){ %>
+                                <% if(media.default){ %>
+                                <img width="100%" src="/service/media/<%= media.media %>">
+                                <% } %>
+                                <% }) %>
+                                <div class="ship-title"><%= ship.title[0].value %></div>
+                                <p><%- ship.description[0].value %></p>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <table class="table table-responsive">
+                                    <tbody>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.det_owner_name %></div>
+                                        </td>
+                                        <td class="attribs"><p><%= ship.user.name %></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.det_ship_name %></div>
+                                        </td>
+                                        <td class="attribs"><p><%= ship.name %></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.det_start_date %></div>
+                                        </td>
+                                        <td class="attribs"><p class="start-date"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.book_time %></div>
+                                        </td>
+                                        <td class="attribs"><p class="duration"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.n_passenger_filter %></div>
+                                        </td>
+                                        <td class="attribs"><p class="number_pas"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.det_skipper %></div>
+                                        </td>
+                                        <td class="attribs"><p class="skipper_solic"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.name %></div>
+                                        </td>
+                                        <td class="attribs"><p class="name"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div>Email</div>
+                                        </td>
+                                        <td class="attribs"><p class="email_solic"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.mobile %></div>
+                                        </td>
+                                        <td class="attribs"><p class="phone_solic"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="names">
+                                            <div><%= texts.xp %></div>
+                                        </td>
+                                        <td class="attribs"><p class="xp_solic"></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-6 names">
+                                            <div><%= texts.det_note %></div>
+                                        </td>
+                                        <td class="col-xs-6 attribs"><p class="note_solic"></p></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- /.modal-dialog -->
+    </div>
+</div>

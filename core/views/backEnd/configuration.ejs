@@ -1,0 +1,1895 @@
+<div ng-controller="configurationCtrl" ng-cloak>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                Configuración
+            </h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div ng-cloak class="row">
+        <div class="col-xs-12">
+            <div>
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#tab_content1" id="info-tab" role="tab" data-toggle="tab" aria-expanded="true">Sistema</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content2" role="tab" data-toggle="tab" aria-expanded="false">
+                                Barcos </a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content3" role="tab" data-toggle="tab" aria-expanded="false">Media</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content4" role="tab" data-toggle="tab" aria-expanded="false">Pagos</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content5" role="tab" data-toggle="tab" aria-expanded="false">Contrato</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content6" role="tab" data-toggle="tab" aria-expanded="false">SEO</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content8" role="tab" data-toggle="tab" aria-expanded="false">Idiomas</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content7" role="tab" data-toggle="tab" aria-expanded="false">Monedas</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content9" role="tab" data-toggle="tab" aria-expanded="false">Backup</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab_content1" aria-labelledby="info-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-gear"></i> General</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Nombre del
+                                                Sitio</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="text" class="form-control" required ng-model="configurations.general.siteName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                                Listar Barcos por Relevancia (# Reservas)
+                                            </label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div class="radio col-xs-6">
+                                                    <label>
+                                                        <input ng-checked="configurations.general.sort"
+                                                               ng-click="configurations.general.sort=true"
+                                                               type="radio" name="iCheckS"> Si
+                                                    </label>
+                                                </div>
+                                                <div class="radio col-xs-6">
+                                                    <label>
+                                                        <input ng-checked="!configurations.general.sort"
+                                                               ng-click="configurations.general.sort=false"
+                                                               type="radio" name="iCheckS"> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Sitio
+                                                Offline</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div class=" col-xs-6">
+                                                    <label lass="activateUserRegister">
+                                                        <input ng-checked="configurations.general.siteOffline"
+                                                               ng-click="configurations.general.siteOffline=true"
+                                                               type="radio" name="iCheck"> Si
+                                                    </label>
+                                                </div>
+                                                <div class=" col-xs-6">
+                                                    <label class="deactivateUserRegister">
+                                                        <input ng-checked="!configurations.general.siteOffline"
+                                                               ng-click="configurations.general.siteOffline=false"
+                                                               type="radio" name="iCheck"> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Mensaje
+                                                Offline</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <textarea id="message" required class="form-control" ng-model="configurations.general.offlineMessage" name="message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Dominio</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="http://yourdomain.com" required ng-model="configurations.general.domain">
+                                                <h6>http:// ó https://</h6>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Uso Horario</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <select class="form-control" ng-model="configurations.general.timeZone">
+                                                    <option ng-repeat="tz in timezones" value="{{tz.text}}">
+                                                        {{tz.text}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button ng-disabled="!validateGeneralData()" ng-click="saveGeneral()" type="button" class="btn btn-success"> Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-code"></i> Meta Data (General)
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left" autocomplete="off">
+                                        <div class="form-group">
+                                            <div>
+                                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                                    <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                    </li>
+                                                </ul>
+                                                <div id="myTabContentInfo" class="tab-content">
+                                                    <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                        aria-labelledby="home-tab">
+                                                        <div class="clearfix"></div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                                                Site Meta Description
+                                                            </label>
+                                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                <textarea required class="form-control" ng-model="configurations.metaData.siteMetaDescription[$index].value">
+                                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Site
+                                                                Meta
+                                                                Keywords</label>
+                                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                <textarea required class="form-control" ng-model="configurations.metaData.siteMetaKeywords[$index].value">
+                                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button ng-disabled="!validateMetaDescriptionData()" ng-click="saveMetaDescription()" type="button" class="btn btn-success"> Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-envelope"></i> Email
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Nombre de la
+                                                cuenta</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input ng-disabled="!editMail" type="text" class="form-control" required ng-model="configurations.mailSettings.name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Servidor</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input ng-disabled="!editMail" type="text" class="form-control" required ng-model="configurations.mailSettings.mailServer">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Puerto</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input ng-disabled="!editMail" type="number" class="form-control" required ng-model="configurations.mailSettings.mailPort">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">SSL</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div id="gender" class="btn-group" data-toggle="buttons">
+                                                    <label ng-disabled="!editMail" style="width: 100px" class="btn" ng-class="{'btn-default':!configurations.mailSettings.secureConnection,'btn-primary':configurations.mailSettings.secureConnection}"
+                                                        ng-click="configurations.mailSettings.secureConnection = true">
+                                                        <input ng-disabled="!editMail"
+                                                               ng-model="configurations.mailSettings.secureConnection"
+                                                               type="radio" name="mode" value="true"> &nbsp; Si &nbsp;
+                                                    </label>
+                                                    <label ng-disabled="!editMail" style="width: 100px" class="btn btn-primary" ng-class="{'btn-default':configurations.mailSettings.secureConnection,'btn-primary':!configurations.mailSettings.secureConnection}"
+                                                        ng-click="configurations.mailSettings.secureConnection = false">
+                                                        <input ng-disabled="!editMail"
+                                                               ng-model="configurations.mailSettings.secureConnection"
+                                                               type="radio" name="mode" value="false"> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Usuario</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input ng-disabled="!editMail" type="text" class="form-control" required ng-model="configurations.mailSettings.user">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Password</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input ng-disabled="!editMail" type="password" class="form-control" placeholder="**************" ng-model="configurations.mailSettings.password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Dirección de
+                                                correo</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input ng-disabled="!editMail" type="text" class="form-control" required ng-model="configurations.mailSettings.email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button ng-show="editMail" ng-disabled="!validateMailSettingsData()" ng-click="saveMailSettings()" type="button" class="btn btn-success"> Guardar
+                                                </button>
+                                                <button ng-show="!editMail" ng-click="editMail=true" type="button" class="btn btn-primary">
+                                                    Editar
+                                                </button>
+                                                <button ng-show="!editMail" ng-disabled="!validateMailSettingsData()" class="btn btn-primary" type="button" ng-click="sendTest()">
+                                                    Probar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-envelope"></i> Impuestos
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Iva%</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="number" class="form-control" ng-model="configurations.iva">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button ng-click="saveIva()" type="button" ng-disabled="validateIva()" class="btn btn-success"> Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="boats-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div ng-hide="showFormExperience">
+                                        <div class="x_title">
+                                            <h2><i class="fa fa-certificate"></i> Experiencias disponibles</h2>
+                                            <button class="btn btn-success btn-xs pull-right" ng-click="changeShowFormExperience(true)">
+                                                Crear Experiencia
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="table-responsive">
+
+                                                <table class="table table-condensed table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th class="column-title">Nombre</th>
+                                                            <th style="min-width:126px" class="column-title">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="experience in configurations.shipSettings.experiences" ng-show="!experience.remove" ng-class-even="$index%2==0"
+                                                            ng-class-odd="$index%2==1">
+                                                            <td>{{experience.name[0].value}}</td>
+                                                            <td class="td-button-padding td-button-padding">
+                                                                <button ng-show="experience.default" ng-click="unCheckExperience(experience._id)" class="btn btn-xs btn-success">
+                                                                <i class="fa fa-check"></i>
+                                                            </button>
+                                                                <button ng-show="!experience.default" ng-click="defaultExperience(experience._id)" class="btn btn-warning btn-xs">
+                                                                <i class="fa fa-ban"></i>
+                                                            </button>
+                                                                <button class="btn btn-info btn-xs " ng-click="selExperience(experience)">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                                <button class="btn btn-danger btn-xs " ng-click="delExperience(experience)">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="showFormExperience">
+                                        <div class="x_title">
+                                            <h2>Crear Nueva Experiencia</h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <form class="form-horizontal form-label-left" autocomplete="off">
+                                                <div>
+                                                    <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                                        <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                                            <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div id="myTabContentInfo" class="tab-content">
+                                                        <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                            aria-labelledby="home-tab">
+                                                            <br>
+                                                            <div class="clearfix"></div>
+                                                            <div class="form-group">
+                                                                <label class="col-xs-12">
+                                                                    Nombre del tipo de Experiencia
+                                                                </label>
+                                                                <div class="col-xs-12">
+                                                                    <input required class="form-control" ng-model="experience.name[$index].value" />
+                                                                </div>
+                                                            </div>
+                                                            <!--<div class="form-group">-->
+                                                            <!--<label class="col-xs-12">-->
+                                                            <!--Descripción del tipo de Experiencia-->
+                                                            <!--</label>-->
+                                                            <!--<div class="col-xs-12">-->
+                                                            <!--<textarea required class="form-control"-->
+                                                            <!--ng-model="experience.description[$index].value"></textarea>-->
+                                                            <!--</div>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12 col-md-offset-3">
+                                                        <button ng-show="!editExperience" ng-disabled="!validateAddExperience()" ng-click="addExperience()" type="button" class="btn btn-success">Crear
+                                                        </button>
+                                                        <button ng-show="editExperience" ng-disabled="!validateAddExperience()" ng-click="saveExperience()" type="button" class="btn btn-success"> Guardar
+                                                        </button>
+                                                        <button ng-click="changeShowFormExperience(false)" type="button" class="btn btn-primary">
+                                                            Cancelar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div ng-hide="showFormType">
+                                        <div class="x_title">
+                                            <h2><i class="fa fa-anchor"></i> Barcos disponibles</h2>
+                                            <button class="btn btn-success btn-xs pull-right" ng-click="showAddType()">
+                                                Crear Tipo de Barco
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="table-responsive">
+                                                <table class="table table-condensed table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th class="column-title">Nombre</th>
+                                                            <th style="min-width:86px" class="column-title">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="typ in types" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                                            <td>{{typ.name[0].value}}</td>
+                                                            <td class="td-button-padding">
+                                                                <button ng-click="showType(typ)" class="btn btn-xs btn-primary">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".delete-type" ng-click="selectType(typ)">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="showFormType">
+                                        <div class="x_title">
+                                            <h2>Crear Nuevo Tipo de Barco</h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <form class="form-horizontal form-label-left" autocomplete="off">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div id="myTabContentInfo" class="tab-content">
+                                                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                                aria-labelledby="home-tab">
+                                                                <br>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group">
+                                                                    <label class="col-xs-12">
+                                                                        Nombre del tipo de Barco
+                                                                    </label>
+                                                                    <div class="col-xs-12">
+                                                                        <input required class="form-control" ng-model="type.name[$index].value" ng-disabled="disabledFormType" />
+                                                                    </div>
+                                                                </div>
+                                                                <!--<div class="form-group">-->
+                                                                <!--<label class="col-xs-12">-->
+                                                                <!--Descripción del tipo de Barco-->
+                                                                <!--</label>-->
+                                                                <!--<div class="col-xs-12">-->
+                                                                <!--<textarea required class="form-control"-->
+                                                                <!--ng-disabled="disabledFormType"-->
+                                                                <!--ng-model="type.description[$index].value"></textarea>-->
+                                                                <!--</div>-->
+                                                                <!--</div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12 col-md-offset-3">
+                                                        <button ng-show="addForm" ng-disabled="!validateTypes()" ng-click="addTypes()" type="button" class="btn btn-success">Crear
+                                                        </button>
+                                                        <button ng-show="!addForm" ng-disabled="!validateTypes()" ng-click="saveTypes()" type="button" class="btn btn-success">Guardar
+                                                        </button>
+                                                        <button ng-click="initializeType()" type="button" class="btn btn-primary">
+                                                            Cancelar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div ng-hide="showAddEquipment">
+                                        <div class="x_title">
+                                            <h2><i class="fa fa-suitcase"></i> Equipamiento</h2>
+                                            <button ng-show="!showEdit" class="btn btn-success btn-xs pull-right" ng-click="selectAddEquipment()">
+                                                Crear Equipamiento
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="table-responsive">
+
+                                                <table class="table table-striped table-bordered jambo_table bulk_action table-condensed">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th class="column-title">Nombre</th>
+                                                            <th class="column-title"># Equipos</th>
+                                                            <th style="min-width:86px" class="column-title">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="eq in equipments" class="pointer" ng-click="selectEquipment(eq)" ng-class="{'odd':($index%2)==0,'even':($index%2)!=0,'selected':equipment._id==eq._id}">
+                                                            <td>{{eq.name[0].value}}</td>
+                                                            <td>{{eq.items.length || 0}}</td>
+                                                            <td class="td-button-padding">
+                                                                <button ng-click="goToEditEquipment(eq)" class="btn btn-xs btn-success">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".remove-equipment" ng-click="selectEquipment(typ)">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="showAddEquipment">
+                                        <div class="x_title">
+                                            <h2>Datos del Equipamiento</h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                                <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                                    <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                </li>
+                                            </ul>
+                                            <div id="myTabContentInfo" class="tab-content">
+                                                <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                    aria-labelledby="home-tab">
+                                                    <br>
+                                                    <div class="clearfix"></div>
+                                                    <form name="nameEquipment" class="form-horizontal form-label-left" style="" autocomplete="off">
+                                                        <div class="form-group">
+                                                            <label class="col-xs-12">
+                                                                Nombre del Equipamiento
+                                                            </label>
+                                                            <div class="col-xs-12">
+                                                                <input required class="form-control" ng-model="equipment.name[$index].value" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                        <div style="width: 190px;margin: 15px auto;">
+                                                            <button ng-disabled="!validateAddEquipment()" ng-show="!showEdit" ng-click="addEquipment()" type="button" class="btn btn-success"
+                                                                disabled="disabled">
+                                                                <%= texts.general.create_button %>
+                                                            </button>
+                                                            <button ng-disabled="!validateAddEquipment()" ng-show="showEdit" ng-click="updateEquipment()" type="button" class="btn btn-success ng-hide"
+                                                                disabled="disabled">
+                                                                Guardar
+                                                            </button>
+                                                            <button ng-click="changeShowAddEquipment(false)" type="button" class="btn btn-primary">
+                                                                <%= texts.general.cancel_button %>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div ng-hide="showAddEquip">
+                                        <div class="x_title">
+                                            <h2><i class="fa fa-suitcase"></i> Equipos
+                                                <small>{{equipment.name[0].value}}</small>
+                                            </h2>
+                                            <button ng-show="equipment && equipments.length" class="btn btn-success btn-xs pull-right" ng-click="selectAddEquip()">
+                                                Crear Equipo
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="table-responsive">
+                                                <table class="table table-condensed table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th class="column-title">Nombre</th>
+                                                            <th style="min-width:86px" class="column-title">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in equipment.items" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                                            <td> {{item.name[0].value}}</td>
+                                                            <td class="td-button-padding">
+                                                                <button ng-click="goToEditEquip(item)" class="btn btn-xs btn-success">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".remove-item" ng-click="selectEquip(item)">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                            </td>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="showAddEquip">
+                                        <div class="x_title">
+                                            <h2>Dato del Equipo
+                                                <small>{{equipment.name[0].value}}</small>
+                                            </h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                                    <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                    </li>
+                                                </ul>
+                                                <div id="myTabContentInfo" class="tab-content">
+                                                    <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                        aria-labelledby="home-tab">
+                                                        <br>
+                                                        <div class="clearfix"></div>
+                                                        <div class="form-group">
+                                                            <label class="col-xs-12">
+                                                                Nombre del Equipo
+                                                            </label>
+                                                            <div class="col-xs-12">
+                                                                <input required class="form-control" required="required" ng-model="equip.name[$index].value" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="ln_solid"></div>
+                                                        <div style="width: 190px;margin: 15px auto;">
+                                                            <button ng-show="!showEdit" ng-disabled="!validateAddEquip()" ng-click="addEquip()" type="button" class="btn btn-success">
+                                                                Crear
+                                                            </button>
+                                                            <button ng-show="showEdit" ng-disabled="!validateAddEquip()" ng-click="updateEquip()" type="button" class="btn btn-success">
+                                                                Guardar
+                                                            </button>
+                                                            <button ng-click="changeShowAddEquip(false)" type="button" class="btn btn-primary ">
+                                                                Cancelar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--<div class="col-xs-12">-->
+                                <!--<div class="x_content">-->
+                                <!--<div>-->
+                                <!--<div class="col-md-6 col-xs-12">-->
+                                <!--<div class="x_title">-->
+                                <!--<h2>-->
+                                <!--<i class="fa fa-clock-o"></i> Duración-->
+                                <!--</h2>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--</div>-->
+                                <!--<div class="x_content">-->
+
+                                <!--<div class="col-xs-12">-->
+                                <!--<h2 class="line_30">Duraciones disponibles</h2>-->
+                                <!--<button class="btn btn-success btn-xs pull-right"-->
+                                <!--ng-click="changeShowFormDuration(true)">Crear-->
+                                <!--Duración-->
+                                <!--</button>-->
+                                <!--<div class="table-responsive">-->
+                                <!--<p class="blue">-->
+                                <!--<i class="fa fa-lightbulb-o"></i>-->
+                                <!--<strong>Duración de Alquiler de Barcos:</strong><br> Los-->
+                                <!--propietarios-->
+                                <!--<strong>Duración de Alquiler<span-->
+                                <!--style="color: #5accfe">de</span>Barco<span-->
+                                <!--style="color: #5accfe">.com</span>:</strong><br>-->
+                                <!--Los propietarios-->
+                                <!--de Barcos podrán gestionar cuales utilizarán en cada uno-->
+                                <!--de sus-->
+                                <!--Barcos .-->
+                                <!--</p>-->
+                                <!--<table class="table table-striped table-bordered jambo_table bulk_action">-->
+                                <!--<thead>-->
+                                <!--<tr class="headings">-->
+                                <!--<th class="column-title">Nombre</th>-->
+                                <!--<th class="column-title">Unidad</th>-->
+                                <!--<th class="column-title">Cantidad</th>-->
+                                <!--<th class="column-title">Acción</th>-->
+                                <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                <!--<tr ng-repeat="duration in configurations.shipSettings.durations"-->
+                                <!--ng-show="!duration.remove"-->
+                                <!--ng-class-even="$index%2==0"-->
+                                <!--ng-class-odd="$index%2==1">-->
+                                <!--<td>{{duration.name[0].value}}</td>-->
+                                <!--<td>-->
+                                <!--<span ng-show="duration.unity==0"> Horas</span>-->
+                                <!--<span ng-show="duration.unity==1"> Días</span>-->
+                                <!--<span ng-show="duration.unity==7"> Semanas</span>-->
+                                <!--</td>-->
+                                <!--<td>{{duration.quantity}}</td>-->
+                                <!--<td class="fs15 fw700 text-right">-->
+                                <!--<span class="label label-danger pointer" ng-click="delDuration(duration)">-->
+                                <!--<i class="fa fa-trash"></i>-->
+                                <!--</span>-->
+                                <!--</td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                                <!--</table>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-6 col-xs-12" ng-show="showFormDuration">-->
+
+                                <!--<h2 class="line_30">Crear Nueva Duración</h2>-->
+                                <!--<form class="form-horizontal form-label-left">-->
+                                <!--<div class="form-group">-->
+                                <!--<label class="col-xs-12">-->
+                                <!--Unidad de Tiempo-->
+                                <!--</label>-->
+                                <!--<div class="col-xs-12">-->
+                                <!--<select class=" form-control" ng-model="duration.unity"-->
+                                <!--ng-change="changeUnity()">-->
+                                <!--<option value="">-->
+                                <!--&#45;&#45; Seleccionar &#45;&#45;-->
+                                <!--</option>-->
+                                <!--<option value="0">-->
+                                <!--Hora-->
+                                <!--</option>-->
+                                <!--<option value="1">-->
+                                <!--Día-->
+                                <!--</option>-->
+                                <!--<option value="7">-->
+                                <!--Semana-->
+                                <!--</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group" ng-show="duration.unity=='0'">-->
+                                <!--<label class="col-xs-12">-->
+                                <!--Cantidad de Horas-->
+                                <!--</label>-->
+                                <!--<div class="col-xs-12">-->
+                                <!--<select class=" form-control" ng-model="duration.quantity">-->
+                                <!--<option value="">-->
+                                <!--&#45;&#45; Seleccionar &#45;&#45;-->
+                                <!--</option>-->
+                                <!--<option ng-repeat="hour in hours"-->
+                                <!--ng-value="hour">-->
+                                <!--{{hour}}-->
+                                <!--</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group" ng-show="duration.unity=='1'">-->
+                                <!--<label class="col-xs-12">-->
+                                <!--Cantidad de Días-->
+                                <!--</label>-->
+                                <!--<div class="col-xs-12">-->
+                                <!--<select class=" form-control" ng-model="duration.quantity">-->
+                                <!--<option value="">-->
+                                <!--&#45;&#45; Seleccionar &#45;&#45;-->
+                                <!--</option>-->
+                                <!--<option ng-repeat="day in days" ng-value="day">-->
+                                <!--{{day}}-->
+                                <!--</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group" ng-show="duration.unity=='7'">-->
+                                <!--<label class="col-xs-12">-->
+                                <!--Cantidad de Semanas-->
+                                <!--</label>-->
+                                <!--<div class="col-xs-12">-->
+                                <!--<select class=" form-control" ng-model="duration.quantity">-->
+                                <!--<option value="">-->
+                                <!--&#45;&#45; Seleccionar &#45;&#45;-->
+                                <!--</option>-->
+                                <!--<option ng-repeat="week in weeks"-->
+                                <!--ng-value="week">-->
+                                <!--{{week}}-->
+                                <!--</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                <!--<div>-->
+                                <!--<ul id="myTabLaguage" class="nav nav-tabs" role="tablist">-->
+                                <!--<li ng-repeat="lang in $root.M_LANGUAGES"-->
+                                <!--role="presentation"-->
+                                <!--ng-class="{'active':$index == selectTab}"-->
+                                <!--ng-click="selectedTab($index)">-->
+                                <!--<a id="home-tab" role="tab" data-toggle="tab"-->
+                                <!--aria-expanded="false">{{lang.name}}</a>-->
+                                <!--</li>-->
+                                <!--</ul>-->
+                                <!--<div id="myTabContentInfo" class="tab-content">-->
+                                <!--<div ng-repeat="lang in $root.M_LANGUAGES"-->
+                                <!--role="tabpanel" class="tab-pane fade "-->
+                                <!--ng-class="{active:$index==selectTab,in:$index==selectTab}"-->
+                                <!--aria-labelledby="home-tab">-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="form-group">-->
+                                <!--<label class="control-label col-md-4 col-sm-4 col-xs-12">-->
+                                <!--Nombre-->
+                                <!--</label>-->
+                                <!--<div class="col-md-8 col-sm-8 col-xs-12">-->
+                                <!--<input required class="form-control"-->
+                                <!--ng-model="duration.name[$index].value"/>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<div class="ln_solid"></div>&ndash;&gt;-->
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-xs-12 col-md-offset-3 col-md-9">-->
+                                <!--<button ng-click="changeShowFormDuration(false)"-->
+                                <!--type="button" class="btn btn-primary">-->
+                                <!--Cancelar-->
+                                <!--</button>-->
+                                <!--<button ng-disabled="!validateAddDuration()"-->
+                                <!--ng-click="addDuration()" type="button"-->
+                                <!--class="btn btn-success">Crear-->
+                                <!--</button>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</form>-->
+
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="media-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-photo"></i> Banner Fotos
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div ng-show="!showUpload" class="x_content">
+                                    <div class="row">
+                                        <!--  <button type="button"
+                                                ng-show="configurations.photos.length < 20"
+                                                ng-click="showUpload=true"
+                                                class="btn btn-success btn-sm pull-right hidden-xs hidden-sm hidden-md">
+                                            <i class="fa fa-plus"></i> Adicionar Fotos
+                                        </button> -->
+                                        <div class="clearfix"></div>
+                                        <div ng-cloak class="col-sm-3 col-md-3 col-xs-12 asper_ratio" ng-repeat="photo in configurations.photos">
+                                            <div class="thumbnail ui-ribbon-container">
+                                                <div class="image view view-first fix-imgc">
+                                                    <img style="width: 100%;height: 100% !important; display: block;" ng-src="{{'/service/media/'+ photo}}" alt="image">
+                                                    <div class="mask">
+                                                        <p>{{$index+1}}</p>
+                                                        <div class="tools tools-bottom">
+                                                            <a href="#" ng-click="selectPhotos(photo)" data-toggle="modal" data-target=".photo-preview"><i
+                                                                        class="fa fa-search"></i></a>
+                                                            <a href="#" ng-click="delPhotos(photo)"><i
+                                                                        class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-cloak class="col-xs-12 asper_ratio">
+                                            <mdr-file url="/service/configurations/photos" model="modelPhoto" size="5" limit="10" formats="'jpg,png'" multiple="true"
+                                                text="Arrastra o haz clic aquí (1366px X 550px)"></mdr-file>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="showUpload" class="x_content">
+                                    <p>Drag multiple files to the box below for multi upload or click to select files. This
+                                        is for demonstration purposes only, the files are not uploaded to any server.
+                                    </p>
+                                    <mdr-file url="/service/configurations/photos" model="modelPhoto" size="5" limit="10" formats="'jpg,png'" multiple="true"
+                                        text="Arrastra o haz clic aquí"></mdr-file>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <button id='btn_clear_dropzone' type="button" ng-click="goBack()" class="btn btn-success btn-sm pull-right hidden-xs hidden-sm hidden-md">
+                                        <i class="fa fa-plus"></i> Finalizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="payment-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-envelope"></i> Paypal
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Modo</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div id="gender" class="btn-group" data-toggle="buttons">
+                                                    <label style="width: 100px" class="btn" ng-class="{'btn-default':configurations.paypal.mode != 'sandbox','btn-primary':configurations.paypal.mode == 'sandbox'}"
+                                                        ng-click="configurations.paypal.mode='sandbox'">
+                                                        <input ng-model="configurations.paypal.mode" type="radio"
+                                                               name="mode" value="sandbox"> &nbsp; Sandbox &nbsp;
+                                                    </label>
+                                                    <label style="width: 100px" class="btn btn-primary" ng-class="{'btn-default':configurations.paypal.mode == 'sandbox','btn-primary':configurations.paypal.mode != 'sandbox'}"
+                                                        ng-click="configurations.paypal.mode='live'">
+                                                        <input ng-model="configurations.paypal.mode" type="radio"
+                                                               name="mode" value="live"> Live
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Client_id</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="text" class="form-control" required ng-model="configurations.paypal.client_id">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Client_secret</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="text" class="form-control" required ng-model="configurations.paypal.client_secret">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Activo</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div class=" col-xs-6">
+                                                    <label lass="activateUserRegister">
+                                                        <input ng-checked="configurations.paypal.active"
+                                                               ng-click="configurations.paypal.active = true"
+                                                               type="radio" name="iCheck"> Si
+                                                    </label>
+                                                </div>
+                                                <div class=" col-xs-6">
+                                                    <label class="deactivateUserRegister">
+                                                        <input ng-checked="!configurations.paypal.active"
+                                                               ng-click="configurations.paypal.active = false"
+                                                               type="radio" name="iCheck"> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button ng-disabled="!validatePaypal()" ng-click="savePaypal()" type="button" class="btn btn-success"> Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-envelope"></i> Redsys
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Modo</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div id="mode" class="btn-group" data-toggle="buttons">
+                                                    <label style="width: 100px" class="btn" ng-class="{'btn-default':configurations.redsys.mode != 'real','btn-primary':configurations.redsys.mode == 'real'}"
+                                                        ng-click="configurations.redsys.mode ='real'">
+                                                        <input ng-model="configurations.paypal.mode" type="radio"
+                                                               name="mode" value="real"> &nbsp; Real &nbsp;
+                                                    </label>
+                                                    <label style="width: 100px" class="btn btn-primary" ng-class="{'btn-default':configurations.redsys.mode == 'real','btn-primary':configurations.redsys.mode != 'real'}"
+                                                        ng-click="configurations.redsys.mode ='test'">
+                                                        <input ng-model="configurations.paypal.mode" type="radio"
+                                                               name="mode" value="test"> Prueba
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Código del
+                                                Comercio</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="text" class="form-control" required ng-model="configurations.redsys.commerce">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Clave del
+                                                Comercio</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <input type="text" class="form-control" required ng-model="configurations.redsys.key">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Activo</label>
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div class=" col-xs-6">
+                                                    <label lass="activateUserRegister">
+                                                        <input ng-checked="configurations.redsys.active"
+                                                               ng-click="configurations.redsys.active = true"
+                                                               type="radio" name="iCheck"> Si
+                                                    </label>
+                                                </div>
+                                                <div class=" col-xs-6">
+                                                    <label class="deactivateUserRegister">
+                                                        <input ng-checked="!configurations.redsys.active"
+                                                               ng-click="configurations.redsys.active = false"
+                                                               type="radio" name="iCheck"> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button ng-disabled="!validateRedsys()" ng-click="saveRedsys()" type="button" class="btn btn-success">
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="contract-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_content">
+                                    <div class="col-md-8 col-xs-12">
+                                        <form class="form-horizontal form-label-left" autocomplete="off">
+                                            <div class="form-group">
+                                                <div>
+                                                    <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                                        <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                                            <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div id="myTabContentInfo" class="tab-content">
+                                                        <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                            aria-labelledby="home-tab">
+                                                            <div class="clearfix"></div>
+                                                            <div class="form-group">
+                                                                <label class="col-xs-12">
+                                                                    Contrato para Empresa
+                                                                </label>
+                                                                <div class="col-xs-12">
+                                                                    <textarea ui-tinymce="tinymceOptions" ng-model="configurations.contract.enterprise[$index].value"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-xs-12">Contrato
+                                                                    para Particular</label>
+                                                                <div class="col-xs-12">
+                                                                    <textarea ui-tinymce="tinymceOptions" ng-model="configurations.contract.particular[$index].value"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ln_solid"></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4 col-xs-12">
+                                        <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                            <i class="fa fa-lightbulb-o"></i>
+                                            <strong>Contrato de Colaboración</strong>
+                                            <br><br>
+
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Nombre fiscal
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [fiscal_name]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Dirección fiscal
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [fiscal_address]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Código Postal
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [postal_code]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Ciudad
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [city]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    País
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [country]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Email fiscal
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [fiscal_email]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    CIF
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [cif]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Fecha
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [date]</code>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="ln_solid"></div>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Nombre del Propietario
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [user_name]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Dirección del usuario
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [user_address]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Código Postal
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [postal_code]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Ciudad
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [city]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    País
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [country]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    DNI
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [dni]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Email del usuario
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [user_email]</code>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    Fecha
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <code> [date]</code>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button ng-click="saveContract()" type="button" class="btn btn-success">
+                                        Guardar Contratos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content6" aria-labelledby="contract-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-gear"></i> SEO</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th class="column-title">URL</th>
+                                                    <th class="column-title no-link last" style="min-width: 20px;">NoIndex
+                                                    </th>
+                                                    <th class="column-title no-link last" style="min-width: 20px;">
+                                                        NoFollow
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="even pointer" ng-cloak ng-repeat="(key, seo) in configurations.seo">
+                                                    <td class="">{{seoKeyByPage(key)}}</td>
+                                                    <td class="a-right a-right td-button-padding">
+                                                        <button ng-click="updateSEO(key, true)" ng-class="{'btn-success':seo.noindex,'btn-warning':!seo.noindex}" class="btn btn-xs">
+                                                        <i ng-class="{'fa-check':seo.noindex,'fa-ban':!seo.noindex }"
+                                                           class="fa"></i>
+                                                    </button>
+                                                    </td>
+                                                    <td class="a-right a-right td-button-padding">
+                                                        <button ng-click="updateSEO(key, false)" ng-class="{'btn-success':seo.nofollow,'btn-warning':!seo.nofollow}" class="btn btn-xs">
+                                                        <i ng-class="{'fa-check':seo.nofollow,'fa-ban':!seo.nofollow }"
+                                                           class="fa"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content7" aria-labelledby="currency-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-money"></i> Monedas
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="col-md-6 col-xs-12">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table class="table table-condensed table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th style="width: 65px;" class="column-title">Menu</th>
+                                                            <th class="column-title">Texto</th>
+                                                            <th class="column-title">Símbolo</th>
+                                                            <th class="column-title">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-cloak class="even" ng-repeat="currency in currencies" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                                            <td class="text-left">
+                                                                <div ng-show="currency.pos!=null && currency.pos>=0">
+                                                                    <code>{{currency.pos+1}}</code>
+                                                                    <i ng-click="menu(currency,'up')" class="fa fa-long-arrow-up pointer" ng-show="currency.pos > 0"></i>
+                                                                    <i ng-click="menu(currency,'down')" class="fa fa-long-arrow-down pointer" ng-show="!currency.last"></i>
+                                                                    <i ng-show="currency.text != 'EUR'" ng-click="menu(currency,'ban')" class="fa fa-ban pointer"></i>
+                                                                </div>
+                                                                <div ng-show="currency.pos == null">
+                                                                    &nbsp; &nbsp; <i ng-show="!currency.pos" ng-click="menu(currency,'show')"
+                                                                        class="fa fa-circle-o pointer"></i>
+                                                                </div>
+                                                            </td>
+                                                            <td ng-class="{'green':currency.text == 'EUR'}">
+                                                                {{currency.text}}
+                                                            </td>
+                                                            <td ng-class="{'green':currency.text == 'EUR'}">
+                                                                {{currency.symbol}}
+                                                            </td>
+                                                            <td class="td-button-padding td-button-padding">
+                                                                <div ng-show="currency.text != 'EUR'">
+                                                                    <button class="btn btn-info btn-xs " ng-click="selCurrency(currency)">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                                    <button class="btn btn-danger btn-xs " ng-click="selDelCurrency(currency)" data-toggle="modal" data-target=".delete-currency">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                                </div>
+                                                            </td>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <div>
+                                            <div class="x_title">
+                                                <h2>Monedas
+                                                    <small ng-show="!showUpdate">Nuevo</small>
+                                                    <small ng-show="showUpdate"> Guardar</small>
+                                                </h2>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <form class="form-horizontal form-label-left" novalidate autocomplete="off">
+                                                    <div class="item form-group">
+                                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Texto <span
+                                                                    class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input type="text" id="text" name="text" required="required" ng-model="currency.text" ng-change="capitalizeText()" class="form-control input-sm col-md-7 col-xs-12">
+                                                        </div>
+                                                    </div>
+                                                    <div class="item form-group">
+                                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="email">Símbolo<span
+                                                                    class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input type="text" id="symbol" name="symbol" required="required" ng-model="currency.symbol" class="form-control col-md-7 col-xs-12 input-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="ln_solid"></div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6 col-md-offset-3">
+                                                            <button ng-disabled="!currency.symbol.length || !currency.text.length" ng-show="!editCurrency" ng-click="addCurrency()" type="button"
+                                                                class="btn btn-success">
+                                                                Crear
+                                                            </button>
+                                                            <button ng-disabled="!currency.symbol.length || !currency.text.length" ng-show="editCurrency" ng-click="updateCurrency()"
+                                                                type="button" class="btn btn-success">
+                                                                Guardar
+                                                            </button>
+                                                            <button ng-click="initializeCurrencies()" type="button" class="btn btn-primary">Cancelar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content8" aria-labelledby="laguage-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-money"></i> Idiomas
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content" ng-controller="languageCtrl">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <div>
+                                                <div class="x_title">
+                                                    <div class="clearfix"></div>
+                                                    <span ng-cloak ng-click="loadLanguages(false)" class="count_top right-space pointer">
+                                                        <i class="fa fa-thumb-tack"></i> Todos ({{totalItems}})
+                                                    </span>
+                                                    <span ng-cloak ng-click="loadLanguages(true)" class="count_top pointer">
+                                                        <i class="fa fa-trash"></i> Papelera ({{totalItemsR}})
+                                                    </span>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <!--<p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
+                                                    <table class="table table-striped table-bordered jambo_table bulk_action">
+                                                        <thead>
+                                                            <tr class="headings">
+                                                                <th class="column-title">Menu</th>
+                                                                <th class="column-title">Iso</th>
+                                                                <th class="column-title">Nombre</th>
+                                                                <th class="column-title">Estado</th>
+                                                                <th class="column-title no-link last" style="min-width: 80px"><span class="nobr">Acción</span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr ng-cloak class="even" ng-repeat="lang in languages" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                                                <td class=" ">
+                                                                    <div ng-show="lang.pos!=null && lang.pos>=0">
+                                                                        <code>{{lang.pos+1}}</code>
+                                                                        <i ng-click="menu(lang,'up')" class="fa fa-long-arrow-up pointer" ng-show="lang.pos > 0"></i>
+                                                                        <i ng-click="menu(lang,'down')" class="fa fa-long-arrow-down pointer" ng-show="!lang.last"></i>
+                                                                        <i ng-show="lang.iso != 'es'" ng-click="menu(lang,'ban')" class="fa fa-ban pointer"></i>
+                                                                    </div>
+                                                                    <div ng-show="lang.pos == null">
+                                                                        &nbsp; &nbsp; <i ng-show="!lang.pos" ng-click="menu(lang,'show')"
+                                                                            class="fa fa-circle-o pointer"></i>
+                                                                    </div>
+                                                                </td>
+                                                                <td class=" ">{{lang.iso}}</td>
+                                                                <td class=" ">{{lang.name}}</td>
+                                                                <td class=" ">
+
+                                                                    <div ng-show="!lang.default">
+                                                                        <button ng-click="status(lang)" ng-show="lang.status" type="button" class="btn btn-success btn-xs">activado
+                                                                    </button>
+                                                                        <button ng-click="status(lang)" ng-show="!lang.status" type="button" class="btn btn-danger btn-xs">desactivado
+                                                                    </button>
+                                                                    </div>
+                                                                    <div ng-show="lang.default">
+                                                                        <span class="count_bottom"><i class="green"><i
+                                                                                    class="fa fa-check"></i> activado</i></span>
+                                                                    </div>
+
+                                                                </td>
+                                                                <td class="td-button-padding">
+                                                                    <div ng-show="lang.default">
+                                                                        <span class="count_bottom"><i class="green"><i class="fa fa-check"></i> Idioma por
+                                            Defecto</i></span>
+                                                                    </div>
+                                                                    <div ng-show="!lang.default">
+                                                                        <button type="button" ng-show="!showRemove" ng-click="edit(lang)" class="btn btn-success btn-xs">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </button>
+                                                                        <button ng-show="showRemove" ng-click="select(lang)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target=".restore-item">
+                                                                        <i class="fa fa-history"></i>
+                                                                    </button>
+
+                                                                        <button ng-show="!showRemove" ng-click="select(lang)" data-toggle="modal" data-target=".remove-lang-item" type="button" class="btn btn-danger btn-xs"><i
+                                                                                class="fa fa-trash-o"></i>
+                                                                    </button>
+
+                                                                        <button ng-show="showRemove" ng-click="select(lang)" data-toggle="modal" data-target=".complete-item" type="button" class="btn btn-danger btn-xs"><i
+                                                                                class="fa fa-trash-o"></i>
+                                                                    </button>
+                                                                    </div>
+                                                                </td>
+
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <div>
+                                                <div class="x_title">
+                                                    <h2>Lenguajes
+                                                        <small ng-show="!showUpdate">Nuevo</small>
+                                                        <small ng-show="showUpdate"> Guardar</small>
+                                                    </h2>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="x_content">
+
+                                                    <form class="form-horizontal form-label-left" novalidate autocomplete="off">
+
+                                                        <!--<p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>-->
+                                                        <!--</p>-->
+                                                        <!--<span class="section">Personal Info</span>-->
+
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Iso <span
+                                                                        class="required">*</span>
+                                                            </label>
+
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <select id="iso" class="form-control col-md-7 col-xs-12" ng-model="language.iso" required="required" name="iso" ng-options="iso for iso in lang_isos">
+                                                                </select>
+                                                                <!--<input id="iso" class="form-control col-md-7 col-xs-12" data-validate-length-range="2,2"-->
+                                                                <!--data-validate-words="1" name="iso" required="required"-->
+                                                                <!--type="text" ng-model="language.iso">-->
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="email">Nombre <span
+                                                                        class="required">*</span>
+                                                            </label>
+
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <input type="text" id="name" name="name" required="required" data-validate-length-range="6" data-validate-words="1" ng-model="language.name"
+                                                                    class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="ln_solid"></div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-md-offset-3">
+
+                                                                <button ng-show="!showUpdate" id="send" type="submit" class="btn btn-success">Crear
+                                                                </button>
+                                                                <button ng-show="showUpdate" id="update" type="submit" class="btn btn-success">
+                                                                    Guardar
+                                                                </button>
+                                                                <button ng-click="initializeVars()" type="button" class="btn btn-primary">Cancelar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="modal fade remove-lang-item" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel2">Eliminar idioma {{langSelected.name}}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <p>This language will be remove</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                                                        </button>
+                                                        <button ng-click="remove()" type="button" class="btn btn-danger" data-dismiss="modal">Accept
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade restore-item" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel2">Restore language {{langSelected.name}}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <p>This language will be restore</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                                                        </button>
+                                                        <button ng-click="restore()" type="button" class="btn btn-danger" data-dismiss="modal">Accept
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade complete-item" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel2">Remove complete language {{langSelected.name}}</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <p>This language will be complete remove</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                                                        </button>
+                                                        <button ng-click="removeComplete()" type="button" class="btn btn-danger" data-dismiss="modal">
+                                                            Accept
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /modals -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content9" aria-labelledby="laguage-tab">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12">
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="x_title">
+                                            <h2><i class="fa fa-save"></i> Exportar Base Datos</h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                        <a href="/service/configurations/backup" download="AlquilerDeBArcoBackup_{{$root.globalToday|date:'MMddyyyy'}}.js" class="btn btn-success">
+                                            <i class="fa fa-save"></i> Exportar
+                                        </a>
+                                        </div>
+                                        </br>
+                                        <div class="clearfix"></div>
+                                        <div class="ln_solid"></div>
+                                        <div class="x_title">
+                                            <h2><i class="fa fa-upload"></i> Importar Base Datos</h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="x_content">
+                                            <mdr-file url="/service/configurations/backup" model="modelBackup" size="100" limit="10" formats="'js'" multiple="false" text="Arrastra o haz clic aquí"></mdr-file>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="x_content col-xs-12">
+        <div class="modal fade avatar-modal" tabindex="-1" role="dialog" aria-hidden="true" id="avatar-modal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span
+                                    aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Seleccionar Photo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div ng-show="imageCropStep == 1">
+                                <br/>
+                                <input type="file" name="fileInput" id="fileInput" onchange="angular.element(this).scope().fileChanged(event)" />
+                            </div>
+                            <div class="col-xs-12" ng-show="imageCropStep == 2" style="box-shadow: inset 0 0 1em #34495E;">
+                                <!-- <image-crop
+                                   data-height="200" //shape's height
+                                   data-width="150" //shape's width
+                                   data-shape="square" //the shape.. square or circle
+                                   data-step="imageCropStep"//scope variable that will contain the current step of the crop (1. Waiting for source image; 2. Image loaded, waiting for crop; 3. Crop done)
+                                   src="imgSrc" //scope variable that will be the source image for the crop (may be a Blob or base64 string)
+                                   data-result-blob="result" //scope variable that will contain the Blob information
+                                   data-result="resultDataUrl" //scope variable that will contain the image's base64 string representation
+                                   crop="initCrop" //scope variable that must be set to true when the image is ready to be cropped
+                                   padding="250" //space, in pixels, rounding the shape
+                                   max-size="1024" //max of the image, in pixels
+                                   ></image-crop> -->
+                                <image-crop data-height="224" data-width="683" data-shape="square" data-step="imageCropStep" src="imgSrc" data-result="result"
+                                    data-result-blob="resultBlob" crop="initCrop" padding="200" max-size="1366"></image-crop>
+                            </div>
+                            <div class="col-xs-12">
+                                <div ng-show="imageCropStep == 2">
+                                    <br/>
+                                    <button ng-click="clear()" class="btn btn-default input-sm pull-left">Volver a
+                                        Seleccionar
+                                    </button>
+                                    <button ng-click="initCrop = true" class="btn btn-success input-sm pull-right">
+                                        Cortar
+                                        Imagen
+                                    </button>
+                                </div>
+                                <div ng-show="imageCropStep == 3">
+                                    <img class="avatar-view" style="margin: 0 auto;width: 550px;height:230px " ng-src="{{result}}" />
+                                    <div class="col-xs-12">
+                                        <p>Cadena en Base64 usada en la imagen de arriba :</p>
+                                        <textarea class="form-control result-datauri">{{ result }}</textarea>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="ln_solid"></div>
+                                    <div class="col-xs-12">
+                                        <button ng-click="addPhotos()" type="button" data-dismiss="modal" class="btn btn-success input-sm pull-right">
+                                            Guardar Cambios
+                                        </button>
+                                        <button ng-click="clear()" type="button" class="btn btn-default input-sm pull-left">
+                                            Volver a Seleccionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade delete-tag" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                        <h4>Eliminar Tag de Barco: <br>
+                            <small>{{tag.name[0].value}}</small>
+                        </h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-body">
+                        ¿Desea eliminar el Tag seleccionado?
+                    </div>
+                    <br>
+                    <br>
+                    <div class="clearfix"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button ng-click="removeTag() " data-dismiss="modal" type="button" class="btn btn-danger">
+                            Si
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade delete-type" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                        <h4>Eliminar Tipo de Barco: <br>
+                            <small>{{type.name[0].value}}</small>
+                        </h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-body">
+                        ¿Desea eliminar el Tipo seleccionado?
+                    </div>
+                    <br>
+                    <br>
+                    <div class="clearfix"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button ng-click="removeType() " data-dismiss="modal" type="button" class="btn btn-danger">
+                            Si
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade photo-preview" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-xs-12">
+                            <img class="avatar-view" style="margin: 0 auto;width: 550px;height: 230px;cursor: default" ng-src="{{picture}}" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-cloak class="modal fade remove-item" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2">Eliminar Equipo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4> {{equip.name[0].value}}</h4> Desea eliminar el Equipo seleccionado?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeEquip()">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade remove-equipment" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2">Eliminar Equipo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4> {{equipment.name[0].value}}</h4> Desea eliminar el Equipamiento seleccionado?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeEquipment()">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade delete-currency" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                        <h4>Eliminar Moneda: <code>{{currency.text}}</code>
+                        </h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-body">
+                        ¿Desea eliminar la Moneda seleccionada?
+                    </div>
+                    <br>
+                    <br>
+                    <div class="clearfix"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button ng-click="delCurrency() " data-dismiss="modal" type="button" class="btn btn-danger">
+                            Si
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

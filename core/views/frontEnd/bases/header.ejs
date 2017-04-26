@@ -1,0 +1,794 @@
+<style>
+    body {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .navbar {
+        margin-bottom: 20px;
+    }
+
+    #carbonads-container {
+        display: none
+    }
+
+    h1[id] {
+        padding-top: 0px;
+        margin-top: 20px
+    }
+
+    .zero-clipboard {
+        display: none !important
+    }
+
+    .anchorjs-link, .v4-tease, .navbar-right {
+        display: none !important
+    }
+
+    .bs-old-docs {
+        display: none
+    }
+
+    .bs-social {
+        display: none
+    }
+
+    .bs-sidebar {
+        display: none !important
+    }
+
+    .col-md-9[role=main] {
+        width: 100% !important
+    }
+
+    .navbar-fixed-top {
+        position: absolute !important
+    }
+
+</style>
+
+<div class="complete-top-bar hidden-xs">
+    <div class="notification col-xs-12">
+        <p class="message"></p>
+    </div>
+    <div class="col-xs-12 top-bar hidden-xs">
+        <div class="container">
+            <div class="col-xs-6 col-sm-3 col-md-3 content">
+                <a href="#" class="dropdown-toggle lang line-margin" data-toggle="dropdown">
+                    <% if(landingsMenu.length){ %>
+                    <% contL = 0 %>
+                    <% landingsMenu.forEach(function(land){ %>
+                    <% if(land._id == landingSelect){ %>
+                    <% contL++ %>
+                    <%= land.name[0].value %> <img src="/frontEnd/img/ic_8_expand_down.png"
+                                                   srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                <% } %>
+                <% });;; %>
+                <% if(!contL){ %>
+                <%= landingsMenu[0].name[0].value %> <img src="/frontEnd/img/ic_8_expand_down.png"
+                                                          srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                <% } %>
+                <% } %>
+                <ul class="dropdown-menu languages">
+                    <% if(landingsMenu.length){ %>
+                        <% landingsMenu.forEach(function(land){ %>
+                        <li><a
+                                    <% if(land.pos == 0){ %>
+                                    class="active"
+                                    <% } %>
+                                    href="/<%= language %>/<%= land.slug[0].value %>"> <%= land.name[0].value %> </a></li>
+                        <% });;; %>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 content">
+                <a href="#" class="dropdown-toggle lang line-margin" data-toggle="dropdown">
+                    <% if(textsMenu.length){ %>
+                    <% contT = 0 %>
+                    <% textsMenu.forEach(function(text){ %>
+                    <% if(text.group == "user-guide" && page == "user-guide"){ %>
+                    <%= text.components[0].text[0].value %>
+                    <% contT++ %>
+                    <% } %>
+                    <% if(text.group == "sailor-guide" && page == "sealer-guide"){ %>
+                    <%= text.components[0].text[0].value %>
+                    <% contT++ %>
+                    <% } %>
+                    <% if(text.group == "about-us" && page == "about-us"){ %>
+                    <%= text.components[0].paragraph[0].value.replace(/(<([^>]+)>)/ig, "") %>
+                    <% contT++ %>
+                    <% } %>
+                    <% if(text.group == "service-conditions" && page == "service-conditions"){ %>
+                    <%= text.components[0].text[0].value %>
+                    <% contT++ %>
+                    <% } %>
+                    <% if(text.group == "privacy-politics" && page == "privacy-politics"){ %>
+                    <%= text.components[0].text[0].value %>
+                    <% contT++ %>
+                    <% } %>
+                    <% if(text.group == "frequently-questions" && page == "frequently-questions"){ %>
+                    <%= text.components[0].text[0].value %>
+                    <% contT++ %>
+                    <% } %>
+
+                    <% });;; %>
+
+                    <% if(!contT && textsMenu.length){ %>
+                    <% if(textsMenu[0].group == "about-us"){ %>
+                    <%- textsMenu[0].components[0].paragraph[0].value.replace(/(<([^>]+)>)/ig, "") %>
+                    <% } else { %>
+                    <%= textsMenu[0].components[0].text[0].value %>
+                    <% } %>
+                    <% } %>
+                    <% } %>
+
+                    <img src="/frontEnd/img/ic_8_expand_down.png" srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x">
+                </a>
+                <ul class="dropdown-menu languages">
+                    <% if(textsMenu.length){ %>
+                    <% textsMenu.forEach(function(text){ %>
+                    <li>
+                        <a
+                                <% if(text.pos == 0){ %>
+                                class="active"
+                                <% } %>
+                                href="/<%= language %>/<%= text.slug %>">
+                            <% if(text.group == "about-us"){ %>
+                            <%- text.components[0].paragraph[0].value.replace(/(<([^>]+)>)/ig, "") || "" %>
+                            <% } else { %>
+                            <%= text.components[0].text[0].value %>
+                            <% } %>
+                        </a>
+                    </li>
+                    <% });;; %>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="hidden-xs col-md-2 content"></div>
+            <div class="col-xs-6 col-sm-3 col-md-2 content" style="padding: 0;">
+                <div class="col-xs-6 dropdown content">
+                    <a href="#" class="dropdown-toggle lang line-margin" data-toggle="dropdown">
+                        <%= language %> <img src="/frontEnd/img/ic_8_expand_down.png"
+                                             srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                    <ul class="dropdown-menu languages">
+                        <% if(languages){ %>
+                        <% languages.forEach(function(lang){ %>
+                        <li><a <% if(lang.iso == language){ %>class="active"
+                                    <% } %>
+                               href="/<%= lang.iso %>"> <%= lang.iso %> </a></li>
+                        <% });;; %>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class="col-xs-6 dropdown content">
+                    <a href="#" class="dropdown-toggle moneda line-margin"
+                       data-toggle="dropdown"> </a>
+                    <ul class="dropdown-menu money">
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2 hidden-xs iso-social">
+                <!--<div class="iso-space hidden-xs hidden-sm hidden-md"></div>-->
+                <a href="https://www.facebook.com/alquilerbarco/?ref=hl" target="_blank"><img
+                            src="/frontEnd/img/ic_16_header_social_facebook.png"
+                            srcset="/frontEnd/img/ic_16_header_social_facebook@2x.png 2x"
+                            class="social inline-block pull-left"></a>
+                <a href="https://twitter.com/Alquiler_Barco" target="_blank"> <img
+                            src="/frontEnd/img/ic_16_header_social_twitter.png"
+                            srcset="/frontEnd/img/ic_16_header_social_twitter@2x.png 2x"
+                            class="social inline-block pull-left"></a>
+                <a href="https://www.instagram.com/alquilerdebarco" target="_blank"><img
+                            src="/frontEnd/img/ic_16_header_social_instagram.png"
+                            srcset="/frontEnd/img/ic_16_header_social_instagram@2x.png 2x"
+                            class="social first inline-block pull-left"></a>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix hidden-xs"></div>
+    <div class="navbar-wrapper header-bar">
+        <div class="container">
+            <div class="navbar navbar-static-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="dropdown-menu nav navbar-nav" style="margin-top: 20px;">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="col-xs-12 menu-social">
+
+
+                                <a href="https://www.facebook.com/alquilerbarco/?ref=hl" target="_blank"><img
+                                            src="/frontEnd/img/ic_16_header_social_facebook.png"
+                                            srcset="/frontEnd/img/ic_16_header_social_facebook@2x.png 2x"
+                                            class="social"></a>
+                                <a href="https://twitter.com/Alquiler_Barco" target="_blank"> <img
+                                            src="/frontEnd/img/ic_16_header_social_twitter.png"
+                                            srcset="/frontEnd/img/ic_16_header_social_twitter@2x.png 2x"
+                                            class="social "></a>
+                                <a href="https://www.instagram.com/alquilerdebarco" target="_blank"><img
+                                            src="/frontEnd/img/ic_16_header_social_instagram.png"
+                                            srcset="/frontEnd/img/ic_16_header_social_instagram@2x.png 2x"
+                                            class="social"></a>
+                            </div>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <div class="xs-money"></div>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="xs-languages">
+                            <div>
+                                <% if(languages){ %>
+                                <% languages.forEach(function(lang){ %>
+                                <a
+                                        <% if(lang.iso == language){ %>
+                                        class="col-xs-2"
+                                        style="color: #9dc1d3;text-transform: uppercase;cursor: default" href="#"/>
+                                <% } else { %>
+                                href="/<%= lang.iso %>" class="col-xs-2" style="color: white;text-transform: uppercase;"
+                                />
+                                <% } %>
+                                <%= lang.iso %>
+                                </a>
+                                <% });;; %>
+                                <% } %>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="http://blog.alquilerdebarco.com/" target="_blank">
+                                <span>Blog</span>
+                                <p class="hidden-sm hidden-xs"><%= texts.blog_sub %></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/<%= language %>/<%= texts.slug_user_guide %>">
+                                <span> <%= texts.user_guide %></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/<%= language %>/<%= texts.slug_sailor_guide %>">
+                                <span> <%= texts.seafarer %></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="helper">
+                                <span><%= texts.help %></span>
+                            </a>
+                        </li>
+                        <% if(user){ %>
+                        <% if(user && !user.permissions.isShipOwner){ %>
+                        <li>
+                            <div>
+                                <p class="col-xs-6" style="text-transform: uppercase;color: white;">
+                                    &nbsp;<%= user.name %></p>
+                                <div class="col-xs-6">
+                                    <a href="/logout" class="col-xs-6 pull-right text-right" style="color: black">
+                                        <span class="glyphicon glyphicon-log-out"
+                                              aria-hidden="true"></span> <%= texts.gen_out %></a>
+                                </div>
+                            </div>
+                        </li>
+                        <% };;; %>
+                        <% }else { %>
+                        <li>
+                            <a class="wake_login"
+                               href="/<%= language %>/<%= texts.slug_access_user %>">
+                                <span><%= texts.access_user %></span>
+                                <p class="hidden-sm hidden-xs"><%= texts.user_sign_sub %></p>
+                            </a>
+                        </li>
+                        <% };;; %>
+
+                        <% if(user){ %>
+                        <% if(user.permissions.isShipOwner){ %>
+                        <li>
+                            <div>
+                                <p class="col-xs-6" style="text-transform: uppercase;color: white;">
+                                    &nbsp;<%= user.name %></p>
+                                <div class="col-xs-6">
+                                    <a href="/logout" class="pull-right text-right" style="color: black">
+                                        <span class="glyphicon glyphicon-log-out"
+                                              aria-hidden="true"></span> <%= texts.gen_out %></a>
+                                </div>
+                            </div>
+                        </li>
+                        <% };;; %>
+                        <% }else { %>
+                        <li>
+                            <a class="wake_login"
+                               href="/<%= language %>/<%= texts.slug_access_owner %>">
+                                <span><%= texts.access_owner %></span>
+                                <p class="hidden-sm hidden-xs"><%= texts.owner_sign_sub %></p>
+                            </a>
+                        </li>
+                        <% };;; %>
+                    </ul>
+                    <a href="/<%= language %>" class="inline-block pull-left"><img
+                                src="/frontEnd/img/img_60_menu_logo.png"
+                                srcset="/frontEnd/img/img_60_menu_logo@2x.png 2x"
+                                class="logo-header"></a>
+                    <a class="navbar-brand inline-block"
+                       href="/<%= language %>">Alquiler<span>de</span>Barco<span>.com</span></a>
+                </div>
+                <div id="header-toogle" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav <% if(user){ %>col-sm-8 col-lg-9<% } %>">
+                        <li class="menu visible-xs">
+                            <a href="#" class="dropdown-toggle lang line-margin " data-toggle="dropdown">
+                                <%= language %> <img src="/frontEnd/img/ic_8_expand_down.png"
+                                                     srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x">
+                            </a>
+                            <ul class="dropdown-menu languages">
+                                <% if(languages){ %>
+                                <% languages.forEach(function(lang){ %>
+                                <li><a <% if(lang.iso == language){ %>class="active"
+                                            <% } %>
+                                       href="/<%= lang.iso %>"> <%= lang.iso %> </a></li>
+                                <% });;; %>
+                                <% } %>
+                            </ul>
+                        </li>
+                        <li class="menu visible-xs">
+                            <a href="#" class="dropdown-toggle moneda line-margin"
+                               data-toggle="dropdown"> </a>
+                            <ul class="dropdown-menu money">
+                            </ul>
+                        </li>
+                        <li class="menu visible-xs">
+                            <div class="col-xs-12 menu-social">
+                                <a href="https://www.facebook.com/alquilerbarco/?ref=hl" target="_blank"><img
+                                            src="/frontEnd/img/ic_16_header_social_facebook.png"
+                                            srcset="/frontEnd/img/ic_16_header_social_facebook@2x.png 2x"
+                                            class="social"></a>
+                                <a href="https://twitter.com/Alquiler_Barco" target="_blank"> <img
+                                            src="/frontEnd/img/ic_16_header_social_twitter.png"
+                                            srcset="/frontEnd/img/ic_16_header_social_twitter@2x.png 2x"
+                                            class="social "></a>
+                                <a href="https://www.instagram.com/alquilerdebarco" target="_blank"><img
+                                            src="/frontEnd/img/ic_16_header_social_instagram.png"
+                                            srcset="/frontEnd/img/ic_16_header_social_instagram@2x.png 2x"
+                                            class="social"></a>
+                            </div>
+                        </li>
+                        <li class="menu"><a href="http://blog.alquilerdebarco.com/" target="_blank">
+                                <span>BLOG</span>
+                                <p class="hidden-sm hidden-xs"><%= texts.blog_sub %></p>
+                            </a>
+                        </li>
+                        <li class="menu visible-xs">
+                            <a href="/<%= language %>/<%= texts.slug_user_guide %>">
+                                <span> <%= texts.user_guide %></span>
+                            </a>
+                        </li>
+                        <li class="menu visible-xs">
+                            <a href="/<%= language %>/<%= texts.slug_sailor_guide %>">
+                                <span> <%= texts.seafarer %></span>
+                            </a>
+                        </li>
+                        <% if(user){ %>
+                        <% if(user && !user.permissions.isShipOwner){ %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle line-margin" data-toggle="dropdown"><%= user.name %> <img
+                                        src="/frontEnd/img/ic_8_expand_down.png"
+                                        srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                            <ul class="dropdown-menu logout">
+                                <li><a href="/logout"><%= texts.gen_out %></a></li>
+                            </ul>
+                            <p class="hidden-sm hidden-xs"><%= texts.gen_welcome %></p>
+                        </li>
+                        <% };;; %>
+                        <% }else { %>
+                        <li>
+                            <a class="wake_login"
+                               href="/<%= language %>/<%= texts.slug_access_user %>">
+                                <span><%= texts.access_user %></span>
+                                <p class="hidden-sm hidden-xs"><%= texts.user_sign_sub %></p>
+                            </a>
+                        </li>
+                        <% };;; %>
+
+                        <% if(user){ %>
+                        <% if(user.permissions.isShipOwner){ %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle line-margin" data-toggle="dropdown"><%= user.name %> <img
+                                        src="/frontEnd/img/ic_8_expand_down.png"
+                                        srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                            <ul class="dropdown-menu logout">
+                                <li><a href="/logout"><%= texts.gen_out %></a></li>
+                            </ul>
+                            <p class="hidden-sm hidden-xs"><%= texts.gen_welcome %></p>
+                        </li>
+                        <% };;; %>
+                        <% }else { %>
+                        <li>
+                            <a class="wake_login"
+                               href="/<%= language %>/<%= texts.slug_access_owner %>">
+                                <span><%= texts.access_owner %></span>
+                                <p class="hidden-sm hidden-xs"><%= texts.owner_sign_sub %></p>
+                            </a>
+                        </li>
+                        <% };;; %>
+
+                        <li class="dropdown <% if(user){ %>pull-right<% } %>">
+                            <a class="helper"><span class="hidden-sm"><%= texts.help %></span>
+                                <img src="/frontEnd/img/ic_32_menu_help.png " class="hidden-xs"
+                                     srcset="/frontEnd/img/ic_32_menu_help@2x.png 2x"></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <% if(page == 'ship-details'){ %>
+                <%- include('../booking-help') %>
+                <% }else{ %>
+                <%- include('../help') %>
+                <% } %>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-static-top navbar-default visible-xs"
+     style="background-color: #0180c5;border-bottom: 1px solid #5ccdff;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle dropdown-toggle" style="margin-right: 10px;"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/<%= language %>" class="inline-block pull-left" style="margin-left: 15px;"><img
+                        src="/frontEnd/img/img_60_menu_logo.png"
+                        srcset="/frontEnd/img/img_60_menu_logo@2x.png 2x"
+                        class="logo-header"></a>
+            <a class="navbar-brand inline-block" style="color: white;"
+               href="/<%= language %>">Alquiler<span>de</span>Barco<span>.com</span></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="border-bottom: 1px solid white;padding-bottom: 5px;">
+                    <div class="col-xs-12 menu-social">
+
+                        <a href="https://www.facebook.com/alquilerbarco/?ref=hl" target="_blank"><img
+                                    src="/frontEnd/img/ic_16_header_social_facebook.png"
+                                    srcset="/frontEnd/img/ic_16_header_social_facebook@2x.png 2x"
+                                    class="social"></a>
+                        <a href="https://twitter.com/Alquiler_Barco" target="_blank"> <img
+                                    src="/frontEnd/img/ic_16_header_social_twitter.png"
+                                    srcset="/frontEnd/img/ic_16_header_social_twitter@2x.png 2x"
+                                    class="social "></a>
+                        <a href="https://www.instagram.com/alquilerdebarco" target="_blank"><img
+                                    src="/frontEnd/img/ic_16_header_social_instagram.png"
+                                    srcset="/frontEnd/img/ic_16_header_social_instagram@2x.png 2x"
+                                    class="social"></a>
+                    </div>
+                </li>
+                <li style="border-bottom: 1px solid white;padding-bottom: 5px;padding-top: 5px;">
+                    <div class="xs-money"></div>
+                    <div class="clearfix"></div>
+                </li>
+
+                <li style="border-bottom: 1px solid white;padding-bottom: 5px;padding-top: 5px;">
+                    <div>
+                        <% if(languages){ %>
+                        <% languages.forEach(function(lang){ %>
+                        <a
+                                <% if(lang.iso == language){ %>
+                                class="col-xs-2"
+                                style="color: #9dc1d3;text-transform: uppercase;cursor: default" href="#"/>
+                        <% } else { %>
+                        href="/<%= lang.iso %>" class="col-xs-2" style="color: white;text-transform: uppercase;"
+                        />
+                        <% } %>
+                        <%= lang.iso %>
+                        </a>
+                        <% });;; %>
+                        <% } %>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </li>
+                <li class="dropdown" style="border-bottom: 1px solid white;padding-bottom: 5px;padding-top: 5px;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <% if(landingsMenu.length){ %>
+                        <% contL = 0 %>
+                        <% landingsMenu.forEach(function(land){ %>
+                        <% if(land._id == landingSelect){ %>
+                        <% contL++ %>
+                        <%= land.name[0].value %> <img src="/frontEnd/img/ic_8_expand_down.png"
+                                                       srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                    <% } %>
+                    <% });;; %>
+                    <% if(!contL){ %>
+                    <%= landingsMenu[0].name[0].value %> <img src="/frontEnd/img/ic_8_expand_down.png"
+                                                              srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x"></a>
+                    <% } %>
+                    <% } %>
+                    <ul class="dropdown-menu" style="background-color: #0180c5;border-bottom: 1px solid #5ccdff">
+                        <% if(landingsMenu.length){ %>
+                        <% landingsMenu.forEach(function(land){ %>
+                        <li><a style="color: white"
+                                    <% if(land.pos == 0){ %>
+                               class="active"
+                                    <% } %>
+                               href="/<%= language %>/<%= land.slug[0].value %>"> <%= land.name[0].value %> </a></li>
+                        <% });;; %>
+                        <% } %>
+                    </ul>
+
+                </li>
+                <li class="dropdown" style="border-bottom: 1px solid white;padding-bottom: 5px;padding-top: 5px;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <% if(textsMenu.length){ %>
+                        <% contT = 0 %>
+                        <% textsMenu.forEach(function(text){ %>
+                        <% if(text.group == "user-guide" && page == "user-guide"){ %>
+                        <%= text.components[0].text[0].value %>
+                        <% contT++ %>
+                        <% } %>
+                        <% if(text.group == "sailor-guide" && page == "sealer-guide"){ %>
+                        <%= text.components[0].text[0].value %>
+                        <% contT++ %>
+                        <% } %>
+                        <% if(text.group == "about-us" && page == "about-us"){ %>
+                        <%- text.components[0].paragraph[0].value %>
+                        <% contT++ %>
+                        <% } %>
+                        <% if(text.group == "service-conditions" && page == "service-conditions"){ %>
+                        <%= text.components[0].text[0].value %>
+                        <% contT++ %>
+                        <% } %>
+                        <% if(text.group == "privacy-politics" && page == "privacy-politics"){ %>
+                        <%= text.components[0].text[0].value %>
+                        <% contT++ %>
+                        <% } %>
+                        <% });;; %>
+
+                        <% if(!contT && textsMenu.length){ %>
+                        <% if(textsMenu[0].group == "about-us"){ %>
+                        <%- textsMenu[0].components[0].paragraph[0].value %>
+                        <% } else { %>
+                        <%= textsMenu[0].components[0].text[0].value %>
+                        <% } %>
+                        <% } %>
+                        <% } %>
+
+                        <img src="/frontEnd/img/ic_8_expand_down.png" srcset="/frontEnd/img/ic_8_expand_down@2x.png 2x">
+                    </a>
+                    <ul class="dropdown-menu" style="background-color: #0180c5;border-bottom: 1px solid #5ccdff">
+                        <% if(textsMenu.length){ %>
+                        <% textsMenu.forEach(function(text){ %>
+                        <li>
+                            <a style="color: white"
+                                    <% if(text.pos == 0){ %>
+                               class="active"
+                                    <% } %>
+                               href="/<%= language %>/<%= text.slug %>">
+                                <% if(text.group == "about-us"){ %>
+                                <%= text.components[0].paragraph[0].value.replace(/(<([^>]+)>)/ig, "") %>
+                                <% } else { %>
+                                <%= text.components[0].text[0].value %>
+                                <% } %>
+                            </a>
+                        </li>
+                        <% });;; %>
+                        <% } %>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://blog.alquilerdebarco.com/" target="_blank">
+                        <span>Blog</span>
+                        <p class="hidden-sm hidden-xs"><%= texts.blog_sub %></p>
+                    </a>
+                </li>
+                <li>
+                    <a class="helper">
+                        <span><%= texts.help %></span>
+                    </a>
+                </li>
+                <% if(user){ %>
+                <% if(user && !user.permissions.isShipOwner){ %>
+                <li>
+                    <div>
+                        <p class="col-xs-6" style="text-transform: uppercase;color: white;">&nbsp;<%= user.name %></p>
+                        <div class="col-xs-6">
+                            <a href="/logout" class="col-xs-6 pull-right text-right" style="color: black">
+                                        <span class="glyphicon glyphicon-log-out"
+                                              aria-hidden="true"></span> <%= texts.gen_out %></a>
+                        </div>
+                    </div>
+                </li>
+                <% };;; %>
+                <% }else { %>
+                <li>
+                    <a class="wake_login"
+                       href="/<%= language %>/<%= texts.slug_access_user %>">
+                        <span><%= texts.access_user %></span>
+                        <p class="hidden-sm hidden-xs"><%= texts.user_sign_sub %></p>
+                    </a>
+                </li>
+                <% };;; %>
+
+                <% if(user){ %>
+                <% if(user.permissions.isShipOwner){ %>
+                <li>
+                    <div>
+                        <p class="col-xs-6" style="text-transform: uppercase;color: white;">&nbsp;<%= user.name %></p>
+                        <div class="col-xs-6">
+                            <a href="/logout" class="pull-right text-right" style="color: black">
+                                        <span class="glyphicon glyphicon-log-out"
+                                              aria-hidden="true"></span> <%= texts.gen_out %></a>
+                        </div>
+                    </div>
+                </li>
+                <% };;; %>
+                <% }else { %>
+                <li>
+                    <a class="wake_login"
+                       href="/<%= language %>/<%= texts.slug_access_owner %>">
+                        <span><%= texts.access_owner %></span>
+                        <p class="hidden-sm hidden-xs"><%= texts.owner_sign_sub %></p>
+                    </a>
+                </li>
+                <% };;; %>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+    <% if(page == 'ship-details'){ %>
+    <%- include('../booking-help') %>
+    <% }else{ %>
+    <%- include('../help') %>
+    <% } %>
+</nav>
+
+<% if(page == 'index' || page == 'ship-details'){ %>
+<!-- Carousel
+================================================== -->
+<div class="container full-width">
+    <div class="englobe">
+        <h2 class="img-title hidden-xs"></h2>
+        <div class="paragraph">
+            <a class="inline-block btn btn-success"
+               href="/<%= language %>/<%= texts.slug_announce %>"><%= texts.announce %></a>
+        </div>
+        <div class="container">
+            <div class="filters col-xs-12">
+                <form autocomplete="off" class="form-search">
+                    <ul class="selectors navbar-nav col-xs-12">
+                        <li class="dropdown col-xs-12 col-sm-4 col-md-2">
+                            <div class="title"><%= texts.country %></div>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown" id="countries">
+                                    <span class="pull-left text"><%= texts.any %></span> <span
+                                            class="pull-right caret"></span></button>
+                                <ul class="dropdown-menu countries zone">
+
+                                </ul>
+
+                            </div>
+                        </li>
+                        <li class="dropdown col-xs-12 col-sm-4 col-md-3 col-lg-4">
+                            <div class="title"><%= texts.localization %></div>
+
+                            <div class="input-group-btn">
+                                <input class="form-control input-sm" autocomplete="off" id="filter-zone"
+                                       placeholder="<%= texts.city %>, <%= texts.ports %> <%= texts.gen_or %> <%= texts.zone %>"/>
+                                <div id="span-caret-filter-location" class="pointer">
+                                    <span class="pull-right caret"></span></div>
+
+                                <ul class="dropdown-menu zone">
+                                    <li class="dropdown-header"><%= texts.city %></li>
+                                    <div class="cities"></div>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header"><%= texts.ports %></li>
+                                    <div class="ports"></div>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header"><%= texts.zone %></li>
+                                    <div class="area"></div>
+
+                                </ul>
+                            </div>
+
+                        </li>
+                        <li class="dropdown col-xs-12 col-sm-4 col-md-2">
+                            <div class="title-out"><%= texts.out %></div>
+                            <div class="input-group input-append date" id="dp3">
+                                <input type="text" class="form-control text-left input-sm">
+                                <span class="input-group-addon add-on">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            </div>
+                        </li>
+                        <li class="dropdown col-xs-12 col-sm-4 col-md-2">
+                            <div class="title"><%= texts.length %></div>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown" id="length">
+                                    <span class="pull-left text"><%= texts.any %></span>
+                                    <span class="caret pull-right"></span></button>
+                                <ul class="dropdown-menu duration zone">
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="dropdown col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <a class="btn btn-search"><span class="icon-search"></span> <%= texts.search_ships %></a>
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-inner hidden-xs" role="listbox">
+        <% imgs.forEach(function(img){ %>
+        <div class="item <% if (img.pos == 0) { %> active <% } %>">
+            <img src="/service/media/<%= img.img %>" alt="...">
+            <div class="carousel-caption">
+                <h2 class="iso-img-title"> <%= img.text %></h2>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
+
+<% };;;;;;;;;;;;;;;;;; %>
+
+<div class="container margin-pages">
+    <div class="row page_notification">
+        <div class="col-xs-12 col-sm-7 col-md-8">
+            <div class="panel">
+                <div class="col-xs-2 col-sm-1 confirm">
+                    <img src="/frontEnd/img/ic_32_checkmark_green.png"
+                         srcset="/frontEnd/img/ic_32_checkmark_green@2x.png 2x">
+                </div>
+                <div class="notif_body col-xs-10 col-sm-11">
+                    <h4 class="title"></h4>
+                    <div class="priv_notif_text"></div>
+                    <button class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left"></i> <%= texts.back %>
+                    </button>
+                    <a class="btn btn-primary" href="/<%= language %>"><span class="icon-home"></span> <%= texts.home %>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-4">
+            <%- include('../contact') %>
+        </div>
+    </div>
+</div>

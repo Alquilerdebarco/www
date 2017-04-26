@@ -1,0 +1,32 @@
+</br>
+</br>
+<div class="clearfix"></div>
+<div class="contain-sm" ng-controller="contractController" ng-cloak>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>CONDICIONES GENERALES DE COMERCIALIZACIÓN Y GESTIÓN DE COBRO
+            </h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br>
+            <form class="form-horizontal form-label-left" action="/service/users/accept" method="post">
+                <blockquote class="col-xs-12" style="max-height: 600px;overflow: auto;">
+                    <p ng-bind-html="contract"></p>
+                </blockquote>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="checkbox pull-left">
+                        <label>
+                            <input ng-model="accept" type="checkbox" name="accept"> Acepto los términos y condiciones
+                        </label>
+                    </div>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success" ng-disabled="!accept">Siguiente</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

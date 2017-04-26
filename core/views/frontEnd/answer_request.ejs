@@ -1,0 +1,45 @@
+<div class="container margin-pages">
+    <div class="row">
+        <% if( status == undefined || status == null ||status == 0){%>
+        <div class="col-xs-12">
+        <div class="answer_header">
+            <h3><%= texts.ans_error%></h3>
+        </div>
+            <div class="answer-body">
+                <p><%= texts.ans_wrong%></p>
+                <a href="/<%= language%>" class="btn btn-danger"><%= texts.ans_accept%></a>
+            </div>
+        </div>
+        <%}else if(status == 1){%>
+        <div class="col-xs-12">
+            <div class="answer_header">
+                <h3><%= texts.ans_connect%></h3>
+            </div>
+            <div class="answer-body">
+                <p><%= texts.ans_wrong%></p>
+                <a href="/<%= language%>" class="btn btn-warning"><%= texts.ans_accept%></a>
+            </div>
+        </div>
+        <%}else if(status == 2){%>
+        <div class="col-xs-12">
+            <div class="answer_header">
+                <h3><%= texts.ans_success_title%></h3>
+            </div>
+            <div class="answer-body">
+                <p><%= texts.ans_success%></p>
+                <a href="/<%= language%>" class="btn btn-success"><%= texts.ans_accept%></a>
+            </div>
+        </div>
+        <%}else{%>
+        <div class="col-xs-12">
+            <div class="answer_header">
+                <h3><%= texts.ans_occup_title%></h3>
+            </div>
+            <div class="answer-body">
+                <p><%= texts.ans_occup%></p>
+                <a href="/<%= language%>" class="btn btn-warning"><%= texts.ans_accept%></a>
+            </div>
+        </div>
+        <%}%>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<div ng-controller="messagesCtrl" ng-cloak >
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div>
+                <div class="x_title">
+                    <h2>Mensajes
+                        <small>Lista</small>
+                    </h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                    <div class="row">
+
+                        <div class="col-sm-4 mail_list_column">
+                            <div ng-cloak ng-repeat="msg in messages"
+                                 ng-click="selectConversation($index)"
+                                 class="mail_list pointer" style="height: 90px;">
+                                <div class="left">
+                                    <i ng-show="msg.check" class="fa fa-circle"></i>
+                                    <i ng-show="!msg.check" class="fa fa-circle-o"></i>
+                                </div>
+                                <div class="right">
+                                    <h3 ng-class="{'check-message':!msg.check}">{{msg.user.name}} {{msg.user.surname}}
+                                        <small>{{msg.date|date:'dd/MM/yyyy'}}</small>
+                                    </h3>
+                                    <p>{{msg.text}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /MAIL LIST -->
+
+
+                        <!-- CONTENT MAIL -->
+                        <div class="col-sm-8 mail_view">
+                            <div ng-show="talkNow" class="tile" ng-cloak>
+                                <div class="inbox-body">
+                                    <div class="view-mail">
+                                        <ul style="min-height: 450px" class="list-unstyled msg_list">
+                                            <div ng-repeat="cnv in conversation">
+
+                                                <li ng-show="cnv.user==message.user._id" class="chat-left">
+                                                <span class="image col-xs-2">
+                                                    <img src="/service/media/{{message.user.avatar}}" alt="img"/>
+                                                </span>
+
+                                                    <div class="col-xs-10">
+                                                        <div class="col-xs-12 chat-header">
+                                                            <span class="chat-user-name">{{message.user.name}} {{message.user.surname}}</span>
+                                                            <small class="chat-past-time">
+                                                                {{cnv.date|date:'dd/MM/yyyy'}}
+                                                            </small>
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                        <p>{{cnv.text}}</p>
+                                                    </div>
+                                                </li>
+
+                                                <li ng-show="cnv.user==$root.M_USER._id" class="chat-right">
+                                                    <div class="col-xs-10">
+                                                        <div class="col-xs-12 chat-header">
+                                                            <span class="chat-user-name">{{$root.M_USER.name}} {{$root.M_USER.surname}}</span>
+                                                            <small class="chat-past-time">
+                                                                {{cnv.date|date:'dd/MM/yyyy'}}
+                                                            </small>
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                        <p>{{cnv.text}}</p>
+                                                    </div>
+                                                    <span class="image col-xs-2">
+                                                        <img src="/service/media/{{$root.M_USER.avatar}}"
+                                                             alt="img"/>
+                                                    </span>
+                                                </li>
+
+                                            </div>
+
+                                        </ul>
+                                        <div class="input-group">
+                                            <input type="text" ng-model="userText" required class="form-control">
+                                            <span class="input-group-btn">
+                                                <button ng-disabled="!userText.length"
+                                                        ng-click="sendMsg()"
+                                                        type="button"
+                                                        class="btn btn-primary resizable_textarea">Enviar
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div ng-show="!talkNow" class="tile" ng-cloak>
+                                <div class="alert alert-info alert-dismissible fade in" role="alert">
+
+                                    <strong>Lo sentimos!</strong> No existen conversaciones activas.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /CONTENT MAIL -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

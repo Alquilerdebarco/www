@@ -1,0 +1,611 @@
+<div class="container index">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="first-title">
+                <%= texts.title_rent_ships %>
+                <span><%= ships.first %>-<%= ships.cont %></span>
+            </h1>
+        </div>
+        <% if(filters){ %>
+        <div class="filter2">
+            <div class="col-xs-12">
+                <div class="breadc">
+                    <a class="filter2-rent-ship inline-block" href="/<%= language %>"> <%= texts.rent_ships %></a>
+                    <% if(filters[7] != "0" && filters[7] != undefined){ %>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-type-ship inline-block"></a>
+                    <% }else{ %>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-type-ship inline-block"
+                       href="/<%= language %>/<%= general_land.slug[0].value %>"><%= texts.general_ships %></a>
+                    <% } %>
+                    <% if(filters[0] != "0" && filters[0] != undefined){ %>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-country inline-block"></a>
+                    <% } %>
+                    <% if(filters[3] != "0" && filters[3] != undefined){ %>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-port inline-block"></a>
+                    <% } else  if(filters[2] != "0" && filters[2] != undefined){ %>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-area inline-block"></a>
+                    <% } else if(filters[1] != "0" && filters[1] != undefined){ %>
+                    <img src="/frontEnd/img/ic_8_braeadcrumbs_forward.png"
+                         srcset="/frontEnd/img/ic_8_braeadcrumbs_forward@2x.png 2x" class="inline-block forward">
+                    <a class="filter2-city inline-block"></a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="dropdown col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                <div class="title"><%= texts.xp %></div>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown" id="xp">
+                        <span class="pull-left text"><%= texts.any %></span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu xps">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown col-xs-12 col-sm-4 col-md-2">
+                <div class="text-left title"><%= texts.ship_type_filter %></div>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown" id="ship-type">
+                        <span class="pull-left text"><%= texts.any %></span><span
+                                class="caret"></span></button>
+                    <ul class="dropdown-menu ship-type">
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="dropdown col-sm-4 col-md-3">
+                <div class="text-left title"><%= texts.slora_filter %></div>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown" id="eslora">
+                        <span class="pull-left text"><%= texts.any %></span> <span
+                                class="caret"></span></button>
+                    <ul class="dropdown-menu eslora">
+
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="dropdown col-sm-4 col-md-3">
+                <div class="text-left title"><%= texts.n_passenger_filter %></div>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown" id="number-passa">
+                        <span class="pull-left text"><%= texts.any %></span> <span
+                                class="caret"></span></button>
+                    <ul class="dropdown-menu number-passa">
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="dropdown col-sm-4 col-md-3 col-lg-2 owner-style">
+                <div class="text-left title"><%= texts.need_patern_filter %></div>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown" id="patron">
+                        <span class="pull-left text"><%= texts.with_or_without_master %></span><span
+                                class="caret"></span></button>
+                    <ul class="dropdown-menu patron">
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <% if(landingSelect){ %>
+        <% var aux = landingSelect.toString() %>
+        <% landing.forEach(function(lan){ %>
+        <% if (lan._id == aux) { %>
+
+        <div class="col-xs-12  correct-format">
+            <div>
+                <br>
+                <!--<div class="clearfix"></div>-->
+                <% if(lan.text1[0]){ %>
+                <p><%- lan.text1[0].value %></p>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+        <% }); %>
+        <% } %>
+        <% } %>
+
+        <% if(filters){ %>
+        <% if(ships.list.length){ %>
+        <% ships.list.forEach(function(ship, index){ %>
+        <% routes.forEach(function(route){ %>
+        <% if(route.lang == language){ %>
+        <% var util = route.url.split("/") %>
+        <div class="col-xs-12 col-sm-6 hola">
+            <a href="/<%= language %>/<%= texts.slug_ship %>/<%= ship.slug %>/<%= ship.seasons[0].experiences[0].experience.slug %> <% if(filters[6] != "0" && filters[6] != null){ %>?startDate=<%= filters[6] %> <% } %>">
+                <div class="col-xs-12 card">
+                    <div class="row">
+                        <% ship.discounts.forEach(function (disc) { %>
+                        <% var exist = false %>
+                        <% var today = new Date() %>
+                        <% if(disc.type == "0" && !exist && new Date(disc.start) < today && today < new Date(disc.end)){ %>
+                        <div class="ui-ribbon-wrapper" style="z-index: 1;">
+                            <div class="ui-ribbon img-ship-active">
+                                - <%= disc.discount %> %
+                            </div>
+                        </div>
+                        <% exist = true %>
+                        <% } %>
+                        <% }) %>
+                        <div class="header">
+                            <% var pos = Math.floor((Math.random() * ((ship.photos.length - 1) - 0 + 1)) + 0); %>
+                            <img class="lazy" data-original="/service/media/<%= ship.photos[pos].media %>" width="100%"
+                                 height="100%">
+
+                        </div>
+                    </div>
+                    <div class="title"><h2><%= ship.title[0].value %></h2></div>
+
+                    <div class="ship-description"><%- ship.description[0].value %>
+                        <div class="transparent"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                  srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x"></div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <%= ship.shipType.name %>, <%= ship.manufacturer %>, <%= ship.model %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                  srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x"></div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <%= ship.technicalDetails.measurements.dimension %> m, <%= ship.technicalDetails
+                                        .habitability.cabins %>
+                                <%= texts.det_ship_cabin %>
+                                , <%= ship.technicalDetails.habitability.persons.day %> <%= texts.det_ship_day %>
+                                , <%= ship.technicalDetails.habitability.persons.night %> <%= texts.det_ship_night %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="localization elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row">
+                                <img src="/frontEnd/img/ic_14_boat_card_location.png"
+                                     srcset="/frontEnd/img/ic_14_boat_card_location@2x.png 2x"
+                                     class="inline-block">
+                            </div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <% if(ship.localization.port){ %>
+                                <strong><%= ship.localization.port.name[0].value %>,
+                                    <% if(ship.localization.area){ %>
+                                    <%= ship.localization.area.name[0].value %>
+                                    <% }else{ %>
+                                    <%= ship.localization.city.name[0].value %>
+                                    <% } %>
+                                </strong>
+                                <% }else{ %>
+                                <strong></strong>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--<div class="elements-margins">-->
+                    <!--<div class="inline-block col-xs-1">-->
+                    <!--<div class="row">-->
+                    <!--<img src="/frontEnd/img/ic_14_boat_card_experience.png"-->
+                    <!--srcset="/frontEnd/img/ic_14_boat_card_experience@2x.png 2x">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="inline-block col-xs-10">-->
+                    <!--<div class="row features">-->
+                    <!--<% if(ship.seasons.length){ %>-->
+                    <!--<strong><%= ship.seasons[0].experiences[0].experience.name %> </strong>-->
+                    <!--<% }else{ %>-->
+                    <!--<strong></strong>-->
+                    <!--<% } %>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="clearfix"></div>
+                    <% if(ship.rentType){ %>
+                    <% if(ship.rentType == 1){ %>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row">
+                                <img src="/frontEnd/img/ic_14_boat_card_skipper.png"
+                                     srcset="/frontEnd/img/ic_14_boat_card_skipper@2x.png 2x">
+                            </div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <strong><%= texts.master_filter %> </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-3 col-lg-2">
+                            <div class="row">
+                                <strong class="see_more"><%= texts.see_more %></strong>
+                            </div>
+                        </div>
+                        <div class="inline-block col-xs-9">
+                            <div class="row">
+                                <p class="filter"
+                                   id="<%= index %>"> <%= ship.seasons[0].experiences[0].experience.name %> <%= texts.of %> <%= ship.shipType.name %> <%= texts.in %> <%= ship.localization.city.name[0].value %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <% var d = false %>
+                    <% if(parseFloat(ship.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                    <% d = true %>
+                    <% }else{ %>
+                    <div class="clearfix"></div>
+                    <div class="divisor-space"></div>
+                    <% } %>
+                    <% if(ship.rentType && ship.rentType != 1){ %>
+                    <div class="not_master"></div>
+                    <% } %>
+                    <div class="row prices <% if(d){ %>old<% } %>">
+                        <% ship.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                        <div class="col-xs-<%= 12 / ship.seasons[0].experiences[0].durations.length %> price">
+                            <div class="row <% if(12 / ship.seasons[0].experiences[0].durations.length == 4){ %> for-fix <% } %>">
+                                <h3 <% if(d){ %>class="old-price"
+                                        <% } %>
+                                ><span class="dollar"></span> <%= duration.price %> <span class="euro"></span></h3>
+                                <% if(duration.duration.unity == 0){ %>
+                                <% if(duration.duration.quantity == 4){ %>
+                                <p><%= texts.halfDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                <% } %>
+                                <% }else if(duration.duration.unity == 1){ %>
+                                <p><%= duration.duration.quantity %> <%= texts.globalDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                <% } %>
+                            </div>
+
+
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="clearfix"></div>
+                    <% if(parseFloat(ship.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                    <div class="row prices">
+                        <% ship.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                        <div class="col-xs-<%= 12 / ship.seasons[0].experiences[0].durations.length %> price">
+                            <div class="row <% if(12 / ship.seasons[0].experiences[0].durations.length == 4){ %> for-fix <% } %>">
+                                <h3>
+                                    <span class="dollar"></span> <%= duration.discount %>
+                                    <span class="euro"></span></h3>
+                                <% if(duration.duration.unity == 0){ %>
+                                <% if(duration.duration.quantity == 4){ %>
+                                <p><%= texts.halfDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                <% } %>
+                                <% }else if(duration.duration.unity == 1){ %>
+                                <p><%= duration.duration.quantity %> <%= texts.globalDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                <% } %>
+                            </div>
+
+
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="clearfix"></div>
+                    <% } %>
+                </div>
+            </a>
+        </div>
+
+        <% } %>
+        <% }) %>
+        <% if(index % 2 != 0){ %>
+        <div class="clearfix"></div>
+        <div class="divisor-space"></div>
+        <% }else{ %>
+        <div class="visible-xs divisor-space"></div>
+        <% } %>
+        <% }) %>
+        <div class="clearfix"></div>
+        <% if(filters){ %>
+        <% if(landingSelect){ %>
+        <% var aux = landingSelect.toString() %>
+        <% landing.forEach(function(lan){ %>
+        <% if (lan._id == aux) { %>
+
+        <div class="col-xs-12  correct-format">
+            <div>
+                <br>
+                <% if(lan.text2[0]){ %>
+                <p><%- lan.text2[0].value %></p>
+                <% } %>
+
+            </div>
+        </div>
+        <% } %>
+        <% }); %>
+        <% } %>
+        <% } %>
+        <div class="clearfix"></div>
+
+        <div class="col-xs-12 list-align">
+            <div class="line-pagination"></div>
+            <div class="col-xs-12 pull-right">
+                <% if(ships.last > 1 && ships.currentPage < ships.last){ %>
+                <button class="btn btn-primary see-more"><span
+                            class="glyphicon glyphicon-plus"></span> <%= texts.see_more_ships %>
+                </button>
+                <% } %>
+            </div>
+        </div>
+        <% }else{ %>
+        <h4 class="text-center"><%= texts.search_filters %></h4>
+        <% } %>
+        <% }
+        else if(ships.list.length){ %>
+        <% ships.list.forEach(function(ship, index){ %>
+        <div class="col-xs-12 col-sm-6">
+            <a href="/<%= language %>/<%= texts.slug_ship %>/<%= ship.slug %>/<%= ship.seasons[0].experiences[0].experience.slug %>">
+                <div class="col-xs-12 card">
+                    <div class="row">
+                        <% ship.discounts.forEach(function (disc) { %>
+                        <% var exist = false %>
+                        <% var today = new Date() %>
+                        <% if(disc.type == "0" && !exist && new Date(disc.start) < today && today < new Date(disc.end)){ %>
+                        <div class="ui-ribbon-wrapper" style="z-index: 1;">
+                            <div class="ui-ribbon img-ship-active">
+                                - <%= disc.discount %> %
+                            </div>
+                        </div>
+                        <% exist = true %>
+                        <% } %>
+                        <% }) %>
+                        <div class="header">
+                            <% var pos = Math.floor((Math.random() * ((ship.photos.length - 1) - 0 + 1)) + 0); %>
+                            <img class="lazy" data-original="/service/media/<%= ship.photos[pos].media %>" width="100%"
+                                 height="100%">
+
+                        </div>
+                    </div>
+                    <div class="title"><h2><%= ship.title[0].value %></h2></div>
+
+                    <div class="ship-description"><%- ship.description[0].value %>
+                        <div class="transparent"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                  srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x"></div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <%= ship.shipType.name %>, <%= ship.manufacturer %>, <%= ship.model %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row"><img src="/frontEnd/img/ic_14_boat_card_features.png"
+                                                  srcset="/frontEnd/img/ic_14_boat_card_features@2x.png 2x"></div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <%= ship.technicalDetails.measurements.dimension %> m, <%= ship.technicalDetails
+                                        .habitability.cabins %>
+                                <%= texts.det_ship_cabin %>
+                                , <%= ship.technicalDetails.habitability.persons.day %> <%= texts.det_ship_day %>
+                                , <%= ship.technicalDetails.habitability.persons.night %> <%= texts.det_ship_night %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="localization elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row">
+                                <img src="/frontEnd/img/ic_14_boat_card_location.png"
+                                     srcset="/frontEnd/img/ic_14_boat_card_location@2x.png 2x"
+                                     class="inline-block">
+                            </div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <% if(ship.localization.port){ %>
+                                <strong><%= ship.localization.port.name[0].value %>,
+                                    <% if(ship.localization.area){ %>
+                                    <%= ship.localization.area.name[0].value %>
+                                    <% }else{ %>
+                                    <%= ship.localization.city.name[0].value %>
+                                    <% } %>
+                                </strong>
+                                <% }else{ %>
+                                <strong></strong>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--<div class="elements-margins">-->
+                    <!--<div class="inline-block col-xs-1">-->
+                    <!--<div class="row">-->
+                    <!--<img src="/frontEnd/img/ic_14_boat_card_experience.png"-->
+                    <!--srcset="/frontEnd/img/ic_14_boat_card_experience@2x.png 2x">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="inline-block col-xs-10">-->
+                    <!--<div class="row features">-->
+                    <!--<% if(ship.seasons.length){ %>-->
+                    <!--<strong><%= ship.seasons[0].experiences[0].experience.name %> </strong>-->
+                    <!--<% }else{ %>-->
+                    <!--<strong></strong>-->
+                    <!--<% } %>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="clearfix"></div>
+                    <% if(ship.rentType){ %>
+                    <% if(ship.rentType == 1){ %>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-1">
+                            <div class="row">
+                                <img src="/frontEnd/img/ic_14_boat_card_skipper.png"
+                                     srcset="/frontEnd/img/ic_14_boat_card_skipper@2x.png 2x">
+                            </div>
+                        </div>
+                        <div class="inline-block col-xs-10">
+                            <div class="row features">
+                                <strong><%= texts.master_filter %> </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <div class="elements-margins">
+                        <div class="inline-block col-xs-3 col-lg-2">
+                            <div class="row">
+                                <strong class="see_more"><%= texts.see_more %></strong>
+                            </div>
+                        </div>
+                        <div class="inline-block col-xs-9">
+                            <div class="row">
+                                <p class="filter"
+                                   id="<%= index %>"> <%= ship.seasons[0].experiences[0].experience.name %> <%= texts.of %> <%= ship.shipType.name %> <%= texts.in %> <%= ship.localization.city.name[0].value %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <% var d = false %>
+                    <% if(parseFloat(ship.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                    <% d = true %>
+                    <% }else{ %>
+                    <div class="clearfix"></div>
+                    <div class="divisor-space"></div>
+                    <% } %>
+                    <% if(ship.rentType && ship.rentType != 1){ %>
+                    <div class="not_master"></div>
+                    <% } %>
+                    <div class="row prices <% if(d){ %>old<% } %>">
+                        <% ship.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                        <div class="col-xs-<%= 12 / ship.seasons[0].experiences[0].durations.length %> price">
+                            <div class="row <% if(12 / ship.seasons[0].experiences[0].durations.length == 4){ %> for-fix <% } %>">
+                                <h3 <% if(d){ %>class="old-price"
+                                        <% } %>
+                                ><span class="dollar"></span> <%= duration.price %> <span class="euro"></span></h3>
+                                <% if(duration.duration.unity == 0){ %>
+                                <% if(duration.duration.quantity == 4){ %>
+                                <p><%= texts.halfDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                <% } %>
+                                <% }else if(duration.duration.unity == 1){ %>
+                                <p><%= duration.duration.quantity %> <%= texts.globalDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                <% } %>
+                            </div>
+
+
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="clearfix"></div>
+                    <% if(parseFloat(ship.seasons[0].experiences[0].durations[0].discount) > 0){ %>
+                    <div class="row prices">
+                        <% ship.seasons[0].experiences[0].durations.forEach(function(duration){ %>
+                        <div class="col-xs-<%= 12 / ship.seasons[0].experiences[0].durations.length %> price">
+                            <div class="row <% if(12 / ship.seasons[0].experiences[0].durations.length == 4){ %> for-fix <% } %>">
+                                <h3>
+                                    <span class="dollar"></span> <%= duration.discount %>
+                                    <span class="euro"></span></h3>
+                                <% if(duration.duration.unity == 0){ %>
+                                <% if(duration.duration.quantity == 4){ %>
+                                <p><%= texts.halfDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_hours %></p>
+                                <% } %>
+                                <% }else if(duration.duration.unity == 1){ %>
+                                <p><%= duration.duration.quantity %> <%= texts.globalDay %></p>
+                                <% }else{ %>
+                                <p><%= duration.duration.quantity %> <%= texts.det_ship_week %></p>
+                                <% } %>
+                            </div>
+
+
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="clearfix"></div>
+                    <% } %>
+                </div>
+            </a>
+        </div>
+
+        <% if(index % 2 != 0){ %>
+        <div class="clearfix"></div>
+        <div class="divisor-space"></div>
+        <% }else{ %>
+        <div class="visible-xs divisor-space"></div>
+        <% } %>
+        <% }) %>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 list-align">
+            <div class="line-pagination"></div>
+            <div class="col-xs-12 pull-right ">
+                <% if(ships.last > 1 && ships.currentPage < ships.last){ %>
+                <button class="btn btn-primary see-more"><span
+                            class="glyphicon glyphicon-plus"></span> <%= texts.see_more_ships %></button>
+                <% } %>
+            </div>
+        </div>
+        <% }else{ %>
+        <h4 class="text-center margin-noting"><%= texts.search_filters %></h4>
+        <% } %>
+
+    </div>
+
+    <!-- /.container -->
+</div>

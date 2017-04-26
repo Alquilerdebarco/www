@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="rentShipApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>LOAD DATA</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/backend/gentelella/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <style>
+    /* Space out content a bit */
+    body {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    /* Everything but the jumbotron gets side spacing for mobile-first views */
+    .header,
+    .marketing,
+    .footer {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    /* Custom page header */
+    .header {
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+      /* Make the masthead heading the same height as the navigation */
+      .header h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px;
+        padding-bottom: 19px;
+      }
+
+    /* Custom page footer */
+    .footer {
+      padding-top: 19px;
+      color: #777;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    /* Custom container */
+    .container-narrow {
+      margin: 0 auto;
+      max-width: 700px;
+    }
+
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+    /* Main marketing message and sign up button */
+    .jumbotron {
+      text-align: center;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+    /* Supporting marketing content */
+    .marketing {
+      margin: 40px 0;
+    }
+
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+
+    /* Responsive: Portrait tablets and up */
+    @media screen and (min-width: 768px) {
+      /* Remove the padding we set earlier */
+      .header,
+      .marketing,
+      .footer {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      /* Space out the masthead */
+      .header {
+        margin-bottom: 30px;
+      }
+
+      /* Remove the bottom border on the jumbotron for visual effect */
+      .jumbotron {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body ng-hide="flase" class="ng-hide">
+
+  <div class="container-narrow" ng-controller="LoadData">
+    <div class="header">
+      <ul class="nav nav-pills pull-right">
+        <li><a style="padding: 0" href="/"><button class="btn btn-success btn-sm">FRONTEND</button></a></li>
+        <li><a style="padding: 0" href="/backoffice"><button class="btn btn-success btn-sm">BACKEND</button></a></li>
+      </ul>
+      <h3 class="text-muted">LoadData Tool</h3>
+    </div>
+    <div class="jumbotron" ng-show="lcomplete">
+      <h1>LOADING COMPLETED</h1>
+
+      <p><a class="btn btn-large btn-success" href="#" ng-click="initialize()">BACK</a></p>
+
+    </div>
+    <div ng-show="!showlog">
+      <div class="progress progress-striped active">
+        <div ng-class="{'progress-bar-danger':percent < 50,
+        'progress-bar-success':percent>75}" class="progress-bar" role="progressbar" style="{{'width:'+percent+'%'}}">
+            </div>
+
+      </div>
+
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Collection</th>
+            <th>Documents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="msg in msgLoad" ng-class="{'success':msg.accion=='insert','danger':msg.accion=='delete'}">
+            <td class="center">{{msg.coll.name|uppercase}}</td>
+            <td class="center"><span class="badge">{{msg.coll.cant}}</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <div ng-show="showlog">
+      <table class="table table-con
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Collections</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-center">
+              Load
+              <!--<a ng-href="javascript:;" ng-click="selectAll()">({{allSelected() ? 'non' : 'all'}})</a>-->
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="collection in collectionSave">
+            <td class="text-left">{{$index+1}}</td>
+            <td class="text-left">{{collection.name|uppercase}}</td>
+            <td class="text-right">{{collection.cant}}</td>
+            <td class="text-center"><input type="checkbox" ng-model="collection.active"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin: 10px auto;width: 100px">
+
+        <button type="button" class="btn btn-primary" ng-click="loadDataCollection()">Load</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2014 iSOFACT-Cuba</p>
+    </div>
+
+  </div>
+  <!-- /container -->
+  <!-- jQuery 2.0.2 -->
+  <script src="/backend/gentelella/js/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="/backend/gentelella/js/bootstrap.min.js"></script>
+
+  <script src="/common/js/angular.js"></script>
+  <script src="/common/js/async.js"></script>
+
+  <!--<script src="../common/js/angular-route.min.js"></script>-->
+  <script src="/common/js/angular-resource.js"></script>
+  <script src="/common/js/ui-bootstrap-tpls-0.13.1.min.js"></script>
+  <script src="/common/js/loadData.js"></script>
+</body>
+</html>

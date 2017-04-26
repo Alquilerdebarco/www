@@ -1,0 +1,642 @@
+<div ng-controller="textsCtrl" ng-cloak >
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                Textos
+            </h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div ng-cloak class="row ">
+        <div class="col-md-8 col-xs-12">
+            <div>
+                <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs " role="tablist">
+                            <li role="presentation"  ng-click="loadPagePhotos('user-guide')" class="active">
+                                <a  href="#tab_content1" id="home-tab" role="tab"
+                                   data-toggle="tab" aria-expanded="true">
+                                    Guía de Usuario
+                                </a>
+                            </li>
+                            <li role="presentation" ng-click="loadPagePhotos('sailor-guide')">
+                                <a  href="#tab_content2" role="tab" id="profile-tab"
+                                   data-toggle="tab" aria-expanded="false">
+                                    Guía del Navegante
+                                </a>
+                            </li>
+                            <li role="presentation"  ng-click="loadPagePhotos('about-us')">
+                                <a  href="#tab_content3" role="tab" id="profile-tab2"
+                                   data-toggle="tab" aria-expanded="false">
+                                    Quiénes somos
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a  href="#tab_content4" role="tab"
+                                   id="profile-tab3" data-toggle="tab" aria-expanded="false">
+                                    Condiciones del Servicio
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a  href="#tab_content5" role="tab"
+                                   id="profile-tab4" data-toggle="tab" aria-expanded="false">
+                                    Política de privacidad y cookies
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a  href="#tab_content7" role="tab"
+                                   id="profile-tab7" data-toggle="tab" aria-expanded="false">
+                                    Preguntas Frecuentes
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a  href="#tab_content6" role="tab"
+                                   id="profile-tab5" data-toggle="tab" aria-expanded="false">
+                                    Slider
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1"
+                                 aria-labelledby="home-tab">
+                                <div class="x_content">
+                                <br>
+                                <div class="clearfix"></div>
+                                 <div ng-cloak class="col-sm-3 col-md-3 col-xs-12 asper_ratio"
+                                     ng-repeat="photo in photos">
+                                    <div class="thumbnail ui-ribbon-container sailor-guide">
+                                        <div class="image view view-first  fix-imgc" style="height:90px">
+                                            <img style="width: 100%;height: 100% !important; display: block;"
+                                                 ng-src="{{'/service/media/'+ photo}}" alt="image">
+                                            <div class="mask">
+                                                <p>{{$index+1}}</p>
+                                                <div class="tools tools-bottom">
+                                                    <a href="#" ng-click="delPhotos(photo)"><i
+                                                                class="fa fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-cloak class="col-xs-12 asper_ratio" z>
+                                    <mdr-file url="/service/text/page/photos" model="modelPhoto" size="4"
+                                              data="{page:'user-guide'}"
+                                              limit="10" formats="'jpg,png'" multiple="true"
+                                              text="Arrastra o haz clic aquí (550px X 310px)"></mdr-file>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                    <form class="form-horizontal form-label-left" autocomplete="off">
+                                        <div>
+                                            <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                                <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                    ng-class="{'active':$index == selectTab}"
+                                                    ng-click="selectedTab($index)">
+                                                    <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                                </li>
+                                            </ul>
+                                            <div id="myTabContentInfo" class="tab-content">
+                                                <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                                     class="tab-pane fade "
+                                                     ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                     aria-labelledby="home-tab">
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12">
+                                                            Título
+                                                        </label>
+                                                        <div class="col-xs-12">
+                                                            <input required class="form-control"
+                                                                   ng-model="user_guide.components[0].text[$index].value"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12">
+                                                            Descripción
+                                                        </label>
+                                                        <div class="col-xs-12">
+                                                            <textarea ui-tinymce="tinymceOptions"
+                                                                      ng-model="user_guide.components[1].paragraph[$index].value"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12">
+                                                            Título (META)
+                                                        </label>
+                                                        <div class="col-xs-12">
+                                                            <input required class="form-control"
+                                                                   ng-model="user_guide.components[2].text[$index].value"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-xs-12">
+                                                            Descripción (META)
+                                                        </label>
+                                                        <div class="col-xs-12">
+                                                            <textarea required class="form-control"
+                                                                      ng-model="user_guide.components[3].paragraph[$index].value">
+                                                        </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                                <button ng-disabled="!validateForm()" ng-click="saveUserGuide()"
+                                                        type="button" class="btn btn-success"> Guardar
+                                                </button>
+                                                <button ng-click="" type="button" class="btn btn-primary">
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div ng-cloak role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                <br>
+                                <div class="clearfix"></div>
+                                 <div ng-cloak class="col-sm-3 col-md-3 col-xs-12 asper_ratio"
+                                     ng-repeat="photo in photos">
+                                    <div class="thumbnail ui-ribbon-container sailor-guide">
+                                        <div class="image view view-first  fix-imgc" style="height:90px">
+                                            <img style="width: 100%;height: 100% !important; display: block;"
+                                                 ng-src="{{'/service/media/'+ photo}}" alt="image">
+                                            <div class="mask">
+                                                <p>{{$index+1}}</p>
+                                                <div class="tools tools-bottom">
+                                                    <a href="#" ng-click="delPhotos(photo)"><i
+                                                                class="fa fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-cloak class="col-xs-12 asper_ratio" z>
+                                    <mdr-file url="/service/text/page/photos" model="modelPhoto" size="4"
+                                              data="{page:'sailor-guide'}"
+                                              limit="10" formats="'jpg,png'" multiple="true"
+                                              text="Arrastra o haz clic aquí (550px X 310px)"></mdr-file>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <form class="form-horizontal form-label-left">
+                                    <div>
+                                        <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                ng-class="{'active':$index == selectTab}"
+                                                ng-click="selectedTab($index)">
+                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContentInfo" class="tab-content">
+                                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                                 class="tab-pane fade "
+                                                 ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                 aria-labelledby="home-tab">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="sailor_guide.components[0].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="sailor_guide.components[1].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="sailor_guide.components[2].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea required class="form-control"
+                                                                  ng-model="sailor_guide.components[3].paragraph[$index].value">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                            <button ng-disabled="!validateForm()" ng-click="saveSailorGuide()"
+                                                    type="button" class="btn btn-success"> Guardar
+                                            </button>
+                                            <button ng-click="" type="button" class="btn btn-primary">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div ng-cloak role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                <br>
+                                <div class="clearfix"></div>
+                                <div ng-cloak class="col-sm-3 col-md-3 col-xs-12 asper_ratio"
+                                     ng-repeat="photo in photos">
+                                    <div class="thumbnail ui-ribbon-container">
+                                        <div class="image view view-first fix-imgc" style="height:90px">
+                                            <img style="width: 100%;height: 100% !important; display: block;"
+                                                 ng-src="{{'/service/media/'+ photo}}" alt="image">
+                                            <div class="mask">
+                                                <p>{{$index+1}}</p>
+                                                <div class="tools tools-bottom">
+                                                    <a href="#" ng-click="delPhotos(photo)"><i
+                                                                class="fa fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-cloak class="col-xs-12 asper_ratio" z>
+                                    <mdr-file url="/service/text/page/photos" model="modelPhoto" size="4"
+                                              data="{page:'about-us'}"
+                                              limit="10" formats="'jpg,png'" multiple="true"
+                                              text="Arrastra o haz clic aquí (550px X 310px)"></mdr-file>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <form class="form-horizontal form-label-left">
+                                    <div>
+                                        <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                ng-class="{'active':$index == selectTab}"
+                                                ng-click="selectedTab($index)">
+                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContentInfo" class="tab-content">
+                                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                                 class="tab-pane fade "
+                                                 ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                 aria-labelledby="home-tab">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="about_us.components[1].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="about_us.components[0].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Datos legales
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="about_us.components[2].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="about_us.components[3].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea required class="form-control"
+                                                                  ng-model="about_us.components[4].paragraph[$index].value">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                            <button ng-disabled="!validateForm()" ng-click="saveAboutUs()" type="button"
+                                                    class="btn btn-success"> Guardar
+                                            </button>
+                                            <button ng-click="" type="button" class="btn btn-primary">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+                                <br>
+                                <div class="clearfix"></div>
+                                <form class="form-horizontal form-label-left">
+                                    <div>
+                                        <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                ng-class="{'active':$index == selectTab}"
+                                                ng-click="selectedTab($index)">
+                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContentInfo" class="tab-content">
+                                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                                 class="tab-pane fade "
+                                                 ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                 aria-labelledby="home-tab">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="service_conditions.components[0].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="service_conditions.components[1].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="service_conditions.components[2].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea required class="form-control"
+                                                                  ng-model="service_conditions.components[3].paragraph[$index].value">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                            <button ng-disabled="!validateForm()" ng-click="saveServiceConditions()"
+                                                    type="button" class="btn btn-success"> Guardar
+                                            </button>
+                                            <button ng-click="" type="button" class="btn btn-primary">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="profile-tab">
+                                <br>
+                                <div class="clearfix"></div>
+                                <form class="form-horizontal form-label-left">
+                                    <div>
+                                        <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                ng-class="{'active':$index == selectTab}"
+                                                ng-click="selectedTab($index)">
+                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContentInfo" class="tab-content">
+                                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                                 class="tab-pane fade "
+                                                 ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                 aria-labelledby="home-tab">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="privacy_politics.components[0].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="privacy_politics.components[1].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="privacy_politics.components[2].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea required class="form-control"
+                                                                  ng-model="privacy_politics.components[3].paragraph[$index].value">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                            <button ng-disabled="!validateForm()" ng-click="savePrivacyPolitics()"
+                                                    type="button" class="btn btn-success"> Guardar
+                                            </button>
+                                            <button ng-click="" type="button" class="btn btn-primary">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content6" aria-labelledby="profile-tab">
+                                <br>
+                                <div class="clearfix"></div>
+                                <form class="form-horizontal form-label-left">
+                                    <div>
+                                        <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                ng-class="{'active':$index == selectTab}"
+                                                ng-click="selectedTab($index)">
+                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContentInfo" class="tab-content">
+                                            <br>
+                                            <div class="clearfix"></div>
+                                            <div ng-repeat="lang in $root.M_LANGUAGES" ng-init="companyIdx=$index"
+                                                 role="tabpanel" class="tab-pane fade "
+                                                 ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                 aria-labelledby="home-tab">
+                                                <div class="form-group" ng-repeat="cmp in slogans.components">
+                                                    <label class="col-xs-12">
+                                                        Slogan {{$index}}
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="cmp.text[companyIdx].value"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                            <button ng-disabled="!validateForm()" ng-click="saveSlogans()" type="button"
+                                                    class="btn btn-success"> Guardar
+                                            </button>
+                                            <button ng-click="" type="button" class="btn btn-primary">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content7" aria-labelledby="profile-tab">
+                                <br>
+                                <div class="clearfix"></div>
+                                <form class="form-horizontal form-label-left">
+                                    <div>
+                                        <ul id="myTabLaguage" class="nav nav-tabs " role="tablist">
+                                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                                ng-class="{'active':$index == selectTab}"
+                                                ng-click="selectedTab($index)">
+                                                <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContentInfo" class="tab-content">
+                                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                                 class="tab-pane fade "
+                                                 ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                                 aria-labelledby="home-tab">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="frequently_questions.components[1].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions"
+                                                                  ng-model="frequently_questions.components[0].paragraph[$index].value"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Título (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <input required class="form-control"
+                                                               ng-model="frequently_questions.components[2].text[$index].value"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">
+                                                        Descripción (META)
+                                                    </label>
+                                                    <div class="col-xs-12">
+                                                        <textarea required class="form-control"
+                                                                  ng-model="frequently_questions.components[3].text[$index].value">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 active">
+                                            <button ng-disabled="!validateForm()" ng-click="saveFrequentlyQuestions()"
+                                                    type="button" class="btn btn-success"> Guardar
+                                            </button>
+                                            <button ng-click="" type="button" class="btn btn-primary">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="table-responsive">
+                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title">texto</th>
+                                    <th class="column-title">Menú</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="even" ng-cloak ng-repeat="mt in menuText|orderBy: 'pos'" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                    <td class=" ">{{getNameText(mt.group)}}</td>
+                                    <td class=" ">
+                                        <div ng-show="mt.pos!=null && mt.pos>=0">
+                                            <code>{{mt.pos+1}}</code> 
+                                            <i ng-click="menu(mt,'up')"   class="fa fa-long-arrow-up pointer"   ng-show="mt.pos > 0"></i> 
+                                            <i ng-click="menu(mt,'down')" class="fa fa-long-arrow-down pointer" ng-show="!mt.last"></i>
+                                            <i ng-click="menu(mt,'ban')"  class="fa fa-ban pointer"></i>
+                                        </div>
+                                        <div ng-show="mt.pos == null">
+                                            &nbsp; &nbsp; <i ng-show="!mt.pos" ng-click="menu(mt,'show')" class="fa fa-circle-o pointer"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+</div>

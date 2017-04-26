@@ -1,0 +1,238 @@
+<div ng-controller="profileCtrl" ng-cloak >
+    <div ng-cloak ng-show="contetShow==1" ng-cloak class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2>Datos de factura</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="alert alert-info alert-dismissible fade in active contain-sm"
+                         role="alert">
+                        <i class="fa fa-lightbulb-o"></i> Este email será el usuario del backoffice de Alquilerdebarco.com
+                    </div>
+                    <div class="clearfix"></div>
+                    <form  id="demo-form2" data-parsley-validate=""
+                          class="form-horizontal form-label-left" novalidate=""
+                          autocomplete="off" name="invoiceForm1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 " for="first-name">Nombre fiscal
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.fiscalName" type="text" required="required"
+                                       ng-validate="defaultValidationStrategy"
+                                       class="form-control col-sm-7 required" data-parsley-id="1025">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">NIF
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.nifCif" type="text" required="required"
+                                       ng-validate="defaultValidationStrategy"
+                                       class="form-control col-md-7 col-xs-12 required" data-parsley-id="1025">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Swift
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.swift" type="text"
+                                       class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">IBAN
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.iban" type="text"
+                                       class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.email"  required="required"
+                                       ng-validate="emailValidationStrategy"
+                                       class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                                       data-parsley-id="9114">
+                                <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Móvil</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.mobile"  ng-validate="phoneVValidationStrategy"
+                                       class="form-control col-md-7 col-xs-12 required" type="text"
+                                       data-parsley-id="9114">
+                                <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Dirección Fiscal
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <textarea ng-model="user.invoice.address" ng-validate="defaultValidationStrategy"
+                                          class="date-picker form-control col-md-7 col-xs-12 required"
+                                          required="required"
+                                          type="text" data-parsley-id="8176">
+
+                                </textarea>
+                                <ul class="parsley-errors-list" id="parsley-id-8176"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Código
+                                Postal</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.postalCode"  required="required"
+                                       ng-validate="defaultValidationStrategy"
+                                       class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                                       data-parsley-id="9114">
+                                <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.city"  required="required"
+                                       ng-validate="defaultValidationStrategy"
+                                       class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                                       data-parsley-id="9114">
+                                <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">País</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="user.invoice.country"  required="required"
+                                       ng-validate="defaultValidationStrategy"
+                                       class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                                       data-parsley-id="9114">
+                                <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <!--<button type="button" class="btn btn-primary">Cancelar</button>-->
+                                <button ng-click="invoiceFunc(1)" type="button"
+                                        class="btn btn-success"> Guardar
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!--<form  id="demo-form2" data-parsley-validate=""-->
+                          <!--class="form-horizontal form-label-left" novalidate=""-->
+                          <!--autocomplete="off" name="invoiceForm2">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">DNI-->
+                            <!--</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.dni" type="text" required="required"-->
+                                       <!--ng-validate="defaultValidationStrategy"-->
+                                       <!--class="form-control col-md-7 col-xs-12 required" data-parsley-id="1025">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Swift-->
+                            <!--</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.swift" type="text"-->
+                                       <!--class="form-control col-md-7 col-xs-12">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">IBAN-->
+                            <!--</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.iban" type="text"-->
+                                       <!--class="form-control col-md-7 col-xs-12">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.email"  required="required"-->
+                                       <!--ng-validate="emailValidationStrategy"-->
+                                       <!--class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"-->
+                                       <!--data-parsley-id="9114">-->
+                                <!--<ul class="parsley-errors-list" id="parsley-id-9114"></ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Móvil</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.mobile"  required="required"-->
+                                       <!--ng-validate="phoneValidationStrategy"-->
+                                       <!--class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"-->
+                                       <!--data-parsley-id="9114">-->
+                                <!--<ul class="parsley-errors-list" id="parsley-id-9114"></ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-md-3 col-sm-3 col-xs-12">Dirección-->
+                            <!--</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+
+                                <!--<textarea ng-model="user.invoice.address" ng-validate="defaultValidationStrategy"-->
+                                          <!--class="date-picker form-control col-md-7 col-xs-12 required"-->
+                                          <!--required="required"-->
+                                          <!--type="text" data-parsley-id="8176">-->
+
+                                <!--</textarea>-->
+                                <!--<ul class="parsley-errors-list" id="parsley-id-8176"></ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Código-->
+                                <!--Postal</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.postalCode"  required="required"-->
+                                       <!--ng-validate="defaultValidationStrategy"-->
+                                       <!--class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"-->
+                                       <!--data-parsley-id="9114">-->
+                                <!--<ul class="parsley-errors-list" id="parsley-id-9114"></ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.city"  required="required"-->
+                                       <!--ng-validate="defaultValidationStrategy"-->
+                                       <!--class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"-->
+                                       <!--data-parsley-id="9114">-->
+                                <!--<ul class="parsley-errors-list" id="parsley-id-9114"></ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">País</label>-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                <!--<input ng-model="user.invoice.country"  required="required"-->
+                                       <!--ng-validate="defaultValidationStrategy"-->
+                                       <!--class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"-->
+                                       <!--data-parsley-id="9114">-->
+                                <!--<ul class="parsley-errors-list" id="parsley-id-9114"></ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="ln_solid"></div>-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">-->
+                                <!--&lt;!&ndash;<button type="button" class="btn btn-primary">Cancelar</button>&ndash;&gt;-->
+                                <!--<button ng-click="invoiceFunc(2)" type="button"-->
+                                        <!--class="btn btn-success"> Guardar-->
+                                <!--</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

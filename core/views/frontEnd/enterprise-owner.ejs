@@ -1,0 +1,85 @@
+<div class="container margin-pages">
+    <div class="row" id="hidden_me">
+        <div class="enterp-form">
+            <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 shipowner-card">
+                    <div class="title">
+                        <h4><%= texts.enterp_title %></h4>
+
+                        <p><%= texts.enterp_title_sub %></p>
+                    </div>
+                    <div class="suggestions">
+                        <div><%- texts.enterp_texts%></div>
+
+                    </div>
+                </div>
+                <div class="private-card col-xs-12">
+                    <div class="title">
+                        <h4><%= texts.priv_title %></h4>
+
+                        <p><%= texts.priv_title_sub %></p>
+                    </div>
+                    <div class="suggestions">
+                        <div><%- texts.priv_text%></div>
+                    </div>
+                    <div class="text-center"><a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_private %>"
+                                                class="btn btn-primary"><%= texts.priv_button %></a></div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <form id="emp-form" class="col-xs-12 contact-form">
+                    <h4><%= texts.enterp_form_title %></h4>
+
+                    <div class="form-group">
+                        <select id="emp_prop" class="form-control required" name="emp_prop">
+                            <option value=""><%= texts.enterp_form_shipowner %></option>
+                            <option value="0"><%= texts.enterp_type_part%></option>
+                            <option value="1"><%= texts.enterp_type_enterp%></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="emp_name" class="form-control required" name="emp_name"
+                               placeholder="<%= texts.your_name %>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="emp_contact" class="form-control required" name="emp_contact"
+                               placeholder="<%= texts.enterp_form_lastname %>">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="emp_email" class="form-control required" name="emp_email"
+                               placeholder="Email">
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" id="emp_phone" class="form-control required phone" name="emp_phone"-->
+                               <!--minlength="6" placeholder="<%= texts.phone %>">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <input type="number" id="emp_mobile"  class="form-control required" name="emp_mobile"
+                                placeholder="<%= texts.enterp_form_phone %>" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="emp_web" class="form-control" name="emp_web"
+                               placeholder="Web">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="emp_address" class="form-control required" name="emp_address"
+                               placeholder="<%= texts.city %>">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="emp_pass" class="form-control required" minlength="6"
+                               name="emp_pass" placeholder="<%= texts.enterp_form_pass %>">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="emp_pass_confirm" minlength="6"
+                               class="form-control required" name="emp_pass_confirm"
+                               placeholder="<%= texts.enterp_form_confirm %>">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" id="emp-send"><%= texts.enterp_form_buttom %></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

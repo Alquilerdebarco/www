@@ -1,0 +1,69 @@
+<div class="container margin-pages">
+    <div class="row" id="hidden_me">
+        <div class="priv_form">
+            <div class="col-xs-12 user-guide">
+                <h4 class="title"><%= texts.rent_title %></h4>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="private-card col-xs-12">
+                    <div class="title">
+                        <h4><%= texts.priv_title %></h4>
+
+                        <p><%= texts.priv_title_sub %></p>
+                    </div>
+                    <div class="suggestions">
+                        <div><%- texts.priv_text %></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 contact-form">
+                <form id="part-form">
+                    <h4><%= texts.priv_form_title %></h4>
+
+                    <div class="form-group">
+                        <input type="text" id="part_name" class="form-control required"
+                               placeholder="<%= texts.your_name %>" required name="part_name">
+                    </div>
+                    <div class="form-group">
+                        <select id="part_mark" class="form-control required" required name="part_mark">
+                            <option value=""><%= texts.priv_specif_det %></option>
+                            <% shipType.forEach(function (type, i) { %>
+                            <option value="<%= type.id %>"><%= type.name[0].value%></option>
+                            <%})%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="part_detail" class="form-control required"
+                               placeholder="<%= texts.priv_detail %>" required name="part_detail">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="part_eslora" class="form-control required"
+                               placeholder="<%= texts.priv_length %> (<%= texts.in %> <%= texts.meters %>) Ej. 10,5" required name="part_eslora">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="part_local" class="form-control required"
+                               placeholder="<%= texts.city %>" required name="part_local">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="part_email" class="form-control required"
+                               placeholder="Email" required name="part_email">
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" id="part_phone" class="form-control required phone"-->
+                               <!--placeholder="<%= texts.priv_phone %>" required-->
+                               <!--minlength="6" name="part_phone">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <input type="number" id="part_mobile" class="form-control required"
+                               placeholder="<%= texts.mobile %>" required
+                               minlength="6" name="part_mobile">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" id="part-send"><%= texts.priv_form_buttom %></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

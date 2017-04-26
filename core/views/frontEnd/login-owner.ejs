@@ -1,0 +1,56 @@
+<div class="container margin-pages">
+    <div class="row" id="hidden_me">
+        <div class="enterp-form">
+            <div class="col-xs-12 col-sm-offset-4 col-sm-4 panel">
+                <form id="login-form" autocomplete="off">
+                    <h4><%-texts.login_user%></h4>
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-control required" name="email"
+                               placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-control required" minlength="6"
+                               name="password" placeholder="<%- texts.placeholder_pass %>">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="remember_here"><%-texts.remember_me%>
+                        </label>
+                    </div>
+                    <div class="form-group text-center">
+                        <button role="button" class="btn  btn-primary  submit login-bnt"
+                                id="user-login-button"><%-texts.button_login%></button>
+                    </div>
+                    <div class="form-group text-center">
+                        <div><a href="#" id="lost-pass"><%- texts.forgot_pass %></a></div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="text-center"><a href="/<%= language %>/<%= texts.slug_enterprise %>"
+                                                    class="btn btn-primary"><%-texts.register_now%></a></div>
+                    </div>
+                    <a href="/<%= language %>">< <%= texts.go_back %></a>
+                </form>
+                <form id="reset_pass-form" novalidate autocomplete="off" class="hidden">
+                    <h4><%-texts.recover_password%></h4>
+                    <div class="form-group">
+                        <!--<label for="reset_pass_email" class="control-label asterisk"><%- texts.placeholder_email %></label>-->
+                        <input id="reset_pass_email" name="reset_pass_email" type="text" class="form-control required"
+                               placeholder="Email"/>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center form-group">
+                        <button role="button" class="btn  btn-primary  submit login-bnt"
+                                id="submit_reset_pass"><%- texts.send %></button>
+                    </div>
+                    <div class="text-center form-group">
+                        <a id="back-form-group" href="#" ><%-texts.already_member%></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--<div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2">-->
+            <!--<%- include('contact') %>-->
+            <!--<%- include('faq') %>-->
+        <!--</div>-->
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <!--<a href="/" class="site_title" target="_blank"><img src="/backend/gentelella/images/img_logo_alquilerdebarco.png">-->
+            <a href="/" class="site_title" target="_blank"><img width="40" height="40" src="/backend/gentelella/images/img_60_menu_logo.png">
+                <span>Alquiler<span style="color: #5accfe">de</span>Barco<span style="color: #5accfe">.com</span></span></a>
+        </div>
+        <div class="clearfix"></div>
+        <!-- menu prile quick info -->
+        <div class="profile" ng-cloak>
+            <div class="profile_pic">
+                <img ng-src="{{$root.M_USER.avatar ? '/service/media/'+$root.M_USER.avatar : '/backend/gentelella/images/user.png'}}" alt="..."
+                    class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+                <span><%= texts.general.greet_sideMenu %>,</span>
+                <h2>
+                    <%= M_USER.name %>
+                </h2>
+            </div>
+        </div>
+        <!-- /menu prile quick info -->
+        <br/>
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <h3>
+                    <%= texts.general.general_sideMenu %>
+                </h3>
+                <ul class="nav side-menu">
+                    <% if (M_USER.permissions.isAdmin == true) { %>
+                        <li class="<% if (page == 'index') { %> nv active  <% } %>" id="home-side-menu">
+                            <a href="/backoffice"><i class="fa fa-home"></i> <%= texts.general.home_SideMenu %>
+                        </a>
+                        </li>
+                        <% } %>
+                            <% if (M_USER.permissions.isAdmin == true || M_USER.permissions.isShipOwner == true) { %>
+                                <li class="<% if (page == 'boats') { %> nv active  <% } %>" id="boats-side-menu">
+                                    <a href="/backoffice/boats">
+                                        <i class="fa fa-anchor"></i> Barcos
+                                    </a>
+                                </li>
+                                <% } %>
+                                    <% if(M_USER.permissions.isAdmin == true) { %>
+                                        <li class="<% if (page == 'requests') { %> nv active  <% } %>" id="requests-side-menu">
+                                            <a href="/backoffice/requests">
+                                                <i class="fa fa-send"></i> Peticiones
+                                            </a>
+                                        </li>
+                                        <li class="<% if (page == 'contact') { %> nv active  <% } %>" id="contact-side-menu">
+                                            <a href="/backoffice/contact">
+                                                <i class="fa fa-user"></i> Datos de usuario
+                                            </a>
+                                        </li>
+                                        <% } %>
+                                            <% if (M_USER.permissions.isShipOwner == true) { %>
+                                                <li class="<% if (page == 'requests') { %> nv active  <% } %>" id="requests-side-menu">
+                                                    <a href="/backoffice/requests">
+                                                        <i class="fa fa-send"></i> Peticiones
+                                                    </a>
+                                                </li>
+                                                <li class="<% if (page == 'contact') { %> nv active  <% } %>" id="contact-side-menu">
+                                                    <a href="/backoffice/contact">
+                                                        <i class="fa fa-user"></i> Datos de propietario
+                                                    </a>
+                                                </li>
+                                                <% } %>
+                                                    <% if (M_USER.permissions.isAdmin == false && M_USER.permissions.isShipOwner == false) { %>
+                                                        <li class="<% if (page == 'contact') { %> nv active  <% } %>" id="contact-side-menu">
+                                                            <a href="/backoffice/contact">
+                                                                <i class="fa fa-user"></i> Datos de usuario
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+                                                            <% if (M_USER.permissions.isAdmin == false) { %>
+                                                                <li class="<% if (page == 'invoice') { %> nv active  <% } %>" id="contact-side-menu">
+                                                                    <a href="/backoffice/invoice">
+                                                                        <i class="fa fa-globe"></i> Datos de facturación
+                                                                    </a>
+                                                                </li>
+                                                                <%}%>
+                                                                    <% if (M_USER.permissions.isAdmin == false) { %>
+                                                                        <li class="<% if (page == 'invoices') { %> nv active  <% } %>" id="contact-side-menu">
+                                                                            <a href="/backoffice/invoices">
+                                                                                <i class="fa fa-money"></i>
+                                                                                <% if(M_USER.permissions.isShipOwner == true) { %> Facturas Propietarios <% } %>
+                                                                                <% if(M_USER.permissions.isShipOwner == false) { %> Facturas Usuarios <% } %>
+                                                                            </a>
+                                                                        </li>
+                                                                        <%}%>
+                                                                            <% if (M_USER.permissions.isAdmin != true) { %>
+                                                                                <li id="front-side-menu">
+                                                                                    <a href="/" target="_blank">
+                                                                                        <!--<img src="/backend/gentelella/images/img_logo_alquilerdebarco.png" style="height: 18px;margin-right: 8px;margin-top: -5px;">Ir a Alquiler<span style="color: #5accfe">de</span>Barco<span style="color: #5accfe">.com</span>-->
+                                                                                        <img src="/backend/gentelella/images/img_60_menu_logo.png" style="height: 18px;margin-right: 8px;margin-top: -5px;">Ir a Alquiler<span class="hidden-xs hidden-sm" style="color: #5accfe">de</span><span class="hidden-md hidden-lg"> de </span>Barco<span class="hidden-xs hidden-sm" style="color: #5accfe">.com</span>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li id="out-side-menu">
+                                                                                    <a href="/Blogout">
+                                                                                        <i class="fa fa-sign-out"></i> Cerrar
+                                                                                        sesión
+                                                                                    </a>
+                                                                                </li>
+                                                                                <% } %>
+                </ul>
+            </div>
+            <% if (M_USER.permissions.isAdmin == true) { %>
+                <%- include('admin-menu', {texts: texts}) %>
+            <% } %>
+        </div>
+        <!-- /sidebar menu -->
+    </div>
+</div>

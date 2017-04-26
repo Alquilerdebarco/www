@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rentShipApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/common/img/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Bootstrap core CSS -->
+    <!--
+    <link href="/backend/gentelella/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/fonts/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/animate.min.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/custom.css" rel="stylesheet"/>
+    <link href="/backend/css/style.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/icheck/flat/green.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/floatexamples.css" rel="stylesheet" type="text/css"/>
+    <link href="/backend/gentelella/css/select/select2.min.css" rel="stylesheet"/>
+    <link href="/common/js/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/jspdf/grids-responsive-min.css" rel="stylesheet"/>
+    <link href="/backend/gentelella/css/jspdf/pure-min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/common/css/image-crop-styles.css"/>
+    <link rel="stylesheet" href="/common/libs/mdr/mdr-file.min.css"/>
+    -->
+    <!--[if lt IE 9]>-->
+    <!--<script src="/assets/js/ie8-responsive-file-warning.js"></script>-->
+    <script src="/common/js/html5shiv.js"></script>
+    <script src="/common/js/respond.min.js"></script>
+    <!--<![endif]&ndash;&gt;-->
+    <link href="/binBack/main.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md" ng-controller="MainCtrl">
+<div class="container body">
+    <% if((!M_USER.complete && (M_USER.permissions.isShipOwner))){ %>
+
+    <% }else{ %>
+    <% if((!M_USER.accept && (M_USER.permissions.isShipOwner))){ %>
+    <%- include('contract',{user: M_USER}) %>
+    <% }else{ %>
+    <div class="main_container">
+        <%- include('side-menu', {title: title,texts: texts}) %>
+        <%- include('top-menu',{user: M_USER}) %>
+        </br></br>
+        <!--<div class="clearfix"></div>-->
+        <div class="right_col" role="main">
+            <% if (page == 'index') { %>
+            <%- include('../index') %>
+            <% } %>
+            <% if (page == 'users') { %>
+            <%- include('../users') %>
+            <% } %>
+            <% if (page == 'owners') { %>
+            <%- include('../owners') %>
+            <% } %>
+            <% if (page == 'particulars') { %>
+            <%- include('../particulars') %>
+            <% } %>
+            <% if (page == 'subscripts') { %>
+            <%- include('../subscripts') %>
+            <% } %>
+            <% if (page == 'languages') { %>
+            <%- include('../languages') %>
+            <% } %>
+            <% if (page == 'localizations') { %>
+            <%- include('../localizations') %>
+            <% } %>
+            <% if (page == 'boats') { %>
+            <%- include('../boats', {texts: texts, durations:durations,experiences:experiences,user:M_USER}) %>
+            <% } %>
+            <% if (page == 'profile') { %>
+            <%- include('../profile') %>
+            <% } %>
+            <% if (page == 'contact') { %>
+            <%- include('../contact') %>
+            <% } %>
+            <% if (page == 'statistics') { %>
+            <%- include('../statistics') %>
+            <% } %>
+            <% if (page == 'invoice') { %>
+            <%- include('../invoice') %>
+            <% } %>
+            <% if (page == 'texts') { %>
+            <%- include('../texts') %>
+            <% } %>
+            <% if (page == 'tool') { %>
+            <%- include('../tool') %>
+            <% } %>
+            <% if (page == 'configuration') { %>
+            <%- include('../configuration') %>
+            <script src="/common/js/timezone.js"></script>
+            <% } %>
+            <% if (page == 'notifications') { %>
+            <%- include('../notifications') %>
+            <% } %>
+            <% if (page == 'requests') { %>
+            <%- include('../requests', {durations:durations,experiences:experiences}) %>
+            <% } %>
+            <!--<% if (page == 'messages') { %>-->
+            <!--<%- include('../messages') %>-->
+            <!--<% } %>-->
+            <% if (page == 'offers') { %>
+            <%- include('../offers') %>
+            <% } %>
+            <% if (page == 'invoices') { %>
+            <%- include('../invoices') %>
+            <% } %>
+            <% if (page == 'landings') { %>
+            <%- include('../landings') %>
+            <% } %>
+        </div>
+        <div class="clearfix"></div>
+        <%- include('footer') %>
+    </div>
+    <% } %>
+    <% } %>
+</div>
+<div class="modal fade" id="compose-modal-contact" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" ng-controller="profileCtrl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="x_title">
+                    <h2>Datos de factura</h2>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <form ng-show="showProfileEnterpise" id="demo-form2" data-parsley-validate=""
+                  class="form-horizontal form-label-left" novalidate=""
+                  autocomplete="off" name="invoiceForm1">
+                <div class="form-group">
+                    <label class="control-label col-sm-3 " for="first-name">Nombre fiscal
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.fiscalName" type="text" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-sm-7 required" data-parsley-id="1025">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">CIF
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.nifCif" type="text" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" data-parsley-id="1025">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Swift
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.swift" type="text"
+                               class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">IBAN
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.iban" type="text"
+                               class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.email" id="middle-name" required="required"
+                               ng-validate="emailValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Teléfono</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.telephone" id="middle-name" required="required"
+                               ng-validate="phoneValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Dirección
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <textarea ng-model="user.invoice.address" ng-validate="defaultValidationStrategy"
+                                          class="date-picker form-control col-md-7 col-xs-12 required"
+                                          required="required"
+                                          type="text" data-parsley-id="8176">
+
+                                </textarea>
+                        <ul class="parsley-errors-list" id="parsley-id-8176"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Código
+                        Postal</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.postalCode" id="middle-name" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.city" id="middle-name" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">País</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.country" id="middle-name" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <!--<button type="button" class="btn btn-primary">Cancelar</button>-->
+                        <button ng-click="invoiceFunc(1)" type="button"
+                                class="btn btn-success"> Guardar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+            <form ng-show="!showProfileEnterpise" id="demo-form2" data-parsley-validate=""
+                  class="form-horizontal form-label-left" novalidate=""
+                  autocomplete="off" name="invoiceForm2">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">DNI
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.dni" type="text" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" data-parsley-id="1025">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Swift
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.swift" type="text"
+                               class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">IBAN
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.iban" type="text"
+                               class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.email" id="middle-name" required="required"
+                               ng-validate="emailValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Teléfono</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.telephone" id="middle-name" required="required"
+                               ng-validate="phoneValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Dirección
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <textarea ng-model="user.invoice.address" ng-validate="defaultValidationStrategy"
+                                          class="date-picker form-control col-md-7 col-xs-12 required"
+                                          required="required"
+                                          type="text" data-parsley-id="8176">
+
+                                </textarea>
+                        <ul class="parsley-errors-list" id="parsley-id-8176"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Código
+                        Postal</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.postalCode" id="middle-name" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.city" id="middle-name" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">País</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input ng-model="user.invoice.country" id="middle-name" required="required"
+                               ng-validate="defaultValidationStrategy"
+                               class="form-control col-md-7 col-xs-12 required" type="text" name="middle-name"
+                               data-parsley-id="9114">
+                        <ul class="parsley-errors-list" id="parsley-id-9114"></ul>
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <!--<button type="button" class="btn btn-primary">Cancelar</button>-->
+                        <button ng-click="invoiceFunc(2)" type="button"
+                                class="btn btn-success"> Guardar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="compose-modal-contract" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" ng-controller="profileCtrl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="x_title">
+                    <h2>Contrato</h2>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            CONTRATO
+        </div>
+    </div>
+</div>
+
+<script>
+  var M_USER = <%- JSON.stringify(M_USER) %>;
+  var M_LANGUAGES = <%- JSON.stringify(M_LANGUAGES) %>;
+  var M_LANGUAGES = <%- JSON.stringify(M_LANGUAGES) %>;
+  var TODAY = <%- JSON.stringify(TODAY) %>;
+  var TEXTS = <%- JSON.stringify(texts) %>;
+  var NEWMESSAGE = <%- JSON.stringify(newMessages) %>;
+  var PRODUCTION = <%- JSON.stringify(production) %>;
+  var TIMEZONE = <%- JSON.stringify(timezone) %>;
+</script>
+<!--
+<script src="/backend/gentelella/js/jquery.min.js"></script>
+<script src="/backend/gentelella/js/bootstrap.min.js"></script>
+<script src="/common/js/angular.js"></script>
+<script src="/common/js/angular-sanitize.min.js"></script>
+<script src="/common/js/angular-resource.min.js"></script>
+<script src="/common/js/angular-locale_es-es.js"></script>
+
+
+<script src="/common/libs/mdr/mdr-file.min.js"></script>
+<script src="/common/js/numeral.min.js"></script>
+<script src="/common/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+<script src="/common/js/ngValidate.js"></script>
+<script src="/common/js/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/common/js/tinymce.js"></script>
+<script src="/backend/gentelella/js/input_mask/jquery.inputmask.bundle.min.js"></script>
+<script src="/backend/gentelella/js/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="/backend/gentelella/js/icheck/icheck.min.js"></script>
+<script src="/backend/gentelella/js/moment.min.js"></script>
+<script src="/backend/gentelella/js/datepicker/daterangepicker.js"></script>
+<script src="/common/js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/common/js/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+<script src="/backend/gentelella/js//moris/raphael-min.js"></script>
+<script src="/backend/gentelella/js//moris/morris.min.js"></script>
+<script src="/common/js/angular-file-upload.min.js"></script>
+<script src="/backend/gentelella/js/parsley/parsley.min.js"></script>
+<script src="/backend/gentelella/js/textarea/autosize.min.js"></script>
+<script src="/backend/gentelella/js/languages.min.js"></script>
+<script src="/backend/gentelella/js/jquery.validate.min.js"></script>
+<script src="/common/js/dropzone.js"></script>
+<script src="/backend/gentelella/js/flot/jquery.flot.js"></script>
+<script src="/backend/gentelella/js/flot/jquery.flot.pie.js"></script>
+<script src="/backend/gentelella/js/flot/jquery.flot.time.min.js"></script>
+<script src="/backend/gentelella/js/flot/date.js"></script>
+<script src="/backend/gentelella/js/flot/jquery.flot.spline.js"></script>
+<script src="/backend/gentelella/js/flot/jquery.flot.stack.js"></script>
+<script src="/backend/gentelella/js/flot/curvedLines.js"></script>
+<script src="/backend/gentelella/js/validator/validator.js"></script>
+<script src="/backend/gentelella/js/notify/pnotify.core.js"></script>
+<script src="/backend/gentelella/js/notify/pnotify.buttons.js"></script>
+<script src="/backend/gentelella/js/notify/pnotify.nonblock.js"></script>
+<script src="/common/js/image-crop.js"></script>
+
+<script src="/backend/gentelella/js/colorpicker/bootstrap-colorpicker.js"></script>
+<script src="/backend/gentelella/js/fastclick/lib/fastclick.js"></script>
+<script src="/backend/gentelella/js/nprogress/nprogress.js"></script>
+<script src="/backend/gentelella/js/custom.js"></script>
+<script src="/backend/gentelella/js/jspdf/jspdf.js"></script>
+<script src="/backend/gentelella/js/jspdf/jspdf.plugin.addimage.js"></script>
+<script src="/backend/gentelella/js/jspdf/jspdf.plugin.standard_fonts_metrics.js"></script>
+<script src="/backend/gentelella/js/jspdf/jspdf.plugin.from_html.js"></script>
+<script src="/backend/gentelella/js/jspdf/jspdf.plugin.split_text_to_size.js"></script>
+<script src="/backend/js/app.js"></script>
+<script src="/backend/js/services.js"></script>
+<script src="/backend/js/Controllers/users.js"></script>
+<script src="/backend/js/Controllers/owners.js"></script>
+<script src="/backend/js/Controllers/languages.js"></script>
+<script src="/backend/js/Controllers/localizations.js"></script>
+<script src="/backend/js/Controllers/ships.js"></script>
+<script src="/backend/js/Controllers/profile.js"></script>
+<script src="/backend/js/Controllers/texts.js"></script>
+<script src="/backend/js/Controllers/configurations.js"></script>
+<script src="/backend/js/Controllers/notifications.js"></script>
+<script src="/backend/js/Controllers/requests.js"></script>
+<script src="/backend/js/Controllers/index.js"></script>
+<script src="/backend/js/Controllers/offers.js"></script>
+<script src="/backend/js/Controllers/invoice.js"></script>
+<script src="/backend/js/Controllers/landing.js"></script>
+<script src="/backend/js/Controllers/particulars.js"></script>
+<script src="/backend/js/Controllers/subscripts.js"></script>
+<script src="/backend/js/phoneValidation.js"></script>
+-->
+<script src="/binBack/main.min.js"></script>
+<script src="/common/js/ngValidate.js"></script>
+
+</body>
+
+</html>

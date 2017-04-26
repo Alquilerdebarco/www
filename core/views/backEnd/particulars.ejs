@@ -1,0 +1,126 @@
+<div ng-cloak ng-controller="particularCtrl">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                Particulares
+            </h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input ng-model="filter_email" ng-change="listParticulars()" type="text" class="form-control" placeholder="Buscar por...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                          <i class="fa fa-search"></i>
+                      </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th style="min-width: 90px;" class="column-title pointer" ng-click="changeSortOptions('name')">
+                                        <div>Nombre
+                                            <i ng-show="sortOptions.field == 'name' && sortOptions.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                            <i ng-show="sortOptions.field == 'name' && sortOptions.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                            <i ng-show="sortOptions.field != 'name'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                        </div>
+                                    </th>
+                                    <th style="min-width: 155px;" class="column-title pointer" ng-click="changeSortOptions('registerDate')">
+                                        <div>Fecha de Registro
+                                            <i ng-show="sortOptions.field == 'registerDate' && sortOptions.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                            <i ng-show="sortOptions.field == 'registerDate' && sortOptions.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                            <i ng-show="sortOptions.field != 'registerDate'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                        </div>
+                                    </th>
+                                    <th style="min-width: 90px;" class="column-title pointer" ng-click="changeSortOptions('specifications')">
+                                        <div>Barco
+                                            <i ng-show="sortOptions.field == 'specifications' && sortOptions.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                            <i ng-show="sortOptions.field == 'specifications' && sortOptions.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                            <i ng-show="sortOptions.field != 'specifications'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                        </div>
+                                    </th>
+                                    <th class="column-title">Eslora</th>
+                                    <th style="min-width: 130px;" class="column-title pointer" ng-click="changeSortOptions('area')">
+                                        <div>Ciudad
+                                            <i ng-show="sortOptions.field == 'area' && sortOptions.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                            <i ng-show="sortOptions.field == 'area' && sortOptions.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                            <i ng-show="sortOptions.field != 'area'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                        </div>
+                                    </th>
+                                    <th style="min-width: 155px;" class="column-title pointer" ng-click="changeSortOptions('email')">
+                                        <div>Email
+                                            <i ng-show="sortOptions.field == 'email' && sortOptions.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                            <i ng-show="sortOptions.field == 'email' && sortOptions.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                            <i ng-show="sortOptions.field != 'email'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                        </div>
+                                    </th>
+                                    <!--<th class="column-title">Teléfono</th>-->
+                                    <th class="column-title">Móvil</th>
+                                    <th class="column-title">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="even pointer" ng-cloak ng-repeat="part in particulars" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                    <td class=" ">{{part.name}}</td>
+                                    <td>{{part.registerDate|date:'dd/MM/yyyy'}}</td>
+                                    <td class=" ">{{part.specifications.name[0].value}}</td>
+                                    <td class=" ">{{part.dimension}}</td>
+                                    <td class=" ">{{part.area}}</td>
+                                    <td class=" ">{{part.email}}</td>
+                                    <!--<td class=" ">{{part.telephone}}</td>-->
+                                    <td class=" ">{{part.mobile.length?part.mobile:"***********"}}</td>
+                                    <td class=" ">
+                                        <button ng-click="status(part)" ng-show="!part.status" class="btn btn-success btn-xs ">
+                                            Nuevo
+                                        </button>
+                                        <button ng-click="status(part)" ng-show="part.status" class="btn btn-info btn-xs ">
+                                            Revisado
+                                        </button>
+                                        <button ng-click="select(part)" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".remove-item">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                        class="pagination pagination-sm no-margin pull-right " ng-change="pageChanged()" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade remove-item" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Eliminar particular {{partSelected.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Este elemento será eliminado</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button ng-click="remove()" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

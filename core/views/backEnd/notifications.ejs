@@ -1,0 +1,2046 @@
+<div ng-controller="notificationCtrl" ng-cloak >
+    <div class="col-xs-12">
+        <div class="title_left ">
+            <h3>Notificaciones</h3>
+        </div>
+    </div>
+    <div ng-cloak class="row page-title">
+        <div class="col-xs-12">
+            <div>
+                <div class="x_content">
+                    <div class="new-style-button">
+                        <button ng-click="showNoty=0" ng-class="{'btn-default':showNoty==0,'btn-info':showNoty!=0}"
+                                class="btn btn-sm">
+                            Registro
+                        </button>
+                        <button ng-click="showNoty=1" ng-class="{'btn-default':showNoty==1,'btn-info':showNoty!=1}"
+                                class="btn btn-sm">
+                            Newsletter
+                        </button>
+                        <button ng-click="showNoty=2" ng-class="{'btn-default':showNoty==2,'btn-info':showNoty!=2}"
+                                class="btn btn-sm">
+                            Recuperar contraseña
+                        </button>
+                        <button ng-click="showNoty=3" ng-class="{'btn-default':showNoty==3,'btn-info':showNoty!=3}"
+                                class="btn btn-sm">
+                            Publicación de Barcos
+                        </button>
+                        <button ng-click="showNoty=4" ng-class="{'btn-default':showNoty==4,'btn-info':showNoty!=4}"
+                                class="btn btn-sm">
+                            Peticiones
+                        </button>
+                        <button ng-click="showNoty=5" ng-class="{'btn-default':showNoty==5,'btn-info':showNoty!=5}"
+                                class="btn btn-sm">
+                            Ofertas
+                        </button>
+                        <button ng-click="showNoty=6" ng-class="{'btn-default':showNoty==6,'btn-info':showNoty!=6}"
+                                class="btn btn-sm">
+                            Confirmación
+                        </button>
+                        <button ng-click="showNoty=7"
+                                ng-class="{'btn-default':showNoty==7,'btn-info':showNoty!=7}"
+                                class="btn btn-sm">
+                            Cancelación
+                        </button>
+                        <button ng-click="showNoty=8" ng-class="{'btn-default':showNoty==8,'btn-info':showNoty!=8}"
+                                class="btn btn-sm">
+                            Tiempo de expiración
+                        </button>
+                    </div>
+                    <div ng-show="showNoty==0" class="row">
+                        <div class="x_title">
+                            <h2> Correo de Registro de Usuario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userRegister.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del Correo
+                                                <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userRegister.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Notificación de Registro de
+                                        Usuario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            <!--Url de Alquiler de barco-->
+                                            Url de Alquiler<span style="color: #5accfe">de</span>Barco<span style="color: #5accfe">.com</span>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [url_site]</code>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userRegister)"
+                                            ng-click="saveNotificationUserRegister()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==0" class="row">
+                        <div class="x_title">
+                            <h2> Correo de Registro de Particulares</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userParticular.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del Correo
+                                                <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userParticular.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Notificación de Registro de
+                                        Usuario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userParticular)"
+                                            ng-click="saveNotificationUserParticular()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==1" class="row">
+                        <div class="x_title">
+                            <h2> Boletín</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.bulletin.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.bulletin.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Suscripción de
+                                        Boletín:</strong>
+                                    <br><br>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Email del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [email_user]</code>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+
+                                    <button ng-disabled="!validateNotification(notifications.bulletin)"
+                                            ng-click="saveNotificationBulletin()" class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                    <!--<button ng-click="sendNotificationBulletin()"-->
+                                    <!--class="btn btn-success pull-right">-->
+                                    <!--Enviar boletín-->
+                                    <!--</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==2" class="row">
+                        <div class="x_title">
+                            <h2> Recuperar contraseña</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.recoveryPassword.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.recoveryPassword.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i>
+                                    <strong>Correo de Recuperación de Contraseña:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            <!--Url de Alquiler de barco-->
+                                            Url de Alquiler<span style="color: #5accfe">de</span>Barco<span style="color: #5accfe">.com</span>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [url_site]</code>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.recoveryPassword)"
+                                            ng-click="saveNotificationRecoveryPassword()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==3" class="row">
+                        <div class="x_title">
+                            <h2>Publicación de Barcos</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.publicationBoat.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.publicationBoat.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Publicación de
+                                        Barcos:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.publicationBoat)"
+                                            ng-click="saveNotificationPublicationBoat()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==4" class="row">
+                        <div class="x_title">
+                            <h2>Petición creada para el usuario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userRequest.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userRequest.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Petición creada para el
+                                        usuario:</strong>
+
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Puerto-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_ship_port]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Fecha de inicio-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_book_date]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Duración-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_duration]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Con patrón-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_patron]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Comentarios-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_conditions]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userRequest)"
+                                            ng-click="saveNotificationUserRequest()" class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==4" class="row">
+                        <div class="x_title">
+                            <h2>Petición creada para el Propietario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.ownerRequest.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.ownerRequest.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de edición creada para el
+                                        Propietario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre y Apellidos del Cliente
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_client]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de Salida
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fabricante y modelo
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [ship_maker_model]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            ¿Necesitas patrón?
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de Solicitud
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_create_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Mensaje
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_conditions]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.bulletin)"
+                                            ng-click="saveNotificationOwnerRequest()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==4" class="row">
+                        <div class="x_title">
+                            <h2>Petición rechazada por el Propietario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.rejectRequest.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.rejectRequest.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de edición creada para el
+                                        Propietario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [request_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Puerto-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_ship_port]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Fecha de inicio-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_book_date]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Duración-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_duration]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Con patrón-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_patron]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<br><br>-->
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Comentarios-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [request_conditions]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.rejectRequest)"
+                                            ng-click="saveNotificationRejectRequest()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==5" class="row">
+                        <div class="x_title">
+                            <h2>Oferta creada para el usuario</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userOffer.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userOffer.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Oferta creada para el
+                                        usuario:</strong>
+
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Descripción del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_description]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de inicio
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Con patrón
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio original
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_original_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio de oferta
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Comentarios
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_conditions]</code>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userOffer)"
+                                            ng-click="saveNotificationUserOffer()" class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==5" class="row">
+                        <div class="x_title">
+                            <h2>Oferta creada para el Propietario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.ownerOffer.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.ownerOffer.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Oferta creada para el
+                                        Propietario:</strong>
+
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Descripción del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_description]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de inicio
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Con patrón
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio original
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_original_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio de oferta
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Comentarios
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_conditions]</code>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.ownerOffer)"
+                                            ng-click="saveNotificationOwnerOffer()" class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==6" class="row">
+                        <div class="x_title">
+                            <h2>Confirmación de compra para el usuario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userBuyConfirmation.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userBuyConfirmation.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Confirmación de compra para
+                                        el usuario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Descripción del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_description]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de inicio
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Con patrón
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio original
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_original_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio de oferta
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Comentarios
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_conditions]</code>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userBuyConfirmation)"
+                                            ng-click="saveNotificationUserBuyConfirmation()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==6" class="row">
+                        <div class="x_title">
+                            <h2>Confirmación de compra para el Propietario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.ownerBuyConfirmation.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del
+                                                Correo<span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.ownerBuyConfirmation.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Confirmación de compra para
+                                        el Propietario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Descripción del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_description]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de inicio
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Con patrón
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio original
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_original_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio de oferta
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Comentarios
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_conditions]</code>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.ownerBuyConfirmation)"
+                                            ng-click="saveNotificationOwnerBuyConfirmation()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==7" class="row">
+                        <div class="x_title">
+                            <h2> Correo de Cancelación para el usuario</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userRefundConfirmation.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del Correo
+                                                <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userRefundConfirmation.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Cancelación para el
+                                        usuario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de inicio
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Con patrón
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio original
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_original_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio de oferta
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Url de Alquiler de barcos-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [url_site]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userRefundConfirmation)"
+                                            ng-click="saveNotificationUserRefundConfirmation()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==7" class="row">
+                        <div class="x_title">
+                            <h2> Correo de Cancelación para el propietario</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.ownerRefundConfirmation.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del Correo
+                                                <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.ownerRefundConfirmation.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de Cancelación para el
+                                        propietario:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del barco
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_name]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Puerto
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_ship_port]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Fecha de inicio
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_book_date]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Duración
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_duration]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Con patrón
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_patron]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio original
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_original_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Precio de oferta
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [offer_price]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Url de Alquiler de barcos-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [url_site]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.ownerRefundConfirmation)"
+                                            ng-click="saveNotificationOwnerRefundConfirmation()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div ng-show="showNoty==8" class="row">
+                        <div class="x_title">
+                            <h2> Correo de notificación de tiempo de expiración para realizar el segundo pago.</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                        ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                        <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContentInfo" class="tab-content">
+                                    <div ng-cloak ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel"
+                                         class="tab-pane fade "
+                                         ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                         aria-labelledby="home-tab">
+                                         <br>
+                                         <div class="clearfix"></div>
+                                        <div class="col-xs-12">
+                                            <label class="control-label col-xs-12" for="first-name">Asunto <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <input type="text" id="first-name" required="required"
+                                                       class="form-control col-xs-12 input-sm"
+                                                       ng-model="notifications.userExpireTime.subject[$index].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top: 10px;">
+                                            <label class="control-label col-xs-12" for="first-name">Cuerpo del Correo
+                                                <span
+                                                        class="required">*</span>
+                                            </label>
+
+                                            <div class="col-xs-12">
+                                                <textarea ui-tinymce="tinymceOptions"
+                                                          ng-model="notifications.userExpireTime.body[$index].value"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="col-md-4 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in active" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-lightbulb-o"></i> <strong>Correo de notificación de tiempo de
+                                        expiración para realizar el segundo pago:</strong>
+                                    <br><br>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6">
+                                            Nombre del Usuario
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <code> [name_user]</code>
+                                        </div>
+                                    </div>
+                                    <br><br>
+
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--Url de Alquiler de barcos-->
+                                    <!--</div>-->
+                                    <!--<div class="col-xs-6">-->
+                                    <!--<code> [url_site]</code>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button ng-disabled="!validateNotification(notifications.userExpireTime)"
+                                            ng-click="saveNotificationUserExpireTime()"
+                                            class="btn btn-success pull-right">
+                                        Guardar Configuración
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

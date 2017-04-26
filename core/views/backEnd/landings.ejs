@@ -1,0 +1,328 @@
+<div ng-cloak ng-controller="landingCtrl">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                Landings
+            </h3>
+        </div>
+        <div class="title_right">
+            <button ng-cloak ng-show="showForm" ng-click="goBack()" class="btn btn-primary pull-right">
+                <i class="fa fa-arrow-left"></i> Atrás
+            </button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_title">
+                <button ng-cloak ng-show="!showForm" ng-click="showForm = true" class="btn btn-success pull-left">
+                    <i class="fa fa-plus"></i> Nuevo
+                </button>
+                <div class="pull-right">
+                        <span ng-click="filterLand(false)" ng-class="{'filter-active': shMenu==false}"
+                              style="padding: 0 5px;" class="count_top right-space pointer ng-binding">
+                                            <i class="fa fa-check"></i>
+                                            Todos
+                                    </span>
+                    <span ng-click="filterLand(true)" ng-class="{'filter-active': shMenu==true}"
+                          style="padding: 0 5px;" class="count_top pointer ng-binding">
+                                            <i class="fa fa-list"></i> Menu
+                                    </span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div ng-cloak ng-show="!showForm" class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered jambo_table bulk_action">
+                        <thead>
+                        <tr class="headings">
+                            <th class="column-title">Menú</th>
+                            <th class="column-title">Nombre del Landing</th>
+                            <th class="column-title">Experiencia</th>
+                            <th class="column-title">Tipo de Barco</th>
+                            <th class="column-title">País</th>
+                            <th class="column-title">Ciudad</th>
+                            <th class="column-title">Zona</th>
+                            <th class="column-title">Puerto</th>
+                            <th class="column-title no-link last" style="min-width: 20px;">NoIndex</th>
+                            <th class="column-title no-link last" style="min-width: 20px;">NoFollow</th>
+                            <th class="column-title no-link last" style="min-width: 100px;"><span class="nobr">Acciones</span>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="even" ng-cloak ng-repeat="lan in landings" ng-class-even="$index%2==0"
+                            ng-class-odd="$index%2==1">
+                            <td>
+                                <div ng-show="lan.pos!=null && lan.pos>=0">
+                                    <code>{{lan.pos+1}}</code>
+                                    <i ng-click="menu(lan,'up')" class="fa fa-long-arrow-up pointer"
+                                       ng-show="lan.pos > 0"></i>
+                                    <i ng-click="menu(lan,'down')" class="fa fa-long-arrow-down pointer"
+                                       ng-show="!lan.last"></i>
+                                    <i ng-click="menu(lan,'ban')" class="fa fa-ban pointer"></i>
+                                </div>
+                                <div ng-show="lan.pos == null">
+                                    &nbsp; &nbsp; <i ng-show="!lan.pos" ng-click="menu(lan,'show')"
+                                                     class="fa fa-circle-o pointer"></i>
+                                </div>
+                            </td>
+                            <td class=" ">{{lan.name[0].value}}</td>
+                            <td class=" ">{{showXp(lan.experience)}}</td>
+                            <td class=" ">{{lan.shipType.name[0].value?
+                                lan.shipType.name[0].value:'------------'}}
+                            </td>
+                            <td class=" ">{{lan.country.name[0].value ? lan.country.name[0].value:'------------'}}
+                            </td>
+                            <td class=" ">{{lan.city.name[0].value ? lan.city.name[0].value:'------------'}}</td>
+                            <td class=" ">{{lan.area.name[0].value ? lan.area.name[0].value:'------------'}}</td>
+                            <td class=" ">{{lan.port.name[0].value ? lan.port.name[0].value:'------------'}}</td>
+                            <td class="a-right a-right td-button-padding">
+                                <button ng-click="noindex(lan)"
+                                        ng-class="{'btn-success':lan.noindex,'btn-warning':!lan.noindex}"
+                                        class="btn btn-xs">
+                                    <i ng-class="{'fa-check':lan.noindex,'fa-ban':!lan.noindex }"
+                                       class="fa"></i>
+                                </button>
+                            </td>
+                            <td class="a-right a-right td-button-padding">
+                                <button ng-click="nofollow(lan)"
+                                        ng-class="{'btn-success':lan.nofollow,'btn-warning':!lan.nofollow}"
+                                        class="btn btn-xs">
+                                    <i ng-class="{'fa-check':lan.nofollow,'fa-ban':!lan.nofollow }"
+                                       class="fa"></i>
+                                </button>
+                            </td>
+                            <td class="a-right a-right td-button-padding">
+                                <button ng-click="showEditForm(lan)" class="btn btn-primary btn-xs">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button ng-click="publish(lan)"
+                                        ng-class="{'btn-success':lan.publish,'btn-warning':!lan.publish }"
+                                        class="btn btn-xs">
+                                    <i ng-class="{'fa-check':lan.publish,'fa-ban':!lan.publish }" class="fa"></i>
+                                </button>
+                                <button ng-click="select(lan)" class="btn btn-danger btn-xs" data-toggle="modal"
+                                        data-target=".remove-landing">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="clearfix"></div>
+                <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems"
+                                ng-model="currentPage" max-size="maxSize"
+                                class="pagination pagination-sm no-margin pull-right " ng-change="pageChanged()"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </uib-pagination>
+            </div>
+            <div ng-cloak ng-show="showForm" class="x_content">
+                <br>
+                <form name="filterName" class="form-horizontal form-label-left" autocomplete="off">
+                    <div class="form-group">
+                        <div>
+                            <ul id="myTabLaguage" class="nav nav-tabs bar_tabs" role="tablist">
+                                <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation"
+                                    ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                    <a id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                                </li>
+                            </ul>
+                            <div id="myTabContentInfo" class="tab-content">
+                                <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade "
+                                     ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                     aria-labelledby="home-tab">
+                                    <div class="form-group">
+                                        <div class="col-xs-12"
+                                             ng-class="{'has-error':filterName.name.$dirty && filterName.name.$invalid}">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="first-name"> Nombre
+                                                    <span
+                                                            class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" required="required"
+                                                           class="form-control col-md-7 col-xs-12 input-sm"
+                                                           ng-model="landing.name[$index].value">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="first-title"> Título(Meta)
+                                                    <span
+                                                            class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" required="required"
+                                                           class="form-control col-md-7 col-xs-12 input-sm"
+                                                           ng-model="landing.title[$index].value">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="first-title"> Descripción(Meta)
+                                                    <span
+                                                            class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea required="required"
+                                                                  class="form-control col-md-7 col-xs-12 input-sm"
+                                                                  ng-model="landing.description[$index].value">
+
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="first-title"> Texto Superior
+                                                    <span class="required">*</span>
+                                                </label>
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions" required="required"
+                                                                  class="form-control col-md-7 col-xs-12 input-sm"
+                                                                  ng-model="landing.text1[$index].value">
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="first-title"> Texto Inferior
+                                                    <span class="required">*</span>
+                                                </label>
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea ui-tinymce="tinymceOptions" required="required"
+                                                                  class="form-control col-md-7 col-xs-12 input-sm"
+                                                                  ng-model="landing.text2[$index].value">
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de Experiencia</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class=" form-control" ng-model="landing.experience">
+                                <option value="">-- Selecciona un tipo de Experiencia --</option>
+                                <option ng-repeat="xp in experiences" value="{{xp._id}}"> {{xp.name[0].value}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de Barcos</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class=" form-control" ng-model="landing.shipType">
+                                <option value="">-- Selecciona un tipo de Barco --</option>
+                                <option ng-repeat="typ in types" value="{{typ._id}}"> {{typ.name[0].value}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Países</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class=" form-control"
+                                    ng-options="loc.name[0].value for loc in localizations track by loc._id"
+                                    ng-model="landing.country" ng-change="changeCountry()">
+                                <option value="">-- Seleccionar --</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class=" form-control"
+                                    ng-options="cit.name[0].value for cit in country.cities track by cit._id"
+                                    ng-model="landing.city" ng-change="changeCity()">
+                                <option value="">-- Seleccionar --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Zona</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class=" form-control"
+                                    ng-options="area.name[0].value for area in city.areas track by area._id"
+                                    ng-model="landing.area" ng-change="changeArea()">
+                                <option value="">-- Seleccionar --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Puerto</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class=" form-control"
+                                    ng-options="port.name[0].value for port in area.ports track by port._id"
+                                    ng-model="landing.port">
+                                <option value="">-- Seleccionar --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <div class="ln_solid"></div>
+                    <button ng-disabled="!validateForm() " ng-hide="editForm" ng-click="addLanding()"
+                            style="float:right" type="button" class="btn btn-success btn-sm">
+                        Adicionar
+                    </button>
+                    <button ng-disabled="!validateForm() " ng-show="editForm" ng-click="editLanding()"
+                            style="float:right" type="button" class="btn btn-success btn-sm">
+                        Guardar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade remove-landing" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">{{landing.name[0].value}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea eliminar el Landing seleccionado?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button ng-click="remove() " data-dismiss="modal" type="button" class="btn btn-danger">
+                        Si
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

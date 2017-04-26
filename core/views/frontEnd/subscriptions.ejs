@@ -1,0 +1,96 @@
+<div class="container margin-pages">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-8 news_back">
+            <% if(cancel){%>
+            <div class="news_profile">
+                <div class="header col-xs-12"><h4><%= texts.news_title%></h4></div>
+                <div class="news_update col-xs-12"><%= texts.news_cancel_title%></div>
+                <div class="col-xs-12"><%= texts.news_cancel_subtitle%></div>
+                <div class="col-xs-12">
+                    <form id="formLeaveNews">
+                        <div class="form-group">
+                            <div class="">
+                                <input type="radio" id="option1" class="" name="options" value="1" required> <%= texts.news_option1%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <input type="radio" id="option2" class="" name="options" value="2"> <%= texts.news_option2%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <input type="radio" id="option3" class="" name="options" value="3"> <%= texts.news_option3%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <input type="radio" id="option4" class="" name="options" value="4"> <%= texts.news_option4%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <input type="radio" id="option5" class="" name="options" value="5"> <%= texts.news_option5%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <textarea class="form-control" id="area_reject" name="area_reject"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-leave"><%=texts.news_send%></button>
+                        <a href="/<%= language%>" class="btn btn-primary"><%= texts.news_go_home%></a>
+                    </form>
+
+
+                </div>
+            </div>
+
+            <%}else{%>
+            <div class="news_profile">
+                <div class="header col-xs-12"><h4><%= texts.news_title%></h4></div>
+                <div class="news_update col-xs-12"><%= texts.news_update%></div>
+                <div class="col-xs-12">
+                    <form id="formUpdate" name="formUpdate">
+                        <div class="form-group">
+                            <label for="name" class="control-label"><%= texts.news_email%></label>
+
+                            <div class="">
+                                <input type="email" id="email_susc" class="form-control" name="email_susc" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label asterisk"><%= texts.news_name%></label>
+
+                            <div class="">
+                                <input type="text" id="name" class="form-control required" name="name"
+                                       placeholder="<%-texts.news_name%>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label asterisk"><%= texts.news_lastname%></label>
+
+                            <div class="">
+                                <input type="text" id="lastname" class="form-control required" name="lastname"
+                                       placeholder="<%-texts.news_lastname%>">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success update_profile"><%=texts.news_update_profile%></button>
+                        <a href="/<%= language%>" class="btn btn-primary"><%= texts.news_go_home%></a>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <%}%>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-md-8 cancel_sucess">
+            <h3><%= texts.news_cancel_success%></h3>
+            <a href="/<%= language%>" class="btn btn-primary"><%= texts.news_go_home%></a>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-4">
+            <%- include('contact') %>
+            <%- include('faq')%>
+        </div>
+    </div>
+</div>

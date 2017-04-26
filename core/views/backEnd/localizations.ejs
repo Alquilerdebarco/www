@@ -1,0 +1,531 @@
+<div ng-cloak ng-controller="localizationsCtrl">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                Ubicaciones
+            </h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2>Países</h2>
+                    <div class="col-xs-4  pull-right">
+                        <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target=".form-country">
+                           Nuevo
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th></th>
+                                    <th class="column-title">Nombre </th>
+                                    <th class="column-title">ISO </th>
+                                    <th style="min-width:156px" class="column-title">Acciones </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="country in countries" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                    <td class="col-xs-1">
+                                        <input type="checkbox" ng-click="checkCountry(country)" ng-checked="countryChecked==$index" class="flat" name="table_records">
+                                    </td>
+                                    <td class="col-xs-6">{{country.name[0].value}}</td>
+                                    <td class="col-xs-6">{{country.iso}}</td>
+                                    <td class="col-xs-5 td-button-padding">
+                                        <button ng-click="selectAddCity(country)" data-toggle="modal" data-target=".form-city" type="button" class="button-location btn btn-success btn-xs">
+                                        <i class="fa fa-plus"></i> ciudad
+                                    </button>
+                                        <button type="button" ng-click="selectCountry(country)" class="button-location btn btn-info btn-xs" data-toggle="modal" data-target=".form-country">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                        <button ng-click="selectDelCountry(country)" data-toggle="modal" data-target=".remove-country" type="button" class="button-location btn btn-danger btn-xs">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                        class="pagination pagination-sm no-margin pull-right " ng-change="pageChanged()" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2>Ciudades</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th></th>
+                                    <th class="column-title">Ciudad </th>
+                                    <th class="column-title">País </th>
+                                    <th style="min-width:156px" class="column-title">Acciones </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="city in cities" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                    <td class="col-xs-1">
+                                        <input type="checkbox" ng-click="checkCity(city)" ng-checked="cityChecked==$index" class="flat" name="table_records">
+                                    </td>
+                                    <td class="col-xs-6">{{city.name[0].value}}</td>
+                                    <td class="col-xs-6">{{city.country.name[0].value}}</td>
+                                    <td class="col-xs-5 td-button-padding">
+                                        <button ng-click="selectAddArea(city)" data-toggle="modal" data-target=".form-area" type="button" class="button-location btn btn-success btn-xs">
+                                                                        <i class="fa fa-plus"></i> zona
+                                                                    </button>
+                                        <button ng-click="selectCity(city)" class="button-location btn btn-info btn-xs" data-toggle="modal" data-target=".form-city">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </button>
+                                        <button ng-click="selectDelCity(city)" data-toggle="modal" data-target=".remove-city" type="button" class="button-location btn btn-danger btn-xs">
+                                                                        <i class="fa fa-trash-o"></i>
+                                                                    </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <uib-pagination direction-links="false" boundary-links="true" total-items="cityTotalItems" ng-model="cityCurrentPage" max-size="cityMaxSize"
+                        class="pagination pagination-sm no-margin pull-right " ng-change="cityPageChanged()" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2>Zonas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th></th>
+                                    <th class="column-title">Zona</th>
+                                    <th class="column-title">Ciudad</th>
+                                    <th class="column-title">País</th>
+                                    <th style="min-width:156px" class="column-title">Acciones </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="area in areas" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                    <td class="col-xs-1">
+                                        <input type="checkbox" ng-click="checkArea(area)" ng-checked="areaChecked==$index" class="flat" name="table_records">
+                                    </td>
+                                    <td class="col-xs-5">{{area.name[0].value}}</td>
+                                    <td class="col-xs-5">{{area.city.name[0].value}}</td>
+                                    <td class="col-xs-5">{{area.country.name[0].value}}</td>
+                                    <td class="col-xs-6 td-button-padding">
+                                        <button ng-click="selectAddPort(area)" data-toggle="modal" data-target=".form-port" type="button" class="button-location btn btn-success btn-xs">
+                                            <i class="fa fa-plus"></i> puerto
+                                        </button>
+                                        <button type="button" ng-click="selectArea(area)" data-toggle="modal" data-target=".form-area" class="button-location btn btn-info btn-xs">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button ng-click="selectDelArea(area)" data-toggle="modal" data-target=".remove-area" type="button" class="button-location btn btn-danger btn-xs">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <uib-pagination direction-links="false" boundary-links="true" total-items="areaTotalItems" ng-model="areaCurrentPage" max-size="areaMaxSize"
+                        class="pagination pagination-sm no-margin pull-right " ng-change="areaPageChanged()" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2>Puertos</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title">Puerto </th>
+                                    <th class="column-title">Zona</th>
+                                    <th class="column-title">Ciudad</th>
+                                    <th class="column-title">País</th>
+                                    <th style="min-width:86px" class="column-title">Acciones </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="port in ports" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                    <td class="col-xs-8">{{port.name[0].value}}</td>
+                                    <td class="col-xs-5">{{port.area.name[0].value}}</td>
+                                    <td class="col-xs-5">{{port.city.name[0].value}}</td>
+                                    <td class="col-xs-5">{{port.country.name[0].value}}</td>
+                                    <td class="col-xs-4 fs15 fw700 td-button-padding">
+                                        <button type="button" ng-click="selectPort(port)" class="btn btn-info btn-xs" data-toggle="modal" data-target=".form-port">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                        <button ng-click="selectDelPort(port)" data-toggle="modal" data-target=".remove-port" type="button" class="btn btn-danger btn-xs"><i
+                                            class="fa fa-trash-o"></i>
+                                </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <uib-pagination direction-links="false" boundary-links="true" total-items="portTotalItems" ng-model="portCurrentPage" max-size="portMaxSize"
+                        class="pagination pagination-sm no-margin pull-right " ng-change="portPageChanged()" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ADD-->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade form-country" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>País
+                        <small ng-show="!showEdit">Nuevo</small>
+                        <small ng-show="showEdit "> Guardar</small>
+                    </h2>
+                    <!--<h4 class="modal-title" id="myModalLabel2">Eliminar Puerto</h4>-->
+                </div>
+                <div class="modal-body">
+                    <form name="locationFormCountry" autocomplete="off">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                aria-labelledby="home-tab">
+                                <div class="form-group margin-iso">
+                                    <div class="col-xs-12" ng-class="{'has-error':locationForm.name.$dirty && locationForm.name.$invalid}">
+                                        <input type="text" id="first-name" required="required" placeholder="Nombre del País" class="form-control col-md-7 col-xs-12"
+                                            ng-model="country.name[$index].value" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group margin-iso">
+                                    <div class="col-xs-12" ng-class="{'has-error':locationForm.iso.$dirty && locationForm.iso.$invalid}">
+                                        <select class="form-control" required ng-model="country.iso" ng-options="iso for iso in isos" name="iso">
+                                            <option value="">--Seleccionar--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-disabled="!locationFormCountry.$valid" ng-show="!showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="createCountry()">Crear
+                    </button>
+                    <button ng-disabled="!locationFormCountry.$valid" ng-show="showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="updateCountry()">
+                        Guardar
+                    </button>
+                    <button type="button" ng-click="initializeVars()" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade form-city" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>País
+                        <small>{{country.name[0].value}}</small>
+                    </h2>
+                    <h2>Ciudad
+                        <small ng-show="!showEdit">Nueva</small>
+                        <small ng-show="showEdit "> Guardar</small>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <div class="clearfix"></div>
+                    <form name="locationFormCity" autocomplete="off">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                aria-labelledby="home-tab">
+                                <div class="form-group">
+                                    <div class="col-xs-12" ng-class="{'has-error':locationForm.name.$dirty && locationForm.name.$invalid}">
+                                        <input type="text" id="first-name" required="required" placeholder="Nombre de la Ciudad" class="form-control col-md-7 col-xs-12"
+                                            ng-model="city.name[$index].value" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-disabled="!locationFormCity.$valid" ng-show="!showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="createCity()">Crear
+                    </button>
+                    <button ng-disabled="!locationFormCity.$valid" ng-show="showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="updateCity()">
+                        Guardar
+                    </button>
+                    <button type="button" ng-click="initializeVars()" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade form-area" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>País
+                        <small>{{country.name[0].value}}</small>
+                    </h2>
+                    <h2>Ciudad
+                        <small>{{city.name[0].value}}</small>
+                    </h2>
+                    <h2>Zona
+                        <small ng-show="!showEdit">Nuevo</small>
+                        <small ng-show="showEdit "> Guardar</small>
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-body">
+                    <form name="locationFormArea" autocomplete="off">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                aria-labelledby="home-tab">
+                                <div class="form-group">
+                                    <div class="col-xs-12" ng-class="{'has-error':locationFormArea.name.$dirty && locationFormArea.name.$invalid}">
+                                        <input type="text" id="first-name" required="required" placeholder="Nombre de la Zona" class="form-control col-md-7 col-xs-12"
+                                            ng-model="area.name[$index].value" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-disabled="!locationFormArea.$valid" ng-show="!showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="createArea()">Crear
+                    </button>
+                    <button ng-disabled="!locationFormArea.$valid" ng-show="showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="updateArea()">
+                        Guardar
+                    </button>
+                    <button type="button" ng-click="initializeVars()" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade form-port" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>País
+                        <small>{{country.name[0].value}}</small>
+                    </h2>
+                    <h2>Ciudad
+                        <small>{{city.name[0].value}}</small>
+                    </h2>
+                    <h2>Zona
+                        <small>{{area.name[0].value}}</small>
+                    </h2>
+                    <h2>Puerto
+                        <small ng-show="!showEdit">Nuevo</small>
+                        <small ng-show="showEdit "> Guardar</small>
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-body">
+                    <form name="locationForm" autocomplete="off">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li ng-repeat="lang in $root.M_LANGUAGES" role="presentation" ng-class="{'active':$index == selectTab}" ng-click="selectedTab($index)">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">{{lang.name}}</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div ng-repeat="lang in $root.M_LANGUAGES" role="tabpanel" class="tab-pane fade " ng-class="{active:$index==selectTab,in:$index==selectTab}"
+                                aria-labelledby="home-tab">
+                                <div class="form-group">
+                                    <div class="col-xs-12" ng-class="{'has-error':locationForm.name.$dirty && locationForm.name.$invalid}">
+                                        <input type="text" id="first-name" required="required" placeholder="Nombre de la Zona" class="form-control col-md-7 col-xs-12"
+                                            ng-model="port.name[$index].value" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="space-solid"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input ng-model="port.longitude" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Lon">
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input ng-model="port.latitude" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Lat">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-disabled="!locationForm.$valid" ng-show="!showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="createPort()">Crear
+                    </button>
+                    <button ng-disabled="!locationForm.$valid" ng-show="showEdit" type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="updatePort()">
+                        Guardar
+                    </button>
+                    <button type="button" ng-click="initializeVars()" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!--REMOVE-->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade remove-port" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Eliminar Puerto</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{port.name[0].value}}</h4>
+                    <p>Desea eliminar el puerto seleccionado?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removePort()">Eliminar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade remove-area" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Eliminar Zona</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{area.name[0].value}}</h4>
+                    <p>Desea eliminar la zona seleccionada?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeArea()">Eliminar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade remove-city" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Eliminar Ciudad</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{city.name[0].value}}</h4>
+                    <p>Desea eliminar la ciudad seleccionada?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeCity()">Eliminar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+    <!-- Small modal -->
+    <div ng-cloak class="modal fade remove-country" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                    <h4 class="modal-title">Eliminar País</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{country.name[0].value}}</h4>
+                    <p>Desea eliminar el país seleccionado?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeCountry()">
+                        Eliminar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modals -->
+</div>

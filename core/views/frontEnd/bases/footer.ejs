@@ -1,0 +1,183 @@
+<div class="newsletter">
+    <div class="container">
+        <div class="inline-block pull-left"><%- texts.newsletter %>
+        </div>
+
+        <div class="inline-block pull-responsive">
+            <form id="newsletter">
+                <div class="input-group">
+                    <input type="email" id="register_email" name="register_email" placeholder="Email"
+                           class="form-control required">
+                <span class="input-group-btn">
+                <button class="btn btn-dark" type="submit" id="subscribe-btn"><%= texts.susc_button %></button>
+                </span>
+
+                </div>
+                <span for="register_email" class="help-block"></span>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="top-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3 space-footer">
+                <div class="title"><%= texts.info %></div>
+                <div class="underline"></div>
+                <ul>
+                    <li><a href="/<%= language %>/<%= texts.slug_about %>"><%= texts.about %></a></li>
+                    <li><a href="/<%= language %>/<%= texts.slug_our_ships %>"><%= texts.our_ships %></a></li>
+                    <li><a href="/<%= language %>/<%= texts.slug_announce %>"><%= texts.announce %></a></li>
+                    <li><a href="/<%= language %>/<%= texts.slug_map%>"><%= texts.site_map%></a> </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 space-footer">
+                <div class="title"><%= texts.access %></div>
+                <div class="underline"></div>
+                <ul>
+                    <% if(user) { %>
+                    <li><a href="/backoffice"><%= texts.access_owner %></a></li>
+                    <li><a href="/backoffice"><%= texts.access_user %></a></li>
+                    <% } else { %>
+                    <li><a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_access_owner %>" class="wake_login"
+                        ><%= texts.access_owner %></a>
+                    </li>
+                    <li><a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_access_user %>" class="wake_login"
+                        ><%= texts.access_user %></a>
+                    </li>
+                    <% } %>
+                    <li><a href="http://blog.alquilerdebarco.com/" target="_blank">Blog</a></li>
+
+                </ul>
+            </div>
+            <div class="visible-xs visible-sm clearfix"></div>
+            <div class="col-xs-12 col-sm-6 col-md-3 space-footer">
+                <div class="title"><%= texts.contact %></div>
+                <div class="underline"></div>
+                <div>
+
+                    <p><a href="tel:(+34) 609 183 183">
+                            <div class="border-radius-white">
+                                <img class="inline-block" src="/frontEnd/img/ic_14_contact_phone.png"
+                                     srcset="/frontEnd/img/ic_14_contact_phone@2x.png 2x">
+                            </div>
+                            (+34) 609 183 183</a></p>
+
+                </div>
+                <div>
+                    <p class="email-p">
+                        <a href="mailto:info@alquilerdebarco.com">
+                            <div class="border-radius-white"><img class="inline-block separator-right" width="14px"
+                                                                  src="/frontEnd/img/ic_14_contact_mail.png"
+                                                                  srcset="/frontEnd/img/ic_14_contact_mail@2x.png 2x">
+                            </div>
+                            info@alquilerdebarco.com</a>
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 space-footer">
+                <div class="title"><%= texts.language %></div>
+                <div class="underline"></div>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle lang" data-toggle="dropdown"> <%= language %> <img
+                                    width="8px"
+                                    height="8px"
+                                    src="/frontEnd/img/ic_8_expand_down@2x.png"></a>
+                        <ul class="dropdown-menu languages">
+                            <% if(languages){ %>
+                            <% languages.forEach(function(lang){ %>
+                            <li><a <% if(lang.iso == language){ %>class="active"
+                                        <% } %>
+                                   href="/<%= lang.iso %>"> <%= lang.iso %> </a></li>
+                            <% }) %>
+                            <% } %>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle moneda" data-toggle="dropdown"> </a>
+                        <ul class="dropdown-menu money">
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 second-line">
+                <div class="title"><%= texts.search %></div>
+                <div class="underline"></div>
+                <div class="row">
+                    <ul>
+                        <% landing.forEach(function(land){ %>
+                        <li class="col-xs-12 col-sm-3">
+                            <a href="/<%= language %>/<%= land.slug[0].value %>"><%= land.name[0].value %></a>
+                        </li>
+
+                        <% }) %>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="bottom-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3 hidden-xs hidden-sm padding-footer logo">
+                <a href="/<%= language %>" class="flex pull-left"><img
+                            src="/frontEnd/img/img_60_menu_logo.png"
+                            srcset="/frontEnd/img/img_60_menu_logo@2x.png 2x"
+                            class="logot flex"></a>
+                <a class="navbar-brand flex padding-title"
+                   href="/<%= language %>">Alquiler<span style="color: #5accfe">de</span>Barco<span style="color: #5accfe">.com</span></a>
+            </div>
+
+            <!--<div class="col-xs-12 col-sm-12 col-md-3 padding-footer">-->
+                <!--<p class="copy"> © 2015-<%= new Date().getFullYear() %> Alquiler<span style="color: #5accfe">de</span>Barco<span-->
+                            <!--style="color: #5accfe">.com</span> SL. <%= texts.right_reserved %></p>-->
+            <!--</div>-->
+            <div class="hidden-xs">
+                <div class="col-xs-12 col-sm-3 padding-footer">
+                    <a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_conditions %>"><%= texts.service_conditions %></a><br>
+                </div>
+                <div class="col-xs-12 col-sm-3 padding-footer">
+                    <a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_privacy %>"><%= texts.cookies_privacy %></a>
+                </div>
+            </div>
+            <div class="visible-xs">
+                <div class="col-xs-12 col-sm-3" style="line-height: 40px">
+                    <a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_conditions %>"><%= texts.service_conditions %></a><br>
+                </div>
+                <div class="col-xs-12 col-sm-3" style="line-height: 40px">
+                    <a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_privacy %>"><%= texts.cookies_privacy %></a>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-xs-12 col-sm-3 resp-social padding-footer flex">
+                <a href="https://www.facebook.com/alquilerbarco/?ref=hl" target="_blank"><img
+                            src="/frontEnd/img/ic_40_footer_social_facebook.png"
+                            srcset="/frontEnd/img/ic_40_footer_social_facebook@2x.png 2x"
+                            class="social inline-block separator-right"></a>
+                <a href="https://twitter.com/Alquiler_Barco" target="_blank"><img
+                            src="/frontEnd/img/ic_40_footer_social_twitter.png"
+                            srcset="/frontEnd/img/ic_40_footer_social_twitter@2x.png 2x"
+                            class="social inline-block separator-right"></a>
+                <a href="https://www.instagram.com/alquilerdebarco" target="_blank"> <img
+                            src="/frontEnd/img/ic_40_footer_social_instagram.png"
+                            srcset="/frontEnd/img/ic_40_footer_social_instagram@2x.png 2x" class="social inline-block"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden l"><%= language %></div>
+</div>

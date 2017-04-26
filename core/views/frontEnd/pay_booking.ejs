@@ -1,0 +1,1145 @@
+<div class="container margin-pages">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="booking-header col-xs-12 col-sm-6">
+                <h1><%= book.ship.name %></h1>
+            </div>
+            <div class="booking-header col-xs-12 col-sm-6">
+                <% if(first){ %>
+                <h1 class="col-xs-12"><%= texts.det_make_firstp %></h1>
+                <% }else if(!cancel && !first){ %>
+                <h1 class="col-xs-12"><%= texts.det_make_secondp %></h1>
+                <% } %>
+            </div>
+            <div class="clearfix"></div>
+            <div class="booking-body">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="media_space not-space">
+                        <% book.ship.photos.forEach(function(media){ %>
+                        <% if(media.default){ %>
+                        <img src="/service/media/<%= media.media %>" width="100%" height="100%">
+                        <% } %>
+                        <% }) %>
+                    </div>
+                    <h2><%= book.ship.title[0].value %></h2>
+                    <div><%- book.ship.description[0].value %></div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td class="names col-xs-6">
+                                <div><%= texts.det_manuf %></div>
+                            </td>
+                            <td class="attribs col-xs-6"><p><%= book.ship.manufacturer %></p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_model %></div>
+                            </td>
+                            <td class="attribs"><p><%= book.ship.model %></p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_type %></div>
+                            </td>
+                            <td class="attribs"><p><%= book.ship.shipType.name[0].value %></p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.ports %></div>
+                            </td>
+                            <td class="attribs"><p><%= book.ship.localization.port.name[0].value %></p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_vacancy %></div>
+                            </td>
+                            <td class="attribs"><p><%= book.numPas %></p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_start_date %></div>
+                            </td>
+                            <td class="attribs"><p><%= new Date(book.bookDate).toLocaleDateString() %></p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.book_time %></div>
+                            </td>
+                            <td class="attribs"><p class="duration">Duracion</p></td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_amount %></div>
+                            </td>
+                            <td class="attribs">
+                                <% if(book.percentage < 100){ %>
+                                <p class="price"><span class="dollar"></span> <%= book.price %> <span
+                                            class="euro"></span> <%= texts.det_iva %> <%= texts.det_in_place_of %> <span
+                                            class="dollar"></span> <%= book.priceTotal %> <span
+                                            class="euro"></span></p>
+                                <% }else{ %>
+                                <p class="price"><span class="dollar"></span> <%= book.price %> <span
+                                            class="euro"></span> <%= texts.det_iva %> <%= texts.det_in_place_of %> <span
+                                            class="dollar"></span> <%= book.priceTotal %> <span
+                                            class="euro"></span></p>
+                                <% } %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_first_pay %>
+                                    <% if(!cancel && first){ %>
+                                    <img src="/frontEnd/img/ic_32_free_advertising_ok_sign.png"
+                                         srcset="/frontEnd/img/ic_32_free_advertising_ok_sign@2x.png 2x">
+                                    <% } %>
+                                </div>
+                            </td>
+                            <td class="attribs"><p class="first-price"><span
+                                            class="dollar"></span> <%= (book.firstPrice) %> <span
+                                            class="euro"></span></p></td>
+                        </tr>
+                        <% if(book.percentage < 100){ %>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_second_pay %>
+                                    <% if(!cancel && !first) { %>
+                                    <img src="/frontEnd/img/ic_32_free_advertising_ok_sign.png"
+                                         srcset="/frontEnd/img/ic_32_free_advertising_ok_sign@2x.png 2x">
+                                    <% } %>
+                                </div>
+                            </td>
+                            <td class="attribs"><p class="second-price"><span
+                                            class="dollar"></span> <%= (book.secondPrice) %> <span
+                                            class="euro"></span></p></td>
+                        </tr>
+                        <% } %>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_owner_price %></div>
+                            </td>
+                            <td class="attribs"><p class="skipper-price"><span
+                                            class="dollar"></span> <%= book.pricePatron %> <span
+                                            class="euro"></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.det_bail %></div>
+                            </td>
+                            <td class="attribs"><p class="fianza"><span
+                                            class="dollar"></span> <%= book.ship.conditions.bail %> <span
+                                            class="euro"></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="names">
+                                <div><%= texts.conditions %></div>
+                            </td>
+                            <td class="attribs"><p><%= book.conditions %></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <% if(cancel){ %>
+                <div class="clearfix"></div>
+                <div class="booking-header col-xs-12">
+                    <h3 class="alert alert-warning"><%= texts.det_warning_note %></h3>
+                    <ul>
+                        <li class="alert alert-warning">
+                            Cancelaciones antes de 60 días a la fecha de la salida del barco: penalización del 50% del
+                            precio del arrendamiento.
+                        </li>
+                        <li class="alert alert-warning">
+                            Cancelaciones entre 30 y 60 días a la fecha de salida del barco: penalización del 75% del
+                            precio del arrendamiento.
+                        </li>
+                        <li class="alert alert-warning">
+                            Cancelaciones con menos de 30 días a la fecha de salida del barco: penalización del 100% del
+                            precio del arrendamiento.
+                        </li>
+                    </ul>
+                </div>
+                <% } %>
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+
+                    <% if(cancel) { %>
+                    <button class="btn btn-danger btn-cancelb"><%= texts.det_cancel_booking %></button>
+                    <% }else{ %>
+
+                    <% if(methodPayment.paypal) { %>
+                    <button class="btn btn-paypal"><img class="paypal-img"
+                                                        src="/frontEnd/img/img_70_payment_paypal_normal.png"
+                                                        srcset="/frontEnd/img/img_70_payment_paypal_normal@2x.png 2x">
+                    </button>
+                    <% } %>
+                    <% if(methodPayment.redsys) { %>
+                    <form id="tpvForm1" action="<%= redsys.uri %>" method="post" class="redsys-form">
+                        <table hidden>
+                            <tbody>
+                            <tr>
+                                <td>Ds_SignatureVersion:</td>
+                                <td><input name="Ds_SignatureVersion" value="<%= redsys.fparams.Ds_SignatureVersion %>"
+                                           required="" size="80"></td>
+                            </tr>
+                            <tr>
+                                <td>Ds_MerchantParameters:</td>
+                                <td><input name="Ds_MerchantParameters"
+                                           value="<%= redsys.fparams.Ds_MerchantParameters %>"
+                                           required="" size="80"></td>
+                            </tr>
+                            <tr>
+                                <td>Ds_Signature:</td>
+                                <td><input name="Ds_Signature" value="<%= redsys.fparams.Ds_Signature %>"
+                                           required="" size="80"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary btn-redsys" id="tpvBtn1">
+                            <img class="redsys-img"
+                                 src="/frontEnd/img/img_70__payment_redsys_normal.png"
+                                 srcset="/frontEnd/img/img_70__payment_redsys_normal@2x.png 2x">
+                            <% if(book.percentage < 100){ %>
+                            <% if(!cancel && first){ %>
+                            (<%= texts.det_fpay %>)
+                            <% }else if(!cancel && !first){ %>
+                            (<%= texts.det_spay %>)
+                            <% } %>
+                            <% } %>
+                        </button>
+                    </form>
+                    <% } %>
+                    <% } %>
+
+                </div>
+                <div class="clearfix"></div>
+                <!--<div class="booking-header col-xs-12">-->
+                <!--<h3><%= texts.det_ship_more_details %></h3>-->
+                <!--<div><%- book.ship.description[0].value %></div>-->
+                <!--</div>-->
+                <div class="booking-header col-xs-12">
+                    <h3><%= texts.det_pics %></h3>
+                </div>
+                <% book.ship.photos.forEach(function (photo) { %>
+                <div class="col-xs-6 media_space">
+                    <img src="/service/media/<%= photo.media %>" width="100%" height="100%">
+                </div>
+                <% }) %>
+                <div class="clearfix"></div>
+                <div class="booking-header col-xs-12">
+                    <h3><%= texts.det_charact %></h3>
+                </div>
+                <div class="col-xs-12">
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_manuf %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.manufacturer %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_model %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.model %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_type %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.shipType.name[0].value %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_constr %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.year %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <% if(book.ship.lastRedecorate){%>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_renov %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.lastRedecorate %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <%}%>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_length %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.measurements.dimension %>
+                            m</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_beam %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.measurements.sleeve %>
+                            m</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_draught %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.measurements.draught %>
+                            m</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_day %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.habitability.persons.day %>
+                            <%= texts.peoples %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_night %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.habitability.persons.night %>
+                            <%= texts.peoples %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_cabin %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.habitability.cabins %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_bath %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.habitability.baths %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_water %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.deposits.freshwater %>
+                            L</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_fuel %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.engine.combustible %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_pow %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.engine.power %> C</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_cruising %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.engine.speed.cruising %>
+                            <%= texts.det_knot %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_speed %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.engine.speed.max %> <%= texts.det_knot %></p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_cons %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.engine.consume %>
+                            L/h</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="charact">
+                        <div class="titles inline-block col-xs-6 text-right"><%= texts.det_cap %></div>
+                        <p class="inline-block col-xs-6 text-left"><%= book.ship.technicalDetails.deposits.combustible %>
+                            L</p>
+                        <div class="clearfix"></div>
+                        <div class="underline"></div>
+                    </div>
+                </div>
+
+                <div class="booking-header col-xs-12">
+                    <h3><%= texts.conditions %></h3>
+                </div>
+                <div class="col-xs-12">
+                    <% var exist = false %>
+                    <% book.ship.conditions.extras.forEach(function(extra){ %>
+                    <% if(extra.included == "1"){ %>
+                    <% if(!exist){ %>
+                    <h4 class="tag_title"><%= texts.det_extras_includes %></h4>
+                    <% exist = true %>
+                    <% } %>
+                    <% if(extra.extra == "1"){ %>
+                    <p class="inline-block"><%= texts.det_extra1 %>:</p>
+                    <p class="inline-block"><%= texts.det_import_by_consuption %></p>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } if(extra.extra == "2"){ %>
+                    <p class="inline-block"><%= texts.det_extra2 %>:</p> <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"> <%= extra.import %> </p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } if(extra.extra == "3"){ %>
+                    <p class="inline-block"><%= texts.det_extra3 %>:</p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "4"){ %>
+                    <p class="inline-block"><%= texts.det_extra4 %>:</p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "5"){ %>
+                    <p class="inline-block"><%= texts.det_extra5 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "6"){ %>
+                    <p class="inline-block"><%= texts.det_extra6 %> :</p>
+                    <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "7"){ %>
+                    <p class="inline-block"><%= texts.det_extra7 %>:</p> <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "8"){ %>
+                    <p class="inline-block"><%= texts.det_extra8 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "9"){ %>
+                    <p class="inline-block"><%= texts.det_extra9 %>: </p>
+                    <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "10"){ %>
+                    <p class="inline-block"><%= texts.det_extra10 %>:</p>
+                    <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "11"){ %>
+                    <p class="inline-block"><%= texts.det_extra11 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "12"){ %>
+                    <p class="inline-block"><%= texts.det_extra12 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "13"){ %>
+                    <p class="inline-block"><%= texts.det_extra13 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "14"){ %>
+                    <p class="inline-block"><%= texts.det_extra14 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "15"){ %>
+                    <p class="inline-block"><%= extra.name %>: </p> <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <% } %>
+                    <% }) %>
+                    <% exist = false %>
+                    <% book.ship.conditions.extras.forEach(function(extra){ %>
+                    <% if(extra.obligatory == "1"){ %>
+                    <% if(!exist){ %>
+                    <h4 class="tag_title"><%= texts.det_extras_obligatory %></h4>
+                    <% exist = true %>
+                    <% } %>
+                    <% if(extra.extra == "1"){ %>
+                    <p class="inline-block"><%= texts.det_extra1 %>: </p>
+                    <p class="inline-block"><%= texts.det_import_by_consuption %></p>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } if(extra.extra == "2"){ %>
+                    <p class="inline-block"><%= texts.det_extra2 %>: </p>
+                    <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } if(extra.extra == "3"){ %>
+                    <p class="inline-block"><%= texts.det_extra3 %>: </p>
+                    <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "4"){ %>
+                    <p class="inline-block"><%= texts.det_extra4 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "5"){ %>
+                    <p class="inline-block"><%= texts.det_extra5 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "6"){ %>
+                    <p class="inline-block"><%= texts.det_extra6 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "7"){ %>
+                    <p class="inline-block"><%= texts.det_extra7 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "8"){ %>
+                    <p class="inline-block"><%= texts.det_extra8 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "9"){ %>
+                    <p class="inline-block"><%= texts.det_extra9 %>:</p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "10"){ %>
+                    <p class="inline-block"><%= texts.det_extra10 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "11"){ %>
+                    <p class="inline-block"><%= texts.det_extra11 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "12"){ %>
+                    <p class="inline-block"><%= texts.det_extra12 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"> <%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "13"){ %>
+                    <p class="inline-block"><%= texts.det_extra13 %>: </p>
+                    <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"> <%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "14"){ %>
+                    <p class="inline-block"><%= texts.det_extra14 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"> <%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "15"){ %>
+                    <p class="inline-block"><%= extra.name %>: </p> <span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } %>
+                    <% }) %>
+
+                    <% exist = false %>
+                    <% book.ship.conditions.extras.forEach(function(extra){ %>
+                    <% if(extra.obligatory == "0"){ %>
+                    <% if(!exist){ %>
+                    <h4 class="tag_title"><%= texts.det_extras_optional %></h4>
+                    <% exist = true %>
+                    <% } %>
+                    <% if(extra.extra == "1"){ %>
+                    <p class="inline-block"><%= texts.det_extra1 %>: </p>
+                    <p class="inline-block"><%= texts.det_import_by_consuption %></p>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } if(extra.extra == "2"){ %>
+                    <p class="inline-block"><%= texts.det_extra2 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"> <%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } if(extra.extra == "3"){ %>
+                    <p class="inline-block"><%= texts.det_extra3 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "4"){ %>
+                    <p class="inline-block"><%= texts.det_extra4 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "5"){ %>
+                    <p class="inline-block"><%= texts.det_extra5 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "6"){ %>
+                    <p class="inline-block"><%= texts.det_extra6 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "7"){ %>
+                    <p class="inline-block"><%= texts.det_extra7 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "8"){ %>
+                    <p class="inline-block"><%= texts.det_extra8 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "9"){ %>
+                    <p class="inline-block"><%= texts.det_extra9 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "10"){ %>
+                    <p class="inline-block"><%= texts.det_extra10 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "11"){ %>
+                    <p class="inline-block"><%= texts.det_extra11 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "12"){ %>
+                    <p class="inline-block"><%= texts.det_extra12 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "13"){ %>
+                    <p class="inline-block"><%= texts.det_extra13 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "14"){ %>
+                    <p class="inline-block"><%= texts.det_extra14 %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(extra.extra == "15"){ %>
+                    <p class="inline-block"><%= extra.name %>: </p><span
+                            class="dolar inline-block"></span>
+                    <p class="inline-block"><%= extra.import %></p> <span
+                            class="euro inline-block"></span>
+                    <% if(extra.period == "0"){ %>
+                    <p class="inline-block"><%= texts.det_period0 %></p>
+                    <% }else if(extra.period == "1"){ %>
+                    <p class="inline-block"><%= texts.det_period1 %></p>
+                    <% }else{ %>
+                    <p class="inline-block"><%= texts.det_period2 %></p>
+                    <% } %>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% } %>
+                    <% }) %>
+                    <h4 class="tag_title"><%= texts.det_schedule %></h4>
+                    <% if(parseInt(book.ship.conditions.weekRentals.checkIn.hour) > 0){ %>
+                    <p><%= texts.det_schedule_checkin %> <%= texts.det_schedule_week %> <%= texts.det_maked_at %> <%= book.ship.conditions.weekRentals.checkIn.hour %>
+                        h</p>
+                    <% } %>
+                    <% if(parseInt(book.ship.conditions.weekRentals.checkOut.hour) > 0){ %>
+                    <p><%= texts.det_schedule_checkout %> <%= texts.det_schedule_week %> <%= texts.det_maked_at %> <%= book.ship.conditions.weekRentals.checkOut.hour %>
+                        h</p>
+                    <% } %>
+                    <% if(parseInt(book.ship.conditions.dayRentals.checkIn.hour) > 0){ %>
+                    <p><%= texts.det_schedule_checkin %> <%= texts.det_schedule_day %> <%= texts.det_maked_at %> <%= book.ship.conditions.dayRentals.checkIn.hour %>
+                        h</p>
+                    <% } %>
+                    <% if(parseInt(book.ship.conditions.dayRentals.checkOut.hour) > 0){ %>
+                    <p><%= texts.det_schedule_checkout %> <%= texts.det_schedule_day %> <%= texts.det_maked_at %> <%= book.ship.conditions.dayRentals.checkOut.hour %>
+                        h</p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <h4 class="tag_title"><%= texts.det_base_port %></h4>
+                    <% if(book.ship.conditions.basePort == "0"){ %>
+                    <p><%= texts.det_base_port_text.replace("[include]", texts.det_port_not_include) %></p>
+                    <% }else{ %>
+                    <p><%= texts.det_base_port_text.replace("[include]", texts.det_port_include) %></p>
+                    <% } %>
+                    <% if(book.ship.conditions.sleepBasePort == "0"){ %>
+                    <p><%= texts.det_nosleep_port %></p>
+                    <% }else{ %>
+                    <p><%= texts.det_sleep_port %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <h4 class="tag_title"><%= texts.det_others_conditios %></h4>
+                    <% if(book.ship.conditions.secondPayment == "0"){ %>
+                    <p><%= texts.det_second_pay %> : <%= texts.det_secp1 %></p>
+                    <% }else if(book.ship.conditions.secondPayment == "1"){ %>
+                    <p><%= texts.det_second_pay %> : <%= texts.det_secp2 %></p>
+                    <% }else if(book.ship.conditions.secondPayment == "2"){ %>
+                    <p><%= texts.det_second_pay %> : <%= texts.det_secp3 %></p>
+                    <% }else if(book.ship.conditions.secondPayment == "3"){ %>
+                    <p><%= texts.det_second_pay %> : <%= texts.det_secp4 %></p>
+                    <% }else if(book.ship.conditions.secondPayment == "4"){ %>
+                    <p><%= texts.det_second_pay %> : <%= texts.det_secp5 %></p>
+                    <% }else if(book.ship.conditions.secondPayment == "1"){ %>
+                    <p><%= texts.det_second_pay %> : <%= texts.det_secp6 %></p>
+                    <% } %>
+                    <div class="clearfix"></div>
+                    <% if(book.ship.conditions.refund == "0"){ %>
+                    <p><%= texts.det_bad_day %><%= texts.det_refund1 %></p>
+                    <% }else if(book.ship.conditions.refund == "1"){ %>
+                    <p><%= texts.det_bad_day %><%= texts.det_refund2 %></p>
+                    <% }else if(book.ship.conditions.refund == "2"){ %>
+                    <p><%= texts.det_bad_day %><%= texts.det_refund3 %></p>
+                    <% }else if(book.ship.conditions.refund == "3"){ %>
+                    <p><%= texts.det_bad_day %><%= texts.det_refund4 %></p>
+                    <% }else if(book.ship.conditions.refund == "4"){ %>
+                    <p><%= texts.det_bad_day %><%= texts.det_refund5 %></p>
+                    <% } %>
+                    <p><%- book.ship.conditions.text[0].value %></p>
+                    <div class="clearfix"></div>
+                    <p><%= texts.det_iva_include %></p>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="booking-header col-xs-12">
+                    <h3><%= texts.det_localization %></h3>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12" id="marker">
+                    <div style="width: 100%" id="mapGoogle">
+
+                    </div>
+                    <br/>
+
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <% if(cancel) { %>
+                    <button class="btn btn-danger btn-cancelb"><%= texts.det_cancel_booking %></button>
+                    <% }else{ %>
+                    <% if(methodPayment.paypal) { %>
+                    <button class="btn btn-paypal"><img class="paypal-img"
+                                                        src="/frontEnd/img/img_70_payment_paypal_normal.png"
+                                                        srcset="/frontEnd/img/img_70_payment_paypal_normal@2x.png 2x">
+                    </button>
+                    <% } %>
+                    <% if(methodPayment.redsys) { %>
+                    <form id="tpvForm2" action="<%= redsys.uri %>"  method="post" class="redsys-form">
+                        <table hidden>
+                            <tbody>
+                            <tr>
+                                <td>Ds_SignatureVersion:</td>
+                                <td><input name="Ds_SignatureVersion" value="<%= redsys.fparams.Ds_SignatureVersion %>"
+                                           required="" size="80"></td>
+                            </tr>
+                            <tr>
+                                <td>Ds_MerchantParameters:</td>
+                                <td><input name="Ds_MerchantParameters"
+                                           value="<%= redsys.fparams.Ds_MerchantParameters %>"
+                                           required="" size="80"></td>
+                            </tr>
+                            <tr>
+                                <td>Ds_Signature:</td>
+                                <td><input name="Ds_Signature" value="<%= redsys.fparams.Ds_Signature %>"
+                                           required="" size="80"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary btn-redsys" id="tpvBtn2">
+                            <img class="redsys-img"
+                                 src="/frontEnd/img/img_70__payment_redsys_normal.png"
+                                 srcset="/frontEnd/img/img_70__payment_redsys_normal@2x.png 2x">
+                            <% if(book.percentage < 100){ %>
+                            <% if(!cancel && first){ %>
+                            (<%= texts.det_fpay %>)
+                            <% }else if(!cancel && !first){ %>
+                            (<%= texts.det_spay %>)
+                            <% } %>
+                            <% } %>
+                        </button>
+                    </form>
+                    <% } %>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

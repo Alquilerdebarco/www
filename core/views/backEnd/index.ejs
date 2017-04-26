@@ -1,0 +1,150 @@
+<div ng-controller="indexCtrl" ng-cloak >
+    <div class="row tile_count page-title">
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i> Total de Usuarios</span>
+                <div class="count">
+                    <%= Totals[0] %>
+                </div>
+                <span class="count_bottom">
+                    <i class="green">
+                        <% if (Totals[0] == 0) { %>
+                        0%
+                        <% } %>
+                        <% if (Totals[0] != 0) { %>
+                        <%= parseInt((Totals[1] * 100) / Totals[0]) %>%
+                        <% } %>
+                    </i>
+                    Última semana
+                </span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <span class="count_top"><i class="fa fa-anchor"></i> Total de Barcos</span>
+                <div class="count">
+                    <%= Totals[2] %>
+                </div>
+                <span class="count_bottom">
+                    <i class="green">
+                        <% if (Totals[2] == 0) { %>
+                        0%
+                        <% } %>
+                        <% if (Totals[2] != 0) { %>
+                        <%= parseInt((Totals[3] * 100) / Totals[2]) %>%
+                        <% } %>
+
+                    </i>
+                    Última semana
+                </span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <span class="count_top"><i class="fa fa-calendar"></i> Total de Reservas</span>
+                <div class="count green">
+                    <%= Totals[4] %>
+                </div>
+                <span class="count_bottom">
+                    <i class="green">
+                        <% if (Totals[4] == 0) { %>
+                        0%
+                        <% } %>
+                        <% if (Totals[4] != 0) { %>
+                        <%= parseInt((Totals[5] * 100) / Totals[4]) %>%
+                        <% } %>
+                    </i>
+                    Última semana
+                </span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <span class="count_top"><i class="fa fa-ban"></i> Total de Cancelaciones</span>
+                <div class="count red">
+                    <%= Totals[6] %>
+                </div>
+                <span class="count_bottom">
+                    <i class="red">
+                        <% if (Totals[6] == 0) { %>
+                        0%
+                        <% } %>
+                        <% if (Totals[6] != 0) { %>
+                        <%= parseInt((Totals[7] * 100) / Totals[6]) %>%
+                        <% } %>
+                    </i>
+                    Última semana
+                </span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i> Total de Subscriptores</span>
+                <div class="count">
+                    <%= Totals[8] %>
+                </div>
+                <span class="count_bottom">
+                    <i class="green">
+                        <% if (Totals[8] == 0) { %>
+                        0%
+                        <% } %>
+                        <% if (Totals[8] != 0) { %>
+                        <%= parseInt((Totals[9] * 100) / Totals[8]) %>%
+                        <% } %>
+                    </i>
+                     Última semana
+                </span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i> Total de Particulares</span>
+                <div class="count">
+                    <%= Totals[10] %>
+                </div>
+                <span class="count_bottom">
+                    <i class="green">
+                        <% if (Totals[10] == 0) { %>
+                        0%
+                        <% } %>
+                        <% if (Totals[10] != 0) { %>
+                        <%= parseInt((Totals[11] * 100) / Totals[10]) %>%
+                        <% } %>
+                    </i>
+                     Última semana
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2 class="pull-left">Sumario de Reserva
+                        <small>Progreso semanal</small>
+                    </h2>
+                    <div class="input-prepend input-group pull-right col-xs-2">
+                        <span class="add-on input-group-addon"><i
+                                    class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                        <input type="text" style="width: 200px" name="reservation" id="reportrange" class="form-control" value="03/18/2013 - 03/23/2013">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content table-responsive">
+                    <div class="col-xs-12">
+                        <div class="demo-container" style="height:280px">
+                            <div id="placeholder33x" class="demo-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

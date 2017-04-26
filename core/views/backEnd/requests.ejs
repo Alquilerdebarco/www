@@ -1,0 +1,759 @@
+<script>
+    var DurationsDatas = <%- JSON.stringify(durations) %>;
+    var ExperiencesDatas = <%- JSON.stringify(experiences) %>;
+    var RequestDatas = <%- JSON.stringify(request) %>;
+    var MethodtDatas = <%- JSON.stringify(method) %>;
+</script>
+<div ng-controller="requestCtrl" ng-cloak >
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div style="width: 400px;margin: 0 auto">
+                <div ng-cloak ng-show="showAlert" id="reject-alert" class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">×</span>
+                    </button>
+                    <strong>Petición rechazada satisfactoriamente!</strong> Se le ha enviado un correo de notificación al usuario.
+                </div>
+            </div>
+            <div ng-cloak ng-show="showRequest==0">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>
+                            Peticiones
+                        </h3>
+                    </div>
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                            <div class="input-group">
+                                <input ng-show="tab==0" ng-model="string_tab_content1" ng-change="listRequests()" type="text" class="form-control" placeholder="Buscar por...">
+                                <input ng-show="tab==1" ng-model="string_tab_content2" ng-change="listRequests()" type="text" class="form-control" placeholder="Buscar por...">
+                                <input ng-show="tab==2" ng-model="string_tab_content3" ng-change="listRequests()" type="text" class="form-control" placeholder="Buscar por...">
+                                <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                          <i class="fa fa-search"></i>
+                      </button>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div>
+                            <div class="x_content">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" ng-click="selectTab(0)" class="active">
+                                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                                                Pendientes
+                                                <span style="background-color: #1A82C3;"
+                                                      class="badge badge-success">{{totalItems}}</span></a>
+                                        </li>
+                                        <li role="presentation" class="" ng-click="selectTab(1)"><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">
+                                                Aceptadas <span style="background-color: #1ABB9C;"
+                                                                class="badge badge-success">{{acceptsTotalItems}}</span></a>
+                                        </li>
+                                        <div class="visible-xs clearfix"></div>
+                                        <li role="presentation" ng-click="selectTab(2)"><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">
+                                                Rechazadas
+
+                                                <span style="background-color: #E74C3C;"
+                                                      class="badge badge-success">{{rejectsTotalItems}}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                    <tr class="headings">
+                                                        <th style="min-width: 60px" class="column-title pointer" ng-click="changeSortOptions('index', 'tab_content1')">
+                                                            <div>Id
+                                                                <i ng-show="sortOptions.tab_content1.field == 'index' && sortOptions.tab_content1.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field == 'index' && sortOptions.tab_content1.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field != 'index'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th style="min-width: 140px" class="column-title pointer" ng-click="changeSortOptions('name', 'tab_content1')">
+                                                            <div>Cliente
+                                                                <i ng-show="sortOptions.tab_content1.field == 'name' && sortOptions.tab_content1.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field == 'name' && sortOptions.tab_content1.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field != 'name'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th style="min-width: 160px" class="column-title pointer" ng-click="changeSortOptions('createDate', 'tab_content1')">
+                                                            <div>Fecha de Solicitud
+                                                                <i ng-show="sortOptions.tab_content1.field == 'createDate' && sortOptions.tab_content1.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field == 'createDate' && sortOptions.tab_content1.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field != 'createDate'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th class="column-title hidden-xs hidden-sm">País</th>
+                                                        <th class="column-title hidden-xs hidden-sm">Ciudad</th>
+                                                        <th class="column-title hidden-xs hidden-sm">Puerto</th>
+                                                        <th style="min-width: 75px" class="column-title pointer"
+                                                            ng-click="changeSortOptions('shipName', 'tab_content1')">
+                                                            <div>Barco
+                                                                <i ng-show="sortOptions.tab_content1.field == 'shipName' && sortOptions.tab_content1.sort == 1"
+                                                                   class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field == 'shipName' && sortOptions.tab_content1.sort == -1"
+                                                                   class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content1.field != 'shipName'"
+                                                                   class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th class="column-title">Fecha de salida</th>
+                                                        <th class="column-title">Duración</th>
+                                                        <th class="column-title hidden-xs hidden-sm">¿Necesitas patrón?</th>
+                                                        <th class="column-title ">Pasajeros</th>
+                                                        <th style="min-width: 90px" class="column-title ">Precio (€)</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-cloak ng-repeat="req in requests" ng-class-odd="'odd'" ng-class-even="'even'" class="pointer">
+                                                        <td class=" ">{{req.index}}</td>
+                                                        <td class=" ">{{req.name}}</td>
+                                                        <td class=" ">{{req.createDate|date:'dd/MM/yyyy'}}</td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.country.name[0].value}}
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.city.name[0].value}}
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.port.name[0].value}}
+                                                        </td>
+                                                        <td class=" ">{{req.shipName}}</td>
+                                                        <td class=" ">{{req.bookDate|date:'dd/MM/yyyy'}}</td>
+                                                        <td class="">
+                                                            {{req.duration.quantity}}
+                                                            <small ng-show="req.duration.unity==0"> Horas</small>
+                                                            <small ng-show="req.duration.unity==1"> Días</small>
+                                                            <small ng-show="req.duration.unity==7"> Semanas</small>
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm last">{{req.patron ? "Si" : "No"}}</td>
+                                                        <td class="">{{req.numPas}}</td>
+                                                        <td class="">{{requestPrice(req)}}</td>
+                                                        <td>
+                                                            <button ng-click="show(req._id)" class="btn btn-success btn-xs">Ver detalles
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <p class="col-md-6 col-xs-12" style="margin:20px 0">Mostrando registros del {{totalItems > 0 ? skip+1 : 0}} al {{skip + requests.length}} de un total de {{totalItems}} registros</p>
+                                                <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                                                                class="pagination pagination-sm no-margin pull-right " ng-change="pageChanged()"
+                                                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                                                </uib-pagination>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                    <tr class="headings">
+                                                        <th style="min-width: 60px" class="column-title pointer" ng-click="changeSortOptions('index', 'tab_content2')">
+                                                            <div>Id
+                                                                <i ng-show="sortOptions.tab_content2.field == 'index' && sortOptions.tab_content2.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field == 'index' && sortOptions.tab_content2.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field != 'index'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th style="min-width: 140px" class="column-title pointer" ng-click="changeSortOptions('name', 'tab_content2')">
+                                                            <div>Cliente
+                                                                <i ng-show="sortOptions.tab_content2.field == 'name' && sortOptions.tab_content2.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field == 'name' && sortOptions.tab_content2.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field != 'name'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th style="min-width: 160px" class="column-title pointer" ng-click="changeSortOptions('createDate', 'tab_content2')">
+                                                            <div>Fecha de Solicitud
+                                                                <i ng-show="sortOptions.tab_content2.field == 'createDate' && sortOptions.tab_content2.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field == 'createDate' && sortOptions.tab_content2.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field != 'createDate'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th class="column-title hidden-xs hidden-sm">País</th>
+                                                        <th class="column-title hidden-xs hidden-sm">Ciudad</th>
+                                                        <th class="column-title hidden-xs hidden-sm">Puerto</th>
+                                                        <th style="min-width: 75px" class="column-title pointer"
+                                                            ng-click="changeSortOptions('shipName', 'tab_content2')">
+                                                            <div>Barco
+                                                                <i ng-show="sortOptions.tab_content2.field == 'shipName' && sortOptions.tab_content2.sort == 1"
+                                                                   class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field == 'shipName' && sortOptions.tab_content2.sort == -1"
+                                                                   class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content2.field != 'shipName'"
+                                                                   class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th class="column-title">Fecha de salida</th>
+                                                        <th class="column-title">Duración</th>
+                                                        <th class="column-title hidden-xs hidden-sm">¿Necesitas patrón?</th>
+                                                        <th class="column-title ">Pasajeros</th>
+                                                        <th style="min-width: 90px" class="column-title ">Precio (€)</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-cloak ng-repeat="req in accepts" ng-class-odd="'odd'" ng-class-even="'even'" class="pointer">
+                                                        <td class=" ">{{req.index}}</td>
+                                                        <td class=" ">{{req.name}}</td>
+                                                        <td class=" ">{{req.createDate|date:'dd/MM/yyyy'}}</td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.country.name[0].value}}
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.city.name[0].value}}
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.port.name[0].value}}
+                                                        </td>
+                                                        <td class=" ">{{req.shipName}}</td>
+                                                        <td class=" ">{{req.bookDate|date:'dd/MM/yyyy'}}</td>
+                                                        <td class="">
+                                                            {{req.duration.quantity}}
+                                                            <small ng-show="req.duration.unity==0"> Horas</small>
+                                                            <small ng-show="req.duration.unity==1"> Días</small>
+                                                            <small ng-show="req.duration.unity==7"> Semanas</small>
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm last">{{req.patron ? "Si" : "No"}}</td>
+                                                        <td class="">{{req.numPas}}</td>
+                                                        <td class="">{{requestPrice(req)}}</td>
+                                                        <td>
+                                                            <button ng-click="show(req._id)" class="btn btn-success btn-xs">Ver detalles
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <p class="col-md-6 col-xs-12" style="margin:20px 0">Mostrando registros del {{acceptsTotalItems > 0 ? acceptsSkip+1 : 0}} al {{acceptsSkip + accepts.length}} de un total de {{acceptsTotalItems}} registros</p>
+                                                <uib-pagination direction-links="false" boundary-links="true" total-items="acceptsTotalItems" ng-model="acceptsCurrentPage" max-size="acceptsMaxSize"
+                                                                class="pagination pagination-sm no-margin pull-right " ng-change="acceptsPageChanged()"
+                                                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                                                </uib-pagination>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered jambo_table bulk_action">
+                                                    <thead>
+                                                    <tr class="headings">
+                                                        <th style="min-width: 60px" class="column-title pointer" ng-click="changeSortOptions('index', 'tab_content3')">
+                                                            <div>Id
+                                                                <i ng-show="sortOptions.tab_content3.field == 'index' && sortOptions.tab_content3.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field == 'index' && sortOptions.tab_content3.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field != 'index'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th style="min-width: 140px" class="column-title pointer" ng-click="changeSortOptions('name', 'tab_content3')">
+                                                            <div>Cliente
+                                                                <i ng-show="sortOptions.tab_content3.field == 'name' && sortOptions.tab_content3.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field == 'name' && sortOptions.tab_content3.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field != 'name'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th style="min-width: 160px" class="column-title pointer" ng-click="changeSortOptions('createDate', 'tab_content3')">
+                                                            <div>Fecha de Solicitud
+                                                                <i ng-show="sortOptions.tab_content3.field == 'createDate' && sortOptions.tab_content3.sort == 1" class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field == 'createDate' && sortOptions.tab_content3.sort == -1" class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field != 'createDate'" class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th class="column-title hidden-xs hidden-sm">País</th>
+                                                        <th class="column-title hidden-xs hidden-sm">Ciudad</th>
+                                                        <th class="column-title hidden-xs hidden-sm">Puerto</th>
+                                                        <th style="min-width: 75px" class="column-title pointer"
+                                                            ng-click="changeSortOptions('shipName', 'tab_content3')">
+                                                            <div>Barco
+                                                                <i ng-show="sortOptions.tab_content3.field == 'shipName' && sortOptions.tab_content3.sort == 1"
+                                                                   class="fa fa-sort-amount-asc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field == 'shipName' && sortOptions.tab_content3.sort == -1"
+                                                                   class="fa fa-sort-amount-desc pull-right"></i>
+                                                                <i ng-show="sortOptions.tab_content3.field != 'shipName'"
+                                                                   class="fa fa-sort pull-right" style="opacity: 0.5"></i>
+                                                            </div>
+                                                        </th>
+                                                        <th class="column-title">Fecha de salida</th>
+                                                        <th class="column-title">Duración</th>
+                                                        <th class="column-title hidden-xs hidden-sm">¿Necesitas patrón?</th>
+                                                        <th class="column-title ">Pasajeros</th>
+                                                        <th style="min-width: 90px" class="column-title ">Precio (€)</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-cloak ng-repeat="req in rejects" ng-class-odd="'odd'" ng-class-even="'even'" class="pointer">
+                                                        <td class=" ">{{req.index}}</td>
+                                                        <td class=" ">{{req.name}}</td>
+                                                        <td class=" ">{{req.createDate|date:'dd/MM/yyyy'}}</td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.country.name[0].value}}
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.city.name[0].value}}
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm">
+                                                            {{req.ship.localization.port.name[0].value}}
+                                                        </td>
+                                                        <td class=" ">{{req.shipName}}</td>
+                                                        <td class=" ">{{req.bookDate|date:'dd/MM/yyyy'}}</td>
+                                                        <td class="">
+                                                            {{req.duration.quantity}}
+                                                            <small ng-show="req.duration.unity==0"> Horas</small>
+                                                            <small ng-show="req.duration.unity==1"> Días</small>
+                                                            <small ng-show="req.duration.unity==7"> Semanas</small>
+                                                        </td>
+                                                        <td class="hidden-xs hidden-sm last">{{req.patron ? "Si" : "No"}}</td>
+                                                        <td class="">{{req.numPas}}</td>
+                                                        <td class="">{{requestPrice(req)}}</td>
+                                                        <td>
+                                                            <button ng-click="show(req._id)" class="btn btn-success btn-xs">Ver detalles
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <p class="col-md-6 col-xs-12" style="margin:20px 0">Mostrando registros del {{rejectsTotalItems > 0 ? rejectsSkip+1 : 0}} al {{rejectsSkip + rejects.length}} de un total de {{rejectsTotalItems}} registros</p>
+                                                <uib-pagination direction-links="false" boundary-links="true" total-items="rejectsTotalItems" ng-model="rejectsCurrentPage" max-size="rejectsMaxSize"
+                                                                class="pagination pagination-sm no-margin pull-right " ng-change="rejectsPageChanged()"
+                                                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                                                </uib-pagination>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-cloak ng-show="showRequest==1">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>
+                            Datos de la Petición
+                            <small>{{request.createDate|date:'dd/MM/yyyy'}}</small>
+                        </h3>
+                    </div>
+                    <div class="title_right">
+                        <button ng-click="showRequest=0" type="button" class="btn btn-primary pull-right">
+                            <i class="fa fa-arrow-left"></i> Atrás
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div>
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="">
+                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" style="  margin-bottom: 10px;">
+                                                <img class="col-md-12 col-sm-12 col-xs-12" ng-src="{{imgMedia}}" />
+                                                <br>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix hidden-lg">
+                                                <br>
+                                            </div>
+                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 detail-request">
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Cliente</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">{{request.name}}</div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Fecha de Salida</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">
+                                                        {{request.bookDate|date:'dd/MM/yyyy'}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Fabricante
+                                                            / Modelo</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">
+                                                        {{request.ship.manufacturer}} / {{request.ship.model}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Nombre
+                                                            del Barco</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">
+                                                        {{request.shipName}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Duración</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">
+                                                        {{ request.duration.quantity }}
+                                                        {{ request.duration.unity==0 ? ' Horas'
+                                                        : (request.duration.unity==1 ? ' Días'
+                                                        : (request.duration.unity==7 ? ' Semanas' : '')) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>¿Necesitas patrón?</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">
+                                                        {{request.patron ? "Si" : "No"}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6 border-none">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Fecha de Solicitud</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fs15 fw700 text-left">
+                                                        {{request.createDate|date:'dd/MM/yyyy'}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6 border-none">
+                                                    <div class="col-xs-12 col-sm-6 col-md-6" style="font-size: 13px"><strong>Mensaje</strong></div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-6 fw700 text-left">{{request.message}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div ng-cloak class="x_title" ng-show="request.status=='send'">
+                                        <div class="ln_solid"></div>
+                                        <h3>Ofertas realizadas</h3>
+                                        <h5 class="red available-reserve">
+                                            No tienes barcos disponibles para este día.
+                                        </h5>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered responsive-utilities jambo_table bulk_action">
+                                            <thead>
+                                            <tr class="headings">
+                                                <th class="column-title">Id</th>
+                                                <th class="column-title">Barco</th>
+                                                <th class="column-title hidden-xs">Modelo</th>
+                                                <th class="column-title">Fecha de Salida</th>
+                                                <th class="column-title">Duración</th>
+                                                <th class="column-title">¿Con Patrón?</th>
+                                                <th class="column-title">Precio</th>
+                                                <th class="column-title hidden-xs">Camarotes</th>
+                                                <th class="column-title hidden-xs">Puerto</th>
+                                                <th class="column-title hidden-xs">Año</th>
+                                                <th class="column-title hidden-xs">Plazas</th>
+                                                <th class="column-title hidden-xs">Baños</th>
+                                                <th class="column-title">Descuentos</th>
+                                                <th class="column-title no-link last">Comunicaciones</th>
+                                                <th class="column-title no-link last" ng-show="request.status=='send'">Estado</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="of in offers" ng-class-even="$index%2==0" ng-class-odd="$index%2==1">
+                                                <td class="">{{of.index}}</td>
+                                                <td class="">{{of.ship.name}}</td>
+                                                <td class="hidden-xs">{{of.ship.model}}</td>
+                                                <td class="">{{of.bookDate|date:'dd/MM/yyyy'}}</td>
+                                                <td class="">
+                                                    {{of.duration.quantity}}
+                                                    <small> {{of.duration.unity==0 ? "Horas" : of.duration.unity==1 ? "Días" : "Semanas"}}
+                                                    </small>
+                                                </td>
+                                                <td class="">{{of.patron ? "Si" : "No"}}</td>
+                                                <td class="" style="min-width: 90px;"> {{of.price|number:2}} <i class="fa fa-euro"></i></td>
+                                                <td class="align-center hidden-xs">{{of.ship.technicalDetails.habitability.cabins}}</td>
+                                                <td class="hidden-xs">{{of.ship.localization.port.name[0].value}}</td>
+                                                <td class="hidden-xs">{{of.ship.year}}</td>
+                                                <td class="hidden-xs">{{request.numPas}}</td>
+                                                <td class="hidden-xs">{{of.ship.technicalDetails.habitability.baths}}</td>
+                                                <td class="">{{of.discount|number:2}} %</td>
+                                                <td class="">
+                                                    <span ng-click="selectOffer(of)" class="col-xs-6 col-xs-offset-4 col-sm-6 col-xs-offset-4 col-md-6 col-md-offset-4 glyphicon glyphicon-comment pointer" aria-hidden="true" data-toggle="modal" data-target=".view-chat-modal-lg"></span>
+                                                </td>
+                                                <td class="" ng-show="request.status=='send'">
+                                                    <span ng-click="remove(of._id)" ng-show="of.status=='send'" class="label label-primary pointer">Enviada</span>
+                                                    <span ng-show="of.status=='accept'" class="label label-success">Aceptada</span>
+                                                    <span ng-show="of.status=='refund'" class="label label-danger">Cancelada</span>
+                                                    <span ng-show="of.status=='check'" class="label label-warning">Revisada</span>
+                                                    <span ng-click="remove(of._id)" ng-show="of.status=='reject'" class="label label-danger pointer">Rechazada</span>
+                                                    <span ng-show="of.status=='check'" class="label label-warning">Revisada</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div ng-hide="$root.M_USER.permissions.typeShipOwner && request.status == 'accept'">
+                                        <button class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target=".offer-reject">
+                                                                            <i class="fa fa-ban"></i>
+                                                                            Rechazar Oferta
+                                                                        </button>
+                                        <button ng-show="availables.length" ng-click="showAddOffer()" class="btn btn-info btn-sm pull-right">
+                                                                            <i class="fa fa-tag"></i>
+                                                                            Añadir Oferta
+                                                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-cloak ng-show="showRequest==2">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>
+                            Oferta para
+                            <small>{{request.name}}</small>
+                        </h3>
+                    </div>
+                    <div class="title_right">
+                        <button ng-click="showRequest=1" type="button" class="btn btn-primary pull-right">
+                            <i class="fa fa-arrow-left"></i> Atrás
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div>
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <form name="offerForm" id="offerForm" class="form-horizontal form-label-left" autocomplete="off">
+                                            <div class="col-md-6 col-xs-12">
+                                                <label>Barco : </label>
+                                                <strong ng-show="request.ship._id!=offer.ship._id" class="pull-right text-warning">(Selección diferente a la solicitud del
+                                                    usuario)</strong>
+                                                <select class="form-control" ng-model="shipId" ng-change="changeAvailable()" ng-options='ava._id as ava.name for ava in availables'>
+                                                    <option value="">-- Seleccionar --</option>
+                                                </select>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="clearfix"></div>
+                                                <label>Fecha de Inicio :</label>
+                                                <strong ng-show="!compareDate(requestDate,requestBookDate) " class="pull-right text-warning">(Selección diferente a la solicitud del
+                                                    usuario)</strong>
+                                                <div ng-repeat="ava in availables" ng-show="ava._id==shipId">
+                                                    <datepicker style="width: 306px" ng-model="request.bookDate" date-disabled="disabled(ava,date, mode)" min-date="minDate"
+                                                                show-weeks="false" ng-change="SelectedDay()" class="well well-sm">
+                                                    </datepicker>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <label>Experiencia</label>
+                                                <strong ng-show="offer.experience != request.experience" class="pull-right text-warning">(Selección diferente a la solicitud del
+                                                    usuario)</strong>
+                                                <select class="form-control" ng-model="offer.experience" ng-change="changeXp()" ng-options='xp._id as xp.name[0].value for xp in xps'>
+                                                    <option value="">-- Seleccionar --</option>
+                                                </select>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <label>Duración</label>
+                                                <strong ng-show="!differentDuration()" class="pull-right text-warning">(Selección
+                                                    diferente a la solicitud del
+                                                    usuario)</strong>
+                                                <select class="form-control" ng-model="offer.duration" ng-change="changeXp()" ng-options='du.id as du.text for du in formDurations'>
+                                                </select>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <label>Con Patrón</label>
+                                                <strong ng-show="!differentPatron()" class="pull-right text-warning">(Selección
+                                                    diferente a la solicitud del usuario)</strong>
+                                                <select ng-model="offer.patron" ng-change="changeDuration()" required="required" class="form-control">
+                                                    <option value="true"> Si ({{patronPrice|number:2}} €)</option>
+                                                    <option value="false"> No</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-xs-12">
+                                                <label>Precio Original: </label>
+                                                <h2 class="green">{{offer.oldPrice|currency}}</h2>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <label>¡Asegurate el alquiler!</label>
+                                                <div class="form-group">
+                                                    <div class="col-md-9 col-sm-9 col-xs-12  ">
+                                                        <strong class="col-xs-12">Te ayudamos a cerrar este alquiler</strong>
+                                                        <p class="col-xs-12">Si haces un descuento como mínimo del 5%, nosotros hacemos un 5% adicional
+                                                        </p>
+                                                        <div>
+                                                            <div class="radio col-xs-12" ng-show="discounts.length">
+                                                                <label class="col-xs-6">
+                                                                    <input type="radio" ng-click="selectTypeDiscount(0)"
+                                                                           ng-checked="typeDicount==0"
+                                                                           value="0" id="optionsRadios1"
+                                                                           name="optionsRadios"> Descuentos activos :
+                                                                </label>
+                                                                <select class="col-xs-6" ng-show="typeDicount==0" ng-model="percentageOfDiscount" ng-change="preparePrice()" ng-options="dis.discount|number as dis.name + ' (' +  dis.discount +' %)' for dis in discounts">
+                                                                </select>
+                                                                <div class="col-xs-6" ng-show="showPAB"><strong class="green" style="font-size:13px">
+                                                                        + 5%</strong></div>
+                                                            </div>
+                                                            <div class="radio col-xs-12">
+                                                                <label class="col-xs-6">
+                                                                    <input type="radio" ng-click="selectTypeDiscount(1)"
+                                                                           ng-checked="typeDicount==1"
+                                                                           value="1" id="optionsRadios1"
+                                                                           name="optionsRadios"> Hago un descuento del:
+                                                                </label>
+                                                                <select class="col-xs-3" ng-show="typeDicount==1" ng-model="customDiscount" ng-change="preparePrice()" ng-options="pd+' %' for pd in pdiscount">
+                                                                </select>
+                                                                <div class="col-xs-3" ng-show="showPAB && typeDicount==1">
+                                                                    <strong class="green" style="font-size:13px"> + 5%</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="radio col-xs-12">
+                                                                <label>
+                                                                    <input type="radio" ng-click="selectTypeDiscount(2)"
+                                                                           ng-checked="typeDicount==2"
+                                                                           value="2" id="optionsRadios1"
+                                                                           name="optionsRadios"> Otro importe
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div ng-show="typeDicount==2" class="form-group">
+                                                    <label class="control-label col-md-6 col-sm-6 col-xs-12">Precio Final
+                                                        <small>(IVA incluido)</small>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                                        <input ng-model="offer.price" ng-change="preparePercent()" type="text" class="form-control has-feedback-left">
+                                                        <span class="fa fa-eur form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <label>A pagar ahora :</label>
+                                                <select class="form-control" ng-disabled="ship.conditions.secondPayment=='0' || !availableSecondPayment" ng-model="posPercent"
+                                                        ng-change="changePercentage()" ng-options="tp.position as tp.percentage + ' % (' + tp.price + ')'  for tp in toPay">
+
+                                                </select>
+                                                <small class="excerpt" ng-show="ship.conditions.secondPayment=='0'">
+                                                    No hay Segundo Pago, se paga el 100% para formalizar la reserva.
+                                                </small>
+                                                <small class="excerpt" ng-show="!availableSecondPayment && ship.conditions.secondPayment=='3'">
+                                                    No hay Segundo Pago, porque solo se admite 2 semanas antes del alquiler.
+                                                </small>
+                                                <small class="excerpt" ng-show="!availableSecondPayment && ship.conditions.secondPayment=='4'">
+                                                    No hay Segundo Pago, porque solo se admite 1 semana antes del alquiler.
+                                                </small>
+                                                <small class="excerpt" ng-show="restPrice > 0">
+                                                    En el Segundo Pago, se debe pagar <strong class="green">{{restPrice|number:2}}
+                                                        €</strong>.
+                                                </small>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <label>Condiciones</label>
+                                                <textarea ng-model="offer.conditions" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                                                <small class="excerpt">
+                                                    Escribe aquí cualquier condición o extra que hayas pactado con el
+                                                    cliente, que éste incluído en el precio. Por ejemplo: Cambiar el
+                                                    puerto de destino,
+                                                    incluir catering, noche anterior a bordo, etc.
+                                                </small>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="ln_solid"></div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                    <button ng-click="showRequest=1" type="button" class="btn btn-default">
+                                                        Cancelar
+                                                    </button>
+                                                    <button ng-disabled="!validateOffer()" ng-click="addOffer() " type="button" class="btn btn-primary">
+                                                        Enviar un presupuesto
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade view-chat-modal-lg" tabindex="-2" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="margin-top: 180px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Chat con {{request.name}}</h4>
+                </div>
+                <div class="modal-body" style="overflow: auto;max-height: 450px;">
+                    <div class="col-xs-12">
+                        <div class="col-xs-2">
+                            <div class="profile">
+                                <div class="profile_pic" style="width: 100%;">
+                                    <img ng-src="/backend/gentelella/images/user.png" alt="..." class="img-circle profile_img" style="    margin-top: 0px;" src="/service/media/57015da06e6d9bb0134ddec3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="request-chat-body">
+                                {{request.message}}
+                            </div>
+                            <strong class="pull-left text-left">{{request.createDate|date:'dd/MM/yyyy h:mm a'}}</strong>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12" style="margin-top: 10px;">
+                        <div class="col-xs-10">
+                            <div class="request-chat-body-down">
+                                {{conditions}}
+                            </div>
+                            <strong class="pull-right text-right">{{conditionsDate|date:'dd/MM/yyyy h:mm a'}}</strong>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="profile">
+                                <div class="profile_pic" style="width: 100%;">
+                                    <img ng-src="{{$root.M_USER.avatar ? '/service/media/'+$root.M_USER.avatar : '/backend/gentelella/images/user.png'}}" alt="..."
+                                        class="img-circle profile_img" style="    margin-top: 0px;" src="/service/media/57015da06e6d9bb0134ddec3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade offer-reject" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Rechazar Oferta</h4>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea confirmar su respuesta?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        No
+                    </button>
+                    <button ng-click="unavailable() " data-dismiss="modal" type="button" class="btn btn-primary">
+                        Si
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

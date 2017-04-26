@@ -1,0 +1,293 @@
+<div ng-controller="profileCtrl" ng-cloak >
+    <div class="page-title">
+        <div class="x_title">
+            <h2 ng-show="!$root.M_USER.permissions.isShipOwner">Perfil de Usuario</h2>
+            <h2 ng-show="$root.M_USER.permissions.isShipOwner">Perfil de Propietario</h2>
+            </br>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-3  col-xs-12 profile_left" style="margin-bottom: 20px">
+                <div class="col-xs-8 col-sm-6 col-md-8 profile_img">
+                    <!-- end of image cropping -->
+                    <div id="crop-avatar">
+                        <!-- Current avatar -->
+                        <div id="avatar-service-container" class="avatar-view" title="Change the avatar">
+                            <img id="avatar-service"
+                                 ng-src="{{user.avatar ? '/service/media/'+user.avatar : '/backend/gentelella/images/user.png'}}"
+                                 alt="Avatar" data-toggle="modal" data-target=".avatar-modal" width="100%">
+                        </div>
+                        <div class="modal fade avatar-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span
+                                                    aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">Seleccionar Avatar</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>
+                                            <div ng-show="imageCropStep == 1">
+                                                <br/>
+                                                <input type="file" name="fileInput" id="fileInput"
+                                                       onchange="angular.element(this).scope().fileChanged(event)"/>
+                                            </div>
+                                            <div class="col-xs-7" ng-show="imageCropStep != 1"
+                                                 style="box-shadow: inset 0 0 1em #34495E;">
+                                                <!-- <image-crop
+                                                   data-height="200" //shape's height
+                                                   data-width="150" //shape's width
+                                                   data-shape="square" //the shape.. square or circle
+                                                   data-step="imageCropStep"//scope variable that will contain the current step of the crop (1. Waiting for source image; 2. Image loaded, waiting for crop; 3. Crop done)
+                                                   src="imgSrc" //scope variable that will be the source image for the crop (may be a Blob or base64 string)
+                                                   data-result-blob="result" //scope variable that will contain the Blob information
+                                                   data-result="resultDataUrl" //scope variable that will contain the image's base64 string representation
+                                                   crop="initCrop" //scope variable that must be set to true when the image is ready to be cropped
+                                                   padding="250" //space, in pixels, rounding the shape
+                                                   max-size="1024" //max of the image, in pixels
+                                                   ></image-crop> -->
+                                                <image-crop data-height="220" data-width="220"
+                                                            data-shape="square" data-step="imageCropStep"
+                                                            src="imgSrc" data-result="result"
+                                                            data-result-blob="resultBlob" crop="initCrop"
+                                                            padding="250" max-size="1024"></image-crop>
+                                            </div>
+                                            <div class="col-xs-5">
+                                                <div ng-show="imageCropStep == 2">
+                                                    <br/>
+                                                    <button ng-click="clear()"
+                                                            class="btn btn-default input-sm pull-left">Volver a
+                                                        Seleccionar
+                                                    </button>
+                                                    <button ng-click="initCrop = true"
+                                                            class="btn btn-success input-sm pull-right">Cortar
+                                                        Imagen
+                                                    </button>
+                                                </div>
+                                                <div ng-show="imageCropStep == 3">
+                                                    <img class="avatar-view" style="margin: 0 auto;"
+                                                         ng-src="{{result}}"/>
+                                                    <div class="clearfix"></div>
+                                                    <div class="ln_solid"></div>
+                                                    <div class="col-xs-12">
+                                                        <button ng-click="uploadAvatar()" type="button"
+                                                                data-dismiss="modal"
+                                                                class="btn btn-success input-sm pull-right">
+                                                            Guardar Cambios
+                                                        </button>
+                                                        <button ng-click="clear()" type="button"
+                                                                class="btn btn-default input-sm pull-left">
+                                                            Volver a Seleccionar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Loading state -->
+                        <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                    </div>
+                    <!-- end of image cropping -->
+                </div>
+                <br>
+                <div class="clearfix"></div>
+                <h3>{{copyuser.name}} {{copyuser.surname}}</h3>
+                <ul class="list-unstyled user_data">
+                    <li><i class="fa fa-map-marker user-profile-icon"></i> {{copyuser.address}}</li>
+                    <li><i class="fa fa-envelope user-profile-icon"></i> {{copyuser.email}}</li>
+                    <li><i class="fa fa-phone user-profile-icon"></i> {{copyuser.mobile}}</li>
+                </ul>
+                <a class="btn btn-success btn-sm" data-toggle="modal" data-target=".password-change-modal-sm">
+                    <i class="fa fa-lock m-right-xs"></i> Cambiar Contraseña</a>
+                </br>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-8  col-xs-12">
+                <div class="clearfix"></div>
+                <div class="alert alert-info alert-dismissible fade in active pull-right col-md-4 col-sm-6 col-xs-12"
+                     role="alert">
+                    <i class="fa fa-lightbulb-o"></i> 
+                    {{$root.M_USER.permissions.isShipOwner? " Incluye los datos de contacto de la empresa o del propietario":"Incluye los datos de contacto del usuario"}}
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <form id="user-form2" name="userForm2" class="form-horizontal form-label-left" novalidate
+                          autocomplete="off">
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre <span
+                                        class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input ng-model="user.name" type="text" ng-validate="defaultValidationStrategy"
+                                       name="name" required="required" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="3">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Apellido <span
+                                        class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input ng-model="user.surname" type="text"
+                                       ng-validate="defaultValidationStrategy"
+                                       name="surname" required="required"
+                                       class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="3">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span
+                                        class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input ng-model="user.email" type="email" ng-validate="emailValidationStrategy"
+                                       name="email" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <!--<div class="item form-group">-->
+                            <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Teléfono-->
+                                <!--<span-->
+                                        <!--class="required">*</span>-->
+                            <!--</label>-->
+                            <!--<div class="col-md-8 col-sm-8 col-xs-12">-->
+                                <!--<input ng-model="user.telephone" type="text"-->
+                                       <!--ng-validate="phoneValidationStrategy"-->
+                                       <!--name="telephone"-->
+                                       <!--required="required" class="form-control col-md-7 col-xs-12">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile">Móvil
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input ng-model="user.mobile" type="text" ng-validate="mobileValidationStrategy"
+                                       name="mobile" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="item form-group" ng-show="user.permissions.isShipOwner">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Web
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input ng-model="user.web" ng-validate="urlValidationStrategy" stype="text"
+                                       name="web" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Ciudad <span
+                                        class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input ng-model="user.address" type="text"
+                                       ng-validate="defaultValidationStrategy"
+                                       name="address" class="form-control col-md-7 col-xs-12"
+                                       required="required"/>
+                            </div>
+                        </div>
+                        <div class="item form-group" ng-show="user.permissions.isShipOwner">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="typep">Tipo de
+                                propietario
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <select ng-model="user.permissions.typeShipOwner"
+                                        class="form-control col-md-7 col-xs-12">
+                                    <option value="0">Particular</option>
+                                    <option value="1">Empresa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button ng-disabled="!userForm2.$valid" ng-click="update()" type="button"
+                                        class="btn btn-success">
+                                    Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </br>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div ng-cloak class="modal fade password-change-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                    <h4>{{user.name}}</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form id="demo-form" data-parsley-validate="" novalidate="" autocomplete="off">
+                        <label for="fullname">Nueva Contraseña * :</label>
+                        <input ng-model="password.new" type="password" id="fullname" class="form-control"
+                               name="password" required>
+
+                        <label for="email">Repetir Contraseña * :</label>
+                        <input ng-model="password.repeat" type="password" id="fullname" class="form-control"
+                               name="password1" required>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button ng-disabled="password.new.length<6 || password.new != password.repeat" type="button"
+                            class="btn btn-primary" data-dismiss="modal" ng-click="changePassword()">Cambiar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div ng-cloak class="modal fade refund-book-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                    <h4>Cancelación de reserva.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <p>¿Confirma su decisión de cancelación de reserva?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal">
+                            No
+                        </button>
+
+                        <button ng-click="confirmRefund()"
+                                type="button"
+                                class="btn btn-primary"
+                                data-dismiss="modal">
+                            Si
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

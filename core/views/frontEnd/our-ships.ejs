@@ -1,0 +1,26 @@
+<div class="container margin-pages">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-8">
+            <% allships.forEach(function(countships){ %>
+            <% countships.forEach(function(shipc){ %>
+            <a class="country-ship"><%= shipc.name %></a>
+
+            <div class="col-xs-12">
+                <% shipc.ships[0].forEach(function(shipcity){ %>
+                <div><a class="city-ship"><%= shipcity.name %></a></div>
+                <div class="col-xs-12 margin-cities">
+                    <% shipcity.ships.forEach(function (ships) { %>
+                    <div><a href="<%= ships.url%>"><%= ships.name%></a></div>
+                    <% }) %>
+                </div>
+
+                <% }) %>
+            </div>
+            <% }) %>
+            <% }) %>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-4">
+            <%- include('contact') %>
+        </div>
+    </div>
+</div>

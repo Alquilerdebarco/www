@@ -1,0 +1,294 @@
+<script>
+  var IVA = <%- JSON.stringify(iva) %>;
+</script>
+<div ng-controller="invoiceCtrl" ng-cloak class="row page-title">
+    <div class="col-md-12">
+        <div ng-show="!showinvoice" class="no-print">
+            <div class="x_title">
+                <h2>Facturación</h2>
+                <% if (M_USER.permissions.isAdmin == true) { %>
+                <div class="input-group pull-right col-xs-4">
+                    <input ng-model="email" type="text" class="form-control" placeholder="Email del Propietario">
+                    <span class="input-group-btn">
+                        <button ng-click="getInvoice()" type="button" class="btn btn-primary">Buscar</button>
+                    </span>
+                </div>
+                <% } %>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <section class="content invoice">
+                    <!-- title row -->
+                    <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                            <h1>
+                                <i class="fa fa-globe"></i> Facturación
+                                <small class="pull-right" ng-cloak>
+                                    <select ng-model="month" ng-change="getInvoice()">
+                                        <option value="-1">Todo el Año</option>
+                                        <option value="0">Enero</option>
+                                        <option value="1">Febrero</option>
+                                        <option value="2">Marzo</option>
+                                        <option value="3">Abril</option>
+                                        <option value="4">Mayo</option>
+                                        <option value="5">Junio</option>
+                                        <option value="6">Julio</option>
+                                        <option value="7">Agosto</option>
+                                        <option value="8">Septiembre</option>
+                                        <option value="9">Octubre</option>
+                                        <option value="10">Noviembre</option>
+                                        <option value="11">Diciembre</option>
+                                    </select>
+                                    <select ng-model="year" ng-change="getInvoice()">
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                    </select>
+                                </small>
+                            </h1>
+
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-xs-12 table-responsive">
+                            <table class="table table-striped jambo_table" id="factures">
+                                <thead>
+                                <tr>
+                                    <th style="min-width: 90px;" class="column-title pointer"
+                                        ng-click="changeSort('createDate',sortBy.sort)">
+                                        <div>
+                                            <i ng-show="sortBy.sort == 1 && sortBy.field=='createDate'"
+                                               class="fa fa-sort-amount-asc pull-left"></i>
+                                            <i ng-show="sortBy.sort == -1 && sortBy.field=='createDate'"
+                                               class="fa fa-sort-amount-desc pull-left"></i>
+                                            Fecha
+                                        </div>
+                                    </th>
+                                    <th ng-click="changeSort('index',sortBy.sort)" class="pointer">
+                                        <div>
+                                            <i ng-show="sortBy.sort == 1 && sortBy.field=='index'"
+                                               class="fa fa-sort-amount-asc pull-left"></i>
+                                            <i ng-show="sortBy.sort == -1 && sortBy.field=='index'"
+                                               class="fa fa-sort-amount-desc pull-left"></i>
+                                            Número
+                                        </div>
+
+                                    </th>
+                                    <th ng-click="changeSort('request.name',sortBy.sort)" class="pointer">
+                                        <div>
+                                            <i ng-show="sortBy.sort == 1 && sortBy.field=='request.name'"
+                                               class="fa fa-sort-amount-asc pull-left"></i>
+                                            <i ng-show="sortBy.sort == -1 && sortBy.field=='request.name'"
+                                               class="fa fa-sort-amount-desc pull-left"></i>
+                                            Cliente
+                                        </div>
+                                    </th>
+                                    <th ng-click="changeSort('shipowner.name',sortBy.sort)" class="pointer">
+                                        <div>
+                                            <i ng-show="sortBy.sort == 1 && sortBy.field=='shipowner.name'"
+                                               class="fa fa-sort-amount-asc pull-left"></i>
+                                            <i ng-show="sortBy.sort == -1 && sortBy.field=='shipowner.name'"
+                                               class="fa fa-sort-amount-desc pull-left"></i>
+                                            Propietario
+                                        </div>
+                                    </th>
+                                    <th>Descripción</th>
+                                    <th>Importe</th>
+                                    <th>Descuento(%)</th>
+                                    <!--<th>Descuento(€)</th>-->
+                                    <th>Comisión(%)</th>
+                                    <!--<th>Comisión(€)</th>-->
+                                    <th>Total Factura</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-cloak ng-repeat="inv in invoices.list"
+                                    ng-class="{
+                                    'rejected-offer-list':inv.status=='refund',
+                                    'accepted-offer-list':inv.status=='accept'
+                                    }">
+                                    <td>{{inv.createDate|date:'MM/dd/yyyy'}}</td>
+                                    <td>{{inv.index}}/{{inv.createDate|date:'yyyy':$root.timezone}}</td>
+                                    <td>{{inv.request.name}}</td>
+                                    <td>{{inv.shipowner.name +" "+ inv.shipowner.surname}}</td>
+                                    <td>{{prepareDescription(inv)}}</td>
+                                    <td>{{calculateImport(inv.price,inv.discount)|currency:'€':2}}</td>
+
+                                    <td>{{inv.discount|currency:'%':0}}</td>
+                                    <!--<td>{{((inv.price * 100) / (100-inv.discount))-inv.price|currency:'€':2}}</td>-->
+                                    <td>{{inv.shipowner.commission|currency:'%':0}}</td>
+                                    <!--<td>{{(inv.price * inv.shipowner.commission) / 100|currency:'€':2}}</td>-->
+                                    <td>{{calculateTotalInvoice(inv.price,inv.shipowner.commission)|currency:'€':2}}
+                                    </td>
+                                    <td><a ng-click="prepareInvoice(inv)" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-print"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems"
+                                        ng-model="currentPage" max-size="maxSize"
+                                        class="pagination pagination-sm no-margin pull-right " ng-change="pageChanged()"
+                                        previous-text="&lsaquo;"
+                                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                        </uib-pagination>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+
+                </section>
+
+            </div>
+        </div>
+        <div ng-show="showinvoice" class="card card-printable style-default-light">
+            <div class="card-head no-print">
+                <div class="tools">
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-floating-action btn-primary" href="javascript:void(0);"
+                           onclick="javascript:window.print();"><i class="fa fa-print"></i></a>
+                    </div>
+                </div>
+            </div><!--end .card-head -->
+            <div class="card-body style-default-bright">
+
+                <!-- BEGIN INVOICE HEADER -->
+                <div class="row">
+                    <div class="col-xs-8">
+                        <img src="/common/img/Retina/img_164px_email_logo_footer@2x.png">
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <h1 class="text-light text-default-light">Factura</h1>
+                    </div>
+                </div><!--end .row -->
+                <!-- END INVOICE HEADER -->
+
+                <br>
+
+                <!-- BEGIN INVOICE DESCRIPTION -->
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h4 class="text-light">Preparado por</h4>
+                        <address>
+                            Bojeo Tours, S.L. <br>
+                            CIF: B66278391 <br>
+                            C/ Via Augusta nº 209
+                            08021 - Barcelona (España) <br>
+                            <abbr><i class="fa fa-link"></i>:</abbr> www.alquilerdebarco.com<br>
+                            <abbr><i class="fa fa-envelope"></i>:</abbr> info@alquilerdebarco.com<br>
+                            <abbr><i class="fa fa-mobile"></i>:</abbr> +34 609 183 183
+                        </address>
+                    </div><!--end .col -->
+                    <div class="col-xs-4">
+                        <h4 class="text-light">Preparado para</h4>
+                        <address>
+                            <strong>{{invoice.shipowner.name}} {{invoice.shipowner.surname}}</strong><br>
+                            {{invoice.shipowner.address}}<br>
+                            San Francisco, CA 54321<br>
+                            <abbr><i class="fa fa-link"></i>:</abbr> {{invoice.shipowner.web}}<br>
+                            <abbr><i class="fa fa-envelope"></i>:</abbr> {{invoice.shipowner.email}}<br>
+                            <abbr><i class="fa fa-mobile"></i>:</abbr> {{invoice.shipowner.mobile}}
+                        </address>
+                    </div><!--end .col -->
+                    <div class="col-xs-4">
+                        <div class="well">
+                            <div class="clearfix">
+                                <div class="pull-left"> No. Factura :</div>
+                                <div class="pull-right"> {{invoice.index}}</div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="pull-left"> Fecha Factura :</div>
+                                <div class="pull-right"> {{invoice.createDate|date:'MM/dd/yyyy'}}</div>
+                            </div>
+                        </div>
+                    </div><!--end .col -->
+                </div><!--end .row -->
+                <!-- END INVOICE DESCRIPTION -->
+
+                <br>
+
+                <!-- BEGIN INVOICE PRODUCTS -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width:60px" class="text-center">{{'Cantidad'|uppercase}}</th>
+                                <th class="text-left">{{'Concepto'|uppercase}}</th>
+                                <th style="width:140px" class="text-right">{{'Importe'|uppercase}}</th>
+                                <th style="width:140px" class="text-right">{{'Descuento (%)'|uppercase}}</th>
+                                <th style="width:140px" class="text-right">{{'Descuento (€)'|uppercase}}</th>
+                                <th style="width:140px;color: #9c27b0;" class="text-right">{{'Total'|uppercase}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>{{concept|uppercase}}</td>
+                                <td class="text-right">{{ calculateImport(invoice.price,invoice.discount)|currency:'€':2}}
+                                </td>
+                                <td class="text-right">{{invoice.discount|currency:'%':2}}</td>
+                                <td class="text-right">{{((invoice.price * 100) /
+                                    (100-invoice.discount))-invoice.price|currency:'€':2}}
+                                </td>
+                                <td style="color: #9c27b0;" class="text-right">{{invoice.price|currency:'€':2}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" rowspan="4">
+
+                                </td>
+                                <td class="text-right"><strong>Subtotal</strong></td>
+                                <td class="text-right">{{invoice.price|currency:'€':2}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right hidden-border"><strong>Comisión
+                                        ({{invoice.shipowner.commission|currency:'%':0}})</strong></td>
+                                <td class="text-right hidden-border">{{-(invoice.price *
+                                    invoice.shipowner.commission)/100|currency:'€':2}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right hidden-border"><strong>IVA {{iva|currency:'%':2}} </strong></td>
+                                <td class="text-right hidden-border">{{-(invoice.price * iva)/100|currency:'€':2}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right" style="color: #9c27b0;"><strong class="text-lg text-accent">{{'Total'|uppercase}}</strong>
+                                </td>
+                                <td class="text-right" style="color: #9c27b0;"><strong class="text-lg text-accent">{{invoice.price-((invoice.price
+                                        * invoice.shipowner.commission)/100)-((invoice.price *
+                                        iva)/100)|currency:'€':2}}</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!--end .col -->
+                    <div class="clearfix"></div>
+                    <div class="ln_solid"></div>
+                    <div class="col-xs-12">
+                        <strong class="text-center">
+                            AlquilerdeBarco.com marca comercial. Razón social Bojeo Tours, S.L, inscrita en el Registro
+                            Mercantil de Barcelona al tomo 42657, folio 33, hoja B-41.232, con
+                            número de identificación fiscal A-08663619 y domiciliada en Barcelona, Avenida Diagonal 621.
+                        </strong>
+                    </div>
+                </div><!--end .row -->
+                <!-- END INVOICE PRODUCTS -->
+            </div><!--end .card-body -->
+        </div>
+    </div>
+</div>

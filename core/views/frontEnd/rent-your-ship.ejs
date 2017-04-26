@@ -1,0 +1,38 @@
+<div class="container margin-pages">
+    <div class="row">
+        <div class="col-xs-12 user-guide">
+            <h4 class="title"><%= texts.rent_title %></h4>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="private-card col-xs-12">
+                <div class="title">
+                    <h4><%= texts.priv_title %></h4>
+
+                    <p><%= texts.priv_title_sub %></p>
+                </div>
+                <div class="suggestions">
+                    <div><%- texts.priv_text%></div>
+                </div>
+                <div class="text-center"><a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_private %>"
+                                            class="btn btn-primary"><%= texts.priv_button %></a></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+
+            <div class="private-card col-xs-12">
+                <div class="title">
+                    <h4><%= texts.enterp_title %></h4>
+
+                    <p><%= texts.enterp_title_sub %></p>
+                </div>
+                <div class="suggestions">
+                    <div><%- texts.enterp_texts%></div>
+
+                </div>
+                <div class="text-center"><a href="/<%if(language !="es"){%><%= language %>/<%}%><%= texts.slug_enterprise %>"
+                                            class="btn btn-primary"><%= texts.register_now %></a></div>
+            </div>
+
+        </div>
+    </div>
+</div>

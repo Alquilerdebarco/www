@@ -1,0 +1,131 @@
+<div ng-controller="profileCtrl" ng-init="getOwnerInvoice()" ng-cloak >
+    <div ng-cloak ng-show="contetShow==1" ng-cloak class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div>
+                <div class="x_title">
+                    <h2>Estadísticas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="profile_title">
+                        <div class="col-xs-12">
+                            <h2>Reporte de Actividad
+                                <small> {{$root.globalToday|date:'yyyy'}}</small>
+                            </h2>
+                        </div>
+                        <div class="col-xs-12">
+
+                        </div>
+                    </div>
+                    <!-- start of user-activity-graph -->
+                    <div id="graph_bar" style="width:100%; height:280px;"></div>
+                    <!-- end of user-activity-graph -->
+
+                    <section class="content invoice">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-xs-12 invoice-header">
+                                <h1>
+                                    <i class="fa fa-globe"></i> Factura.
+                                    <small class="pull-right">
+                                        <select ng-model="month" ng-change="getOwnerInvoice()">
+                                            <option value="-1">Año</option>
+                                            <option value="0">Enero</option>
+                                            <option value="1">Febrero</option>
+                                            <option value="2">Marzo</option>
+                                            <option value="3">Abril</option>
+                                            <option value="4">Mayo</option>
+                                            <option value="5">Junio</option>
+                                            <option value="6">Julio</option>
+                                            <option value="7">Agosto</option>
+                                            <option value="8">Septiembre</option>
+                                            <option value="9">Octubre</option>
+                                            <option value="10">Noviembre</option>
+                                            <option value="11">Diciembre</option>
+                                        </select>
+                                        {{$root.globalToday|date:'yyyy'}}
+                                    </small>
+                                </h1>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+
+
+                        <!-- Table row -->
+                        <div class="row">
+                            <div class="col-xs-12 table">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Barco</th>
+                                        <th>Duración</th>
+                                        <th>Tipo</th>
+                                        <th style="width: 40%">Condiciones</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="inv in invoices.list"
+                                        ng-class="{'expire-offer-list':inv.expire,
+                                            'rejected-offer-list':inv.status=='refund',
+                                            'accepted-offer-list':inv.status=='accept'}">
+                                        <td>{{inv.bookDate|date:'dd/MM/yyyy'}}</td>
+                                        <td>{{inv.ship.name}}</td>
+                                        <td>
+                                            {{inv.duration.quantity}}
+                                            <small ng-show="inv.duration.unity==0"> Horas</small>
+                                            <small ng-show="inv.duration.unity==1"> Días</small>
+                                            <small ng-show="inv.duration.unity==7"> Semanas</small>
+                                        </td>
+                                        <td>{{inv.status=='accept' ? 'Reserva' : 'Cancelación'}}
+                                        </td>
+                                        <td>{{inv.conditions}}</td>
+                                        <td> {{inv.gain|currency}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="lead">Métodos de Pago:</p>
+                                <img src="/backend/gentelella/images/paypal2.png" alt="Paypal">
+
+                                <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                                    PayPal' es una que pertenece al sector del comercio electrónico y
+                                    permite pagar en
+                                    sitios web, así como transferir dinero entre usuarios que tengan
+                                    correo
+                                    electrónico.
+                                </p>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-xs-6">
+                                <p class="lead">Cantidad Adecuada</p>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td> {{invoices.total|currency}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
